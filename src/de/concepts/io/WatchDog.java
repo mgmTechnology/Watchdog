@@ -28,10 +28,10 @@ public class WatchDog {
         String currentDirectory;
         File file = new File(".");
         currentDirectory = file.getAbsolutePath();
+        logWatchdog();
         configureWatchDog();
         configureLogging(currentDirectory);
-        logWatchdog();
-        Path path = Paths.get(args[0]);
+        Path path = Paths.get(watchdogDirectoryMonitored);
         logger.info(String.format("Watchdog started monitoring"));
 
 
@@ -121,7 +121,7 @@ public class WatchDog {
                 "\n .    .   .  .      ::::::::::::::::,......:::::.......                         " +
                 "                                                       ";
         System.out.println(theDog);
-        logger.info(theDog);
+        //logger.info(theDog);
     }
 
     private static void configureLogging(String currentDirectory) {
