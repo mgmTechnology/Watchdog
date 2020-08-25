@@ -24,7 +24,7 @@ public class WatchDog {
     static Queue<String> queueWithFilenames = new LinkedList<>();
     static Handler fileHandler = null;
 
-    public static void main(String[] args) {
+    public static void main(String... args) {
         String currentDirectory;
         File file = new File(".");
         currentDirectory = file.getAbsolutePath();
