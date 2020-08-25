@@ -6,10 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.*;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.Properties;
-import java.util.Queue;
+import java.util.*;
 import java.util.logging.*;
 
 
@@ -71,10 +68,14 @@ public class WatchDog {
         file.getParentFile().mkdirs(); // create parent dirs
         try {Path newDir = Files.createDirectory(Paths.get(watchdogDirectoryMonitored)); } catch(Exception e){ }
         try {Path newDir = Files.createDirectory(Paths.get(watchdogDirectoryProcessed)); } catch(Exception e){ }
+        System.out.println(String.format("Environment:  %s", Helper.getServerEnvironmentVariables()));
         System.out.println(String.format("Monitoring:  %s", watchdogDirectoryMonitored));
         System.out.println(String.format("Processed:   %s", watchdogDirectoryProcessed));
         System.out.println(String.format("Logfile:     %s", watchdogLogfilePath));
     }
+
+
+
 
 
     private static void logWatchdog() {
