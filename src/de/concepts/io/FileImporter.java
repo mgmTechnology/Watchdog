@@ -26,7 +26,7 @@ public class FileImporter implements Runnable {
     }
 
     public void start(Queue<String> queue) {
-        log.info("Starting " + threadName + " for " + queue.poll());
+        log.info("[Thread " + threadName + "] processes file " + queue.poll());
         if (t == null) {
             t = new Thread(this, threadName);
             t.start();
