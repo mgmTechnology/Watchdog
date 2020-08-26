@@ -1,25 +1,33 @@
+/* Copyright (C) Marc Müller - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Marc Müller <marc@mgm.technology>, 2020
+ */
 package de.concepts.io;
 
 import de.concepts.io.importer.ImporterCSV;
 import de.concepts.io.importer.ImporterJSON;
 import de.concepts.io.importer.ImporterXML;
+import de.concepts.io.tools.Helper;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.*;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.Properties;
+import java.util.Queue;
 import java.util.logging.*;
 
 
 public class WatchDog {
-    static String watchdogLogfilePath = "configured by property file"; // will be overwritten later
-    static String watchdogDirectoryMonitored = "configured by property file"; // will be overwritten later
-    static String watchdogDirectoryProcessed = "configured by property file"; // will be overwritten later
-    static String watchdogTimestampFormat = "configured by property file"; // will be overwritten later
-    static String watchdogSleepMilliseconds = "configured by property file"; // will be overwritten later
+    static String watchdogLogfilePath = ""; // will be overwritten later
+    static String watchdogDirectoryMonitored = ""; // will be overwritten later
+    static String watchdogDirectoryProcessed = ""; // will be overwritten later
+    static String watchdogTimestampFormat = ""; // will be overwritten later
+    static String watchdogSleepMilliseconds = ""; // will be overwritten later
     static final String WATCHDOG_LOGGING_PROPERTIES = "watchdog.properties";
     static Logger logger = Logger.getAnonymousLogger();
     static Queue<String> queueWithFilenames = new LinkedList<>();
@@ -29,12 +37,11 @@ public class WatchDog {
         String currentDirectory;
         File file = new File(".");
         currentDirectory = file.getAbsolutePath();
-        logWatchdog();
+        Helper.logWatchdog();
         configureWatchDog();
         configureLogging(currentDirectory);
         Path path = Paths.get(watchdogDirectoryMonitored);
-        logger.info(String.format("Watchdog started monitoring"));
-
+        logger.info("Watchdog started monitoring");
 
         try (WatchService watchService = FileSystems.getDefault().newWatchService()) {
             WatchKey key = path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE,
@@ -56,8 +63,6 @@ public class WatchDog {
             in = new FileInputStream(WATCHDOG_LOGGING_PROPERTIES);
             properties.load(in);
             in.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -70,64 +75,16 @@ public class WatchDog {
         // ensure the main directories exist
         File file = new File(watchdogLogfilePath); // create log dir
         file.getParentFile().mkdirs(); // create parent dirs
-        try {Path newDir = Files.createDirectory(Paths.get(watchdogDirectoryMonitored)); } catch(Exception e){ }
-        try {Path newDir = Files.createDirectory(Paths.get(watchdogDirectoryProcessed)); } catch(Exception e){ }
-        System.out.println(String.format("Environment:  %s", Helper.getServerEnvironmentVariables()));
-        System.out.println(String.format("Monitoring:  %s", watchdogDirectoryMonitored));
-        System.out.println(String.format("Processed:   %s", watchdogDirectoryProcessed));
-        System.out.println(String.format("Logfile:     %s", watchdogLogfilePath));
+        try {Path newDir = Files.createDirectory(Paths.get(watchdogDirectoryMonitored)); } catch (Exception e) { }
+        try {Path newDir = Files.createDirectory(Paths.get(watchdogDirectoryProcessed)); } catch (Exception e) { }
+        System.out.printf("Environment:  %s%n", Helper.getServerEnvironmentVariables());
+        System.out.printf("Monitoring:  %s%n", watchdogDirectoryMonitored);
+        System.out.printf("Processed:   %s%n", watchdogDirectoryProcessed);
+        System.out.printf("Logfile:     %s%n", watchdogLogfilePath);
     }
 
 
-
-
-
-    private static void logWatchdog() {
-        // BuildMyString.com generated code. Please enjoy your string responsibly.
-
-
-        String theDog = "\n........................................................ .. ..... ... ... ..  .." +
-                "\n.......................................................       .     .      .    " +
-                "\n............................................ Z..M..............................." +
-                "\n............................................MM..M..............................." +
-                "\n...........................................?MMM.M .............................." +
-                "\n...........................................MMMM7MI.............................." +
-                "\n...........................................7MMMMMMMMMM.........................." +
-                "\n............................................MMMMMMMMMMM........................." +
-                "\n............................................MMMMMMMMMMMMMMM ...................." +
-                "\n.......................................... MMMMMMMMMMMMMMMM. .... ... . . . ...." +
-                "\n......................................... MMMMMMMMMMMMMMMMM   . .     . . . . . " +
-                "\n.................................... ....MMMMMMMMMMMMMMMMMM.  . ....  . .  . . ." +
-                "\n........................................MMMMMMMMMMMMMMMMMM.... ......  .. ....  " +
-                "\n ..................................... MMMMMMMMMMM....~......... .. ..... .... ." +
-                "\n............................. ....... MMMMMMMMMMM....... ..  .. ... . ..  ... .." +
-                "\n.....................................MMMMMMMMMMMM....... ......   ..   .   ... ." +
-                "\n....................................MMMMMMMMMMMMMM...... . . . .   .......... .." +
-                "\n.... .... ....  ... .. ... ......OMMMMMMMMMMMMMMMM.............................." +
-                "\n..... ...... ..  .. ..  .. .....DMMMMMMMMMMMMMMMMM .......... . ................" +
-                "\n....................... .......MMMMMMMMMMMMMMMMMMMO........ ...................." +
-                "\n.................... .........MMMMMMMMMMMMMMMMMMMMZ............................." +
-                "\n....  .. .... . ..  .. ..  .$MMMMMMMMMMMMMMMMMMMMM.............................." +
-                "\n. .. . .... ..... . .    ..MMMMMMMMMMMMMMMMMMMMMM:.............................." +
-                "\n .........................MMMMMMMMMMMMMMMMMMMMMM+..................... ........." +
-                "\n...............   ......MMMMMMMMMMMMMMMMMMMMMMMM................................" +
-                "\n .... .......... .. .  MMMMMMMMMMMMMMMMMMMMMMMM8................................" +
-                "\n................. ... MMMMMMMMMMMMMMMMMMMMMMMMM+................................" +
-                "\n...... ............  MMMMMMMMMMMMMMMMMMM: MMMMM:................................" +
-                "\n.............. .  .. MMMMMMMMMMMMMMMMMZ ..MMMMM,................................" +
-                "\n....... ...... . ... MMMMMMMMMMMMMMMMM ...MMMMM ................................" +
-                "\n................. . MMMMMMMMMMMMMMMMMM....MMMMM ........... . ... . ........  . " +
-                "\n...................8MMMMMMMMMMMMMMMMM.....MMMMM ................................" +
-                "\n...................NMMMMMMMMMMMMMMM ......MMMMM ............... . ...    ... .. " +
-                "\n.... .........   ..MMMMMMMMMMMMMM.........MMMMM........... .....  . ... . . . .." +
-                "\n.... . .. ... ..  MMMMMMMMMMMMMI..   .....MMM,MM.. .....  .  .. . .  .    ...  ." +
-                "\n ... ....      ....MMMDMMMMMMMMMMMMMMMM..OMM.MMM....... .. ..... ............ ." +
-                "\n.......... ..........OMMMMMMMMMMMMMMM ... MMMMM....... ..    . ... ... .....  ." +
-                "\n .    .   .  .      ::::::::::::::::,......:::::.......                         " +
-                "                                                       ";
-        System.out.println(theDog);
-        //logger.info(theDog);
-    }
+    
 
     private static void configureLogging(String currentDirectory) {
         System.out.println("Looking for watchdog.properties within current working directory : " + currentDirectory);
@@ -140,7 +97,7 @@ public class WatchDog {
                 fileHandler.setFormatter(simple);
                 logger.addHandler(fileHandler);//adding Handler for file
             } catch (IOException e) {
-                System.err.println("Exeption during configuration of logging.");
+                System.err.println("Exception during configuration of logging.");
             }
         } catch (IOException e) {
             System.err.println(e.getMessage());
@@ -152,20 +109,22 @@ public class WatchDog {
 
     /**
      * move a processed file into a separate processed folder, adding a timestamp prefix to it
+     *
      * @param queue
-     * @return
+     * @return true or false signale move result
      */
     public static boolean moveFile(Queue<String> queue) {
         boolean fileMoved = true;
         String importFilePath = queue.poll();
         Path fileToMovePath;
         Path targetPath;
+        assert importFilePath != null;
         fileToMovePath = Paths.get(importFilePath);
         String timeStamp = new SimpleDateFormat(watchdogTimestampFormat).format(new Date());
         targetPath = Paths.get(watchdogDirectoryProcessed + timeStamp + fileToMovePath.getFileName());
         try {
             File f = new File(String.valueOf(fileToMovePath));
-            while (! f.canWrite()) { // file is locked, let's wait until is is competely written
+            while (!f.canWrite()) { // file is locked, let's wait until is is completely written
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
@@ -186,11 +145,13 @@ public class WatchDog {
             } catch (IOException ioException) {
                 logger.severe("IO Exception trying to write file: " + targetPath.getFileName());
                 ioException.printStackTrace();
+                fileMoved = false;
             }
 
         } catch (IOException e) {
             //something else went wrong
             e.printStackTrace();
+            fileMoved = false;
         }
         return fileMoved;
     }
@@ -226,8 +187,7 @@ public class WatchDog {
                         logger.info(timeStamp + modifiedFilePath);
 
                         String fileTypeExtension = Helper.getPathExtension(modifiedFilePath).toLowerCase();
-                        switch(fileTypeExtension)
-                        {
+                        switch (fileTypeExtension) {
                             case "xml":
                                 ImporterXML xmlImporter = new ImporterXML();
                                 break;

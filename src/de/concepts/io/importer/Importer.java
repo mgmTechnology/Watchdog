@@ -1,8 +1,15 @@
+/* Copyright (C) Marc Müller - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Marc Müller <marc@mgm.technology>, 2020
+ */
 package de.concepts.io.importer;
 
+import java.util.logging.Logger;
+
 public class Importer {
-    // private static final Logger LOGGER = Logger.getLogger( Importer.class.getName() );
+    private final Logger log = Logger.getLogger(this.getClass().getName());
     public Importer() {
-        System.out.println("Importer instantiated.");
+        log.info(String.format("%s instantiated.", this.getClass().getName()));
     }
 }
