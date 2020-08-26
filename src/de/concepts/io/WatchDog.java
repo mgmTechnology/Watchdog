@@ -1,5 +1,9 @@
 package de.concepts.io;
 
+import de.concepts.io.importer.ImporterCSV;
+import de.concepts.io.importer.ImporterJSON;
+import de.concepts.io.importer.ImporterXML;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -160,6 +164,15 @@ public class WatchDog {
         String timeStamp = new SimpleDateFormat(watchdogTimestampFormat).format(new Date());
         targetPath = Paths.get(watchdogDirectoryProcessed + timeStamp + fileToMovePath.getFileName());
         try {
+            File f = new File(String.valueOf(fileToMovePath));
+            while (! f.canWrite()) { // file is locked, let's wait until is is competely written
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            logger.info("File can be moved: " + f.canWrite()); // -> true
             Files.move(fileToMovePath, targetPath);
             logger.info("Moved processed file to " + targetPath.getFileName());
         } catch (FileAlreadyExistsException e) {
@@ -211,6 +224,22 @@ public class WatchDog {
                         queueWithFilenames.offer(modifiedFilePath); // add to queue to handle this file later
                         String timeStamp = new SimpleDateFormat("MM-dd hh:mm:ss ").format(new Date());
                         logger.info(timeStamp + modifiedFilePath);
+
+                        String fileTypeExtension = Helper.getPathExtension(modifiedFilePath).toLowerCase();
+                        switch(fileTypeExtension)
+                        {
+                            case "xml":
+                                ImporterXML xmlImporter = new ImporterXML();
+                                break;
+                            case "json":
+                                ImporterJSON jsonImporter = new ImporterJSON();
+                                break;
+                            case "csv":
+                                ImporterCSV csvImporter = new ImporterCSV();
+                                break;
+                            default:
+                                logger.info(String.format("file type %s not supported.", fileTypeExtension));
+                        }
                         moveFile(queueWithFilenames);
                         break;
                     case "ENTRY_DELETE":
