@@ -1,84 +1,50 @@
 {
-  "createdBy": 2,
-  "creationTime": "2020-07-01T12:52:01.777+02:00",
-  "lastUpdateTime": "1970-01-01T01:00:00+01:00",
-  "offerId": 12,
-  "offerNumber": "AN-00011",
-  "customerId": 4,
-  "processorId": 2,
-  "date": "2020-07-01",
-  "validUntil": "2021-07-01",
-  "reference": "",
-  "freightCosts": 4,
-  "totalProcurementPrice": 0,
-  "totalValue": 78,
-  "totalTaxes": 13.120000000000001,
-  "totalDiscount": 0,
-  "deliveryAddress": {
-    "contact": {
-      "name": "Billy Box",
-      "phoneNumber1": "",
-      "phoneNumber2": "",
-      "email": "",
-      "faxNumber": "",
-      "website": ""
+  "users": [
+    {
+      "id": 1,
+      "prename": "Kornelia",
+      "surname": "Pticar",
+      "email": "kp@april.biz",
+      "address": {
+        "street": "Kulas Light",
+        "suite": "Apt. 556",
+        "city": "Gwenborough",
+        "zipcode": "92998-3874",
+        "geo": {
+          "lat": "-37.3159",
+          "lng": "81.1496"
+        }
+      },
+      "phone": "1-770-736-8031 x56442",
+      "website": "hildegard.org",
+      "company": {
+        "name": "Romaguera-Crona",
+        "catchPhrase": "Multi-layered client-server neural-net",
+        "bs": "harness real-time e-markets"
+      }
     },
-    "location": {
-      "extraAddressLine": "",
-      "street": "Lieferstrasse",
-      "houseNumber": "22",
-      "zipCode": "10223",
-      "city": "Berlin",
-      "country": "DE",
-      "inEU": true,
-      "addressString": "Lieferstrasse 22, 10223 Berlin, Deutschland"
+    {
+      "id": 2,
+      "prename": "Susanne",
+      "surname": "vom Stein",
+      "email": "ss@melissa.tv",
+      "address": {
+        "street": "Kulas Light",
+        "suite": "Apt. 556",
+        "city": "Gwenborough",
+        "zipcode": "92998-3874",
+        "geo": {
+          "lat": "-37.3159",
+          "lng": "81.1496"
+        }
+      },
+      "phone": "1-770-736-8031 x56442",
+      "website": "hildegard.org",
+      "company": {
+        "name": "Romaguera-Crona",
+        "catchPhrase": "Multi-layered client-server neural-net",
+        "bs": "harness real-time e-markets"
+      }
     }
-  },
-  "performanceDate": "",
-  "invoiceAddress": {
-    "contact": {
-      "name": "Roland Koch UG",
-      "phoneNumber1": "",
-      "phoneNumber2": "",
-      "email": "",
-      "faxNumber": "",
-      "website": ""
-    },
-    "location": {
-      "extraAddressLine": "",
-      "street": "",
-      "houseNumber": "",
-      "zipCode": "",
-      "city": "Husum",
-      "country": "DE",
-      "inEU": true,
-      "addressString": " Husum, Deutschland"
-    }
-  },
-  "paymentTermId": 1,
-  "deliveryTermId": 2,
-  "deliveryTerm": {
-    "id": 2,
-    "shortName": "FCA",
-    "printoutText": "",
-    "entityClass": "DeliveryTerm",
-    "entityId": "2"
-  },
-  "paymentMethod": "BANK_TRANSFER",
-  "currency": "EUR",
-  "exchangeRate": 1,
-  "warranty": "",
-  "documentLocale": "de_DE",
-  "showDiscountOnPrintout": false,
-  "showDeliveryInformationOnPrintout": false,
-  "printoutText1": "",
-  "printoutText2": "",
-  "status": "OPEN",
-  "communicationStatus": "UNSENT",
-  "totalNetValue": 82,
-  "totalGrossValue": 95.12,
-  "totalMargin": 0,
-  "partialShipment": false,
-  "fresh": true,
-  "inquiryDate": null
+  ]
 }
