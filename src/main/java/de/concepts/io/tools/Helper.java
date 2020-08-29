@@ -121,7 +121,9 @@ public class Helper {
         while (keys.hasMoreElements()) {
             String key = (String) keys.nextElement();
             String value = (String) p.get(key);
-            retVal.append(key + ": " + value + "\n");
+//            if ("key".contains("runtime.version")) {
+                retVal.append(key + ": " + value + "\n");
+//            }
         }
         return retVal.toString();
     }
