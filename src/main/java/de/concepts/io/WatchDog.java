@@ -28,6 +28,9 @@ public class WatchDog {
     static String watchdogDirectoryProcessed = ""; // will be overwritten later
     static String watchdogTimestampFormat = ""; // will be overwritten later
     static String watchdogSleepMilliseconds = ""; // will be overwritten later
+    static String watchdogFTPPw = ""; // will be overwritten later
+    static String watchdogFTPServer = ""; // will be overwritten later
+    static String watchdogFTPUser = ""; // will be overwritten later
     static final String WATCHDOG_LOGGING_PROPERTIES = "watchdog.properties";
     static Logger logger = Logger.getAnonymousLogger();
     static Queue<String> queueWithFilenames = new LinkedList<>();
@@ -75,12 +78,15 @@ public class WatchDog {
         watchdogDirectoryProcessed = properties.getProperty("watchdog.directory.processed");
         watchdogTimestampFormat = properties.getProperty("watchdog.timestamp.format");
         watchdogSleepMilliseconds = properties.getProperty("watchdog.sleep.ms");
+        watchdogFTPServer = properties.getProperty("watchdog.ftp.server");
+        watchdogFTPUser = properties.getProperty("watchdog.ftp.user");
+        watchdogFTPPw = properties.getProperty("wwatchdog.ftp.pw");
         // ensure the main directories exist
         File file = new File(watchdogLogfilePath); // create log dir
         file.getParentFile().mkdirs(); // create parent dirs
         try {Path newDir = Files.createDirectory(Paths.get(watchdogDirectoryMonitored)); } catch (Exception e) { }
         try {Path newDir = Files.createDirectory(Paths.get(watchdogDirectoryProcessed)); } catch (Exception e) { }
-        System.out.printf("Environment:  %s%n", Helper.getServerEnvironmentVariables());
+        System.out.printf("Java      :  %s%n", Helper.getServerEnvironmentVariables());
         System.out.printf("Monitoring:  %s%n", watchdogDirectoryMonitored);
         System.out.printf("Processed:   %s%n", watchdogDirectoryProcessed);
         System.out.printf("Logfile:     %s%n", watchdogLogfilePath);
