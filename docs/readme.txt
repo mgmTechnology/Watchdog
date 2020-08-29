@@ -22,6 +22,8 @@ Choosen:
     org.junit.jupiter:junit-jupiter:5.6.2
 - Unirest Java for REST requests
     com.konghq:unirest-java:3.10.00
+- Apache Commons for FTP
+    commons-net:commons-net:3.6
 - start on command line
     java -jar D:\projects\Corazon\WatchDog\out\artifacts\WatchDog_jar\WatchDog.jar
 
