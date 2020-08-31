@@ -8,6 +8,7 @@ package de.concepts.io;
 import de.concepts.io.importer.ImporterCSV;
 import de.concepts.io.importer.ImporterJSON;
 import de.concepts.io.importer.ImporterXML;
+import de.concepts.io.tools.FTPTimerTask;
 import de.concepts.io.tools.Helper;
 
 import java.io.File;
@@ -15,10 +16,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.*;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.Properties;
-import java.util.Queue;
+import java.util.*;
 import java.util.logging.*;
 
 
@@ -31,6 +29,7 @@ public class WatchDog {
     static String watchdogFTPPw = ""; // will be overwritten later
     static String watchdogFTPServer = ""; // will be overwritten later
     static String watchdogFTPUser = ""; // will be overwritten later
+    static String watchdogFTPMinutes = ""; // will be overwritten later
     static final String WATCHDOG_LOGGING_PROPERTIES = "watchdog.properties";
     static Logger logger = Logger.getAnonymousLogger();
     static Queue<String> queueWithFilenames = new LinkedList<>();
@@ -46,6 +45,11 @@ public class WatchDog {
         logger.info("Selftest Unirest : " + Helper.checkUnirest());
         logger.info("Selftest XML     : " + Helper.checkXmlHandling());
         logger.info("Selftest JSON    : " + Helper.checkJsonHandling());
+
+        // start FTP monitoring
+        Timer timer = new Timer();
+        timer.schedule(new FTPTimerTask(), 0, Integer.parseInt(watchdogFTPMinutes)*60*1000);
+        // start directory monitoring
         Path path = Paths.get(watchdogDirectoryMonitored);
         logger.info("Watchdog started monitoring");
 
@@ -80,7 +84,8 @@ public class WatchDog {
         watchdogSleepMilliseconds = properties.getProperty("watchdog.sleep.ms");
         watchdogFTPServer = properties.getProperty("watchdog.ftp.server");
         watchdogFTPUser = properties.getProperty("watchdog.ftp.user");
-        watchdogFTPPw = properties.getProperty("wwatchdog.ftp.pw");
+        watchdogFTPPw = properties.getProperty("watchdog.ftp.pw");
+        watchdogFTPMinutes = properties.getProperty("watchdog.ftp.minutes");
         // ensure the main directories exist
         File file = new File(watchdogLogfilePath); // create log dir
         file.getParentFile().mkdirs(); // create parent dirs

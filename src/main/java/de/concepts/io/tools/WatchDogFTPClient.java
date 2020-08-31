@@ -51,6 +51,10 @@ public class WatchDogFTPClient
         }
     }
 
+    public void sayHello() {
+        System.out.println("FTP monitoring active");
+    }
+
     public static void main(String[] args) {
         try {
             WatchDogFTPClient ftpDownloader =
