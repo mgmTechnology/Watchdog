@@ -60,7 +60,7 @@ public class WatchDogFTPClient
             WatchDogFTPClient ftpDownloader =
                     new WatchDogFTPClient("mgm.technology", "developer", "ftp4Developers!Now");
             ftpDownloader.downloadFile("/testdata/users.xml", "./downloads/users.xml");
-            System.out.println("FTP File downloaded successfully");
+            System.out.println("FTP directory checked.");
             ftpDownloader.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
