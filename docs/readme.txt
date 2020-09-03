@@ -24,6 +24,8 @@ Choosen:
     com.konghq:unirest-java:3.10.00
 - Apache Commons for FTP
     commons-net:commons-net:3.6
+- OpenCSV for CSV files
+    com.opencsv:opencsv:5.2
 - start on command line
     java -jar D:\projects\Corazon\WatchDog\out\artifacts\WatchDog_jar\WatchDog.jar
 
