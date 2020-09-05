@@ -18,6 +18,7 @@ import java.nio.file.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.*;
+import java.util.stream.Stream;
 
 
 public class WatchDog {
@@ -45,8 +46,7 @@ public class WatchDog {
         logger.info("Selftest Unirest : " + Helper.checkUnirest());
         logger.info("Selftest XML     : " + Helper.checkXmlHandling());
         logger.info("Selftest JSON    : " + Helper.checkJsonHandling());
-
-        // start FTP monitoring
+  // start FTP monitoring
         Timer timer = new Timer();
         timer.schedule(new FTPTimerTask(), 0, Integer.parseInt(watchdogFTPMinutes)*60*1000);
         // start directory monitoring

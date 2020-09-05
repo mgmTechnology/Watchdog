@@ -5,9 +5,12 @@
  */
 package concepts.io.tools;
 
+import de.concepts.io.tools.Helper;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,7 +31,16 @@ class HelperTest {
     void testGetFileExtension() {
         File f = new File("c:\\test\\demo.xml");
         assertEquals("xml", de.concepts.io.tools.Helper.getFileExtension(f));
+        
     }
 
+    @Test
+    void testReadCSVFromFile() {
+        // test CSV
+        List<String> csvLines = Helper.getLinesFromFile("D:\\projects\\Corazon\\WatchDog\\docs\\kadis\\Beispiel_u_Schemadateien" +
+                "\\Preise_die_von_KaDIS_gemeldet_werden\\", "b2c_shopware_artikel_preise.csv");
+        //assertNotNull(csvLines);
+        assertEquals(39672, csvLines.size());
+    }
 
 }

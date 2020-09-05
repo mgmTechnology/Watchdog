@@ -22,10 +22,16 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Helper class
@@ -171,5 +177,27 @@ public class Helper {
         //logger.info(theDog);
     }
 
+    /**
+     * read lines from a file into a Stream
+     * @param absDir
+     * @param fileName
+     * @return
+     */
+    public static List<String> getLinesFromFile(String absDir, String fileName) {
+        Path filePath = Paths.get(absDir, fileName);
+
+        //try-with-resources
+        try (Stream<String> lines = Files.lines( filePath ))
+        {
+            // lines.forEach(System.out::println);
+            return lines.collect(Collectors.toList());
+
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }
