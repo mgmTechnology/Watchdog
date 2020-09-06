@@ -6,6 +6,7 @@
 package de.concepts.io.tools;
 
 import com.google.gson.*;
+import de.concepts.kadis.PriceNotification;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
@@ -16,20 +17,20 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.text.NumberFormat;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Locale;
 import java.util.Properties;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -37,7 +38,7 @@ import java.util.stream.Stream;
  * Helper class
  */
 public class Helper {
-
+    private static final String SEMICOLON = ";";
     /**
      * selftest for unirest framework
      *
@@ -177,21 +178,50 @@ public class Helper {
         //logger.info(theDog);
     }
 
+
+    /**
+     * functional interface for createing price notification object from csv line
+     */
+    private static Function<String, PriceNotification> mapToPriceNotification = (line) -> {
+        String[] p = line.split(SEMICOLON);// a CSV has comma separated lines
+        PriceNotification priceNote = new PriceNotification();
+
+        try {
+            priceNote.setId(Integer.parseInt(p[0]));//<-- this is the first column in the csv file
+            priceNote.setOrdernumber(p[1]);
+            priceNote.setPricegroup(p[2]);
+            priceNote.setVon(p[3]);
+            priceNote.setZu(p[4]);
+            priceNote.setPrice(p[5].equals("") ? new BigDecimal(0) : new BigDecimal(p[5].replaceAll(",",".")));
+            priceNote.setPseudoprice(p[6].equals("") ? new BigDecimal(0) : new BigDecimal(p[6].replaceAll(",",".")));
+            priceNote.setBaseprice(p[7].equals("")? new BigDecimal(0) : new BigDecimal(p[7].replaceAll(",",".")));
+            priceNote.setBulkgroup(p[8]);
+            priceNote.setTaxgroup(p[9]);
+            priceNote.setTaxvalue(p[10].equals("") ? new BigDecimal(0) : new BigDecimal(p[10].replaceAll(",",".")));
+        } catch (NumberFormatException e) {
+            System.out.println("Error on " + p[0]);
+        }
+        return priceNote;
+    };
+
+
+
     /**
      * read lines from a file into a Stream
      * @param absDir
      * @param fileName
      * @return
      */
-    public static List<String> getLinesFromFile(String absDir, String fileName) {
+    public static List<PriceNotification> getAllPriceNotificationsFromCSV(String absDir, String fileName) {
         Path filePath = Paths.get(absDir, fileName);
 
         //try-with-resources
         try (Stream<String> lines = Files.lines( filePath ))
         {
-            // lines.forEach(System.out::println);
-            return lines.collect(Collectors.toList());
-
+            // skipp header line
+            List<PriceNotification> collectedList = lines.skip(1).map(mapToPriceNotification).collect(Collectors.toList());
+            // collectedList.forEach(System.out::println);
+            return collectedList;
         }
         catch (IOException e)
         {
@@ -199,5 +229,9 @@ public class Helper {
             return null;
         }
     }
+
+
+
+
 
 }
