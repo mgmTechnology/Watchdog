@@ -6,6 +6,7 @@
 package concepts.io.tools;
 
 import de.concepts.io.tools.Helper;
+import de.concepts.kadis.PriceNotification;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -37,10 +38,10 @@ class HelperTest {
     @Test
     void testReadCSVFromFile() {
         // test CSV
-        List<String> csvLines = Helper.getLinesFromFile("D:\\projects\\Corazon\\WatchDog\\docs\\kadis\\Beispiel_u_Schemadateien" +
+        List<PriceNotification> csvLines = Helper.getAllPriceNotificationsFromCSV("D:\\projects\\Corazon\\WatchDog\\docs\\kadis\\Beispiel_u_Schemadateien" +
                 "\\Preise_die_von_KaDIS_gemeldet_werden\\", "b2c_shopware_artikel_preise.csv");
         //assertNotNull(csvLines);
-        assertEquals(39672, csvLines.size());
+        assertEquals(39671, csvLines.size());
     }
 
 }
