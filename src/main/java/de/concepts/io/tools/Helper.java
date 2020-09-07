@@ -30,6 +30,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -221,6 +222,7 @@ public class Helper {
             // skipp header line
             List<PriceNotification> collectedList = lines.skip(1).map(mapToPriceNotification).collect(Collectors.toList());
             // collectedList.forEach(System.out::println);
+//            List<PriceNotification> collectedList = lines.skip(1).map(mapToPriceNotification).collect(Collectors.toList()).forEach(System.out::println);
             return collectedList;
         }
         catch (IOException e)
@@ -231,7 +233,8 @@ public class Helper {
     }
 
 
-
+    public static BiFunction<Integer, Integer, Integer> incrementAndMultiplyExample = ( incrementNumber, multiplyNumber)
+            -> (incrementNumber + 1) * multiplyNumber;
 
 
 }

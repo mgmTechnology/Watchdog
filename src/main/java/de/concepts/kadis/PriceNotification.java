@@ -1,6 +1,8 @@
 package de.concepts.kadis;
 
 import java.math.BigDecimal;
+import java.util.Objects;
+import java.util.Optional;
 
 public class PriceNotification {
 
@@ -9,18 +11,27 @@ public class PriceNotification {
     String pricegroup;
     String von;
     String zu;
-
-    @Override
-    public String toString() {
-        return "PriceNotification{" + "id=" + id + ", ordernumber='" + ordernumber + '\'' + ", pricegroup='" + pricegroup + '\'' + ", price=" + price + '}';
-    }
-
     BigDecimal price;
     BigDecimal pseudoprice;
     BigDecimal baseprice;
     String bulkgroup;
     String taxgroup;
     BigDecimal taxvalue;
+    String comment;
+
+    public   String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    @Override
+    public String toString() {
+        return "PriceNotification{" + "id=" + id + ", ordernumber='" + ordernumber + '\'' + ", pricegroup='" + pricegroup
+                + '\'' + ", price=" + price + ", comment='" + this.getComment() + '\'' + '}';
+    }
 
     public int getId() {
         return id;

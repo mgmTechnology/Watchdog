@@ -18,7 +18,7 @@ import java.nio.file.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.*;
-import java.util.stream.Stream;
+
 
 
 public class WatchDog {
@@ -41,14 +41,17 @@ public class WatchDog {
         File file = new File(".");
         currentDirectory = file.getAbsolutePath();
         Helper.printAsciiWatchDog();
+
+        System.out.println(Helper.incrementAndMultiplyExample.apply(0,3));
+
         configureWatchDog();
         configureLogging(currentDirectory);
-        logger.info("Selftest Unirest : " + Helper.checkUnirest());
-        logger.info("Selftest XML     : " + Helper.checkXmlHandling());
-        logger.info("Selftest JSON    : " + Helper.checkJsonHandling());
-  // start FTP monitoring
+        logger.info(String.format("Selftest Unirest : %s", Helper.checkUnirest()));
+        logger.info(String.format("Selftest XML     : %s", Helper.checkXmlHandling()));
+        logger.info(String.format("Selftest JSON    : %s" , Helper.checkJsonHandling()));
+  // start FTP monitoring)
         Timer timer = new Timer();
-        timer.schedule(new FTPTimerTask(), 0, Integer.parseInt(watchdogFTPMinutes)*60*1000);
+        timer.schedule(new FTPTimerTask(), 0, Long.parseLong(watchdogFTPMinutes)*60*1000);
         // start directory monitoring
         Path path = Paths.get(watchdogDirectoryMonitored);
         logger.info("Watchdog started monitoring");
@@ -68,7 +71,7 @@ public class WatchDog {
      */
     private static void configureWatchDog() {
         Properties properties = new Properties();
-        FileInputStream in = null;
+        FileInputStream in;
         try {
             in = new FileInputStream(WATCHDOG_LOGGING_PROPERTIES);
             properties.load(in);
@@ -89,8 +92,12 @@ public class WatchDog {
         // ensure the main directories exist
         File file = new File(watchdogLogfilePath); // create log dir
         file.getParentFile().mkdirs(); // create parent dirs
-        try {Path newDir = Files.createDirectory(Paths.get(watchdogDirectoryMonitored)); } catch (Exception e) { }
-        try {Path newDir = Files.createDirectory(Paths.get(watchdogDirectoryProcessed)); } catch (Exception e) { }
+        try {Files.createDirectory(Paths.get(watchdogDirectoryMonitored)); } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        try {Files.createDirectory(Paths.get(watchdogDirectoryProcessed)); } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
         System.out.printf("Java      :  %s%n", Helper.getServerEnvironmentVariables());
         System.out.printf("Monitoring:  %s%n", watchdogDirectoryMonitored);
         System.out.printf("Processed:   %s%n", watchdogDirectoryProcessed);
@@ -126,8 +133,8 @@ public class WatchDog {
     /**
      * move a processed file into a separate processed folder, adding a timestamp prefix to it
      *
-     * @param queue
-     * @return true or false signale move result
+     * @param queue queue of filenames
+     * @return true or false signal move result
      */
     public static boolean moveFile(Queue<String> queue) {
         boolean fileMoved = true;
@@ -217,7 +224,7 @@ public class WatchDog {
                             default:
                                 logger.info(String.format("file type %s not supported.", fileTypeExtension));
                         }
-                        moveFile(queueWithFilenames);
+                        boolean success = moveFile(queueWithFilenames);
                         break;
                     case "ENTRY_DELETE":
                         // log.info("File deleted: " + watchEvent.context());
