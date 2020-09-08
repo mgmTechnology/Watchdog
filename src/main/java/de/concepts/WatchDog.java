@@ -3,7 +3,7 @@
  * Proprietary and confidential
  * Written by Marc Müller <marc@mgm.technology>, 2020
  */
-package de.concepts.io;
+package de.concepts;
 
 import de.concepts.io.importer.ImporterCSV;
 import de.concepts.io.importer.ImporterJSON;
@@ -22,15 +22,6 @@ import java.util.logging.*;
 
 
 public class WatchDog {
-    static String watchdogLogfilePath = ""; // will be overwritten later
-    static String watchdogDirectoryMonitored = ""; // will be overwritten later
-    static String watchdogDirectoryProcessed = ""; // will be overwritten later
-    static String watchdogTimestampFormat = ""; // will be overwritten later
-    static String watchdogSleepMilliseconds = ""; // will be overwritten later
-    static String watchdogFTPPw = ""; // will be overwritten later
-    static String watchdogFTPServer = ""; // will be overwritten later
-    static String watchdogFTPUser = ""; // will be overwritten later
-    static String watchdogFTPMinutes = ""; // will be overwritten later
     static final String WATCHDOG_LOGGING_PROPERTIES = "watchdog.properties";
     static Logger logger = Logger.getAnonymousLogger();
     static Queue<String> queueWithFilenames = new LinkedList<>();
@@ -42,66 +33,40 @@ public class WatchDog {
         currentDirectory = file.getAbsolutePath();
         Helper.printAsciiWatchDog();
 
-        System.out.println(Helper.incrementAndMultiplyExample.apply(0,3));
+        // System.out.println(Helper.incrementAndMultiplyExample.apply(0,3));
 
-        configureWatchDog();
+        WatchDogConfiguration.configureWatchDog();
         configureLogging(currentDirectory);
         logger.info(String.format("Selftest Unirest : %s", Helper.checkUnirest()));
         logger.info(String.format("Selftest XML     : %s", Helper.checkXmlHandling()));
         logger.info(String.format("Selftest JSON    : %s" , Helper.checkJsonHandling()));
-  // start FTP monitoring)
-        Timer timer = new Timer();
-        timer.schedule(new FTPTimerTask(), 0, Long.parseLong(watchdogFTPMinutes)*60*1000);
-        // start directory monitoring
-        Path path = Paths.get(watchdogDirectoryMonitored);
-        logger.info("Watchdog started monitoring");
 
-        try (WatchService watchService = FileSystems.getDefault().newWatchService()) {
-            WatchKey key = path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE,
-                    StandardWatchEventKinds.ENTRY_MODIFY, StandardWatchEventKinds.ENTRY_DELETE);
-            startListening(watchService);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        logger.info("Watchdog stopped monitoring.");
-    }
-
-    /**
-     * configures watchdog using WATCHDOG_LOGGING_PROPERTIES
-     */
-    private static void configureWatchDog() {
-        Properties properties = new Properties();
-        FileInputStream in;
-        try {
-            in = new FileInputStream(WATCHDOG_LOGGING_PROPERTIES);
-            properties.load(in);
-            in.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (WatchDogConfiguration.watchdogFTPEnabled.equalsIgnoreCase("true")) {
+            // start FTP monitoring)
+            logger.info("Watchdog started FTP server monitoring");
+            Timer timer = new Timer();
+            timer.schedule(new FTPTimerTask(), 0, Long.parseLong(WatchDogConfiguration.watchdogFTPMinutes)*60*1000);
+            // start directory monitoring
+        } else {
+            logger.info("FTP server monitoring not enabled");
         }
 
-        watchdogLogfilePath = properties.getProperty("watchdog.logfile.path");
-        watchdogDirectoryMonitored = properties.getProperty("watchdog.directory.monitored");
-        watchdogDirectoryProcessed = properties.getProperty("watchdog.directory.processed");
-        watchdogTimestampFormat = properties.getProperty("watchdog.timestamp.format");
-        watchdogSleepMilliseconds = properties.getProperty("watchdog.sleep.ms");
-        watchdogFTPServer = properties.getProperty("watchdog.ftp.server");
-        watchdogFTPUser = properties.getProperty("watchdog.ftp.user");
-        watchdogFTPPw = properties.getProperty("watchdog.ftp.pw");
-        watchdogFTPMinutes = properties.getProperty("watchdog.ftp.minutes");
-        // ensure the main directories exist
-        File file = new File(watchdogLogfilePath); // create log dir
-        file.getParentFile().mkdirs(); // create parent dirs
-        try {Files.createDirectory(Paths.get(watchdogDirectoryMonitored)); } catch (Exception e) {
-            System.err.println(e.getMessage());
+        if(WatchDogConfiguration.watchdogDirectoryEnabled.equalsIgnoreCase("true")) {
+            // start directory monitoring
+            Path pathDirectoryMonitored = Paths.get(WatchDogConfiguration.watchdogDirectoryMonitored);
+            logger.info("Watchdog started directory monitoring");
+            try (WatchService watchService = FileSystems.getDefault().newWatchService()) {
+                WatchKey key = pathDirectoryMonitored.register(watchService, StandardWatchEventKinds.ENTRY_CREATE,
+                        StandardWatchEventKinds.ENTRY_MODIFY, StandardWatchEventKinds.ENTRY_DELETE);
+                startListening(watchService);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            logger.info("Directory monitoring not enabled");
         }
-        try {Files.createDirectory(Paths.get(watchdogDirectoryProcessed)); } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
-        System.out.printf("Java      :  %s%n", Helper.getServerEnvironmentVariables());
-        System.out.printf("Monitoring:  %s%n", watchdogDirectoryMonitored);
-        System.out.printf("Processed:   %s%n", watchdogDirectoryProcessed);
-        System.out.printf("Logfile:     %s%n", watchdogLogfilePath);
+
+        // logger.info("Watchdog stopped monitoring.");
     }
 
 
@@ -115,7 +80,7 @@ public class WatchDog {
             LogManager manager = LogManager.getLogManager();
             manager.readConfiguration(new FileInputStream(WATCHDOG_LOGGING_PROPERTIES));
             try {
-                fileHandler = new FileHandler(watchdogLogfilePath, true); //file
+                fileHandler = new FileHandler(WatchDogConfiguration.watchdogLogfilePath, true); //file
                 SimpleFormatter simple = new SimpleFormatter();
                 fileHandler.setFormatter(simple);
                 logger.addHandler(fileHandler);//adding Handler for file
@@ -125,9 +90,9 @@ public class WatchDog {
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
-        logger.info(String.format("Monitoring:  %s", watchdogDirectoryMonitored));
-        logger.info(String.format("Processed:   %s", watchdogDirectoryProcessed));
-        logger.info(String.format("Logfile:     %s", watchdogLogfilePath));
+        logger.info(String.format("Monitoring:  %s", WatchDogConfiguration.watchdogDirectoryMonitored));
+        logger.info(String.format("Processed:   %s", WatchDogConfiguration.watchdogDirectoryProcessed));
+        logger.info(String.format("Logfile:     %s", WatchDogConfiguration.watchdogLogfilePath));
     }
 
     /**
@@ -143,8 +108,8 @@ public class WatchDog {
         Path targetPath;
         assert importFilePath != null;
         fileToMovePath = Paths.get(importFilePath);
-        String timeStamp = new SimpleDateFormat(watchdogTimestampFormat).format(new Date());
-        targetPath = Paths.get(watchdogDirectoryProcessed + timeStamp + fileToMovePath.getFileName());
+        String timeStamp = new SimpleDateFormat(WatchDogConfiguration.watchdogTimestampFormat).format(new Date());
+        targetPath = Paths.get(WatchDogConfiguration.watchdogDirectoryProcessed + timeStamp + fileToMovePath.getFileName());
         try {
             File f = new File(String.valueOf(fileToMovePath));
             while (!f.canWrite()) { // file is locked, let's wait until is is completely written
@@ -197,14 +162,14 @@ public class WatchDog {
              * for large files. So you actually cannot be sure whether or not the file is successfully
              * copied, you have to come up with application/OS dependent metrics.
              */
-            Thread.sleep(Integer.parseInt(watchdogSleepMilliseconds));
+            Thread.sleep(Integer.parseInt(WatchDogConfiguration.watchdogSleepMilliseconds));
             for (WatchEvent<?> watchEvent : queuedKey.pollEvents()) {
                 switch (watchEvent.kind().name()) {
                     case "ENTRY_CREATE":
                         // log.fine("New file: " watchEvent.context());
                         break;
                     case "ENTRY_MODIFY":
-                        String modifiedFilePath = watchdogDirectoryMonitored + watchEvent.context().toString();
+                        String modifiedFilePath = WatchDogConfiguration.watchdogDirectoryMonitored + watchEvent.context().toString();
                         queueWithFilenames.offer(modifiedFilePath); // add to queue to handle this file later
                         String timeStamp = new SimpleDateFormat("MM-dd hh:mm:ss ").format(new Date());
                         logger.info(timeStamp + modifiedFilePath);
