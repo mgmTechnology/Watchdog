@@ -30,10 +30,11 @@ Choosen:
         - https://matomo.org/blog/2015/11/introducing-piwik-java-tracker/
 - Sqlite
     - org.xerial:sqlite-jdbc:3.32.3
+- JAXB as external library as it was removed in JDK 11
+    javax.xml.bind:jaxb-api:2.3.1
+        - needed for piwik
+
 - start on command line
     java -jar D:\projects\Corazon\WatchDog\out\artifacts\WatchDog_jar\WatchDog.jar
 
 Removed:
-- JAXB as external library as it was removed in JDK 11
-    javax.xml.bind:jaxb-api:2.3.1
-        - maybe using Stax instead

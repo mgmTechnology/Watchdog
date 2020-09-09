@@ -12,9 +12,12 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="org.junit.jupiter:junit-jupiter:5.6.2" level="project" />
     <orderEntry type="library" name="com.google.code.gson:gson:2.8.5" level="project" />
-    <orderEntry type="library" name="javax.xml.bind:jaxb-api:2.3.1" level="project" />
     <orderEntry type="library" name="com.konghq:unirest-java:3.10.00" level="project" />
     <orderEntry type="library" name="commons-net:commons-net:3.6" level="project" />
     <orderEntry type="library" name="com.opencsv:opencsv:5.2" level="project" />
+    <orderEntry type="library" name="matomo-java-tracker-1.6" level="project" />
+    <orderEntry type="library" name="org.glassfish:jakarta.json:1.1.6" level="project" />
+    <orderEntry type="library" name="org.xerial:sqlite-jdbc:3.32.3" level="project" />
+    <orderEntry type="library" name="javax.xml.bind:jaxb-api:2.3.1" level="project" />
   </component>
 </module>

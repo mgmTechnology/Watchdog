@@ -6,6 +6,7 @@
 package de.concepts.io.tools;
 
 import de.concepts.WatchDogConfiguration;
+import de.concepts.io.db.SQLiter;
 import org.apache.http.HttpResponse;
 import org.piwik.java.tracking.PiwikRequest;
 import org.piwik.java.tracking.PiwikTracker;
@@ -32,9 +33,12 @@ public class FTPTimerTask extends TimerTask {
         String resultMessage = ftpDownloader.downloadFile(WatchDogConfiguration.watchdogFTPKadisPathArticles,
                 "./downloads/" + ts + "articles.xml");
         System.out.println(resultMessage);
+        SQLiter.logFtpAccess("articles.xml");
         ftpDownloader.downloadFile(WatchDogConfiguration.watchdogFTPKadisPathInventory, "./downloads/" + ts + "article_inventory.csv");
+        SQLiter.logFtpAccess("article_inventory.csv");
         System.out.println(resultMessage);
         resultMessage = ftpDownloader.downloadFile(WatchDogConfiguration.watchdogFTPKadisPathPrices, "./downloads/" + ts + "article_prices.csv");
+        SQLiter.logFtpAccess("article_prices.csv");
         System.out.println(resultMessage);
 
         ftpDownloader.disconnect();
