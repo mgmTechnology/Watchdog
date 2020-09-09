@@ -6,8 +6,6 @@
 package de.concepts.kadis;
 
 import java.math.BigDecimal;
-import java.util.Objects;
-import java.util.Optional;
 
 public class PriceNotification {
 
@@ -24,7 +22,7 @@ public class PriceNotification {
     BigDecimal taxvalue;
     String comment;
 
-    public   String getComment() {
+    public String getComment() {
         return comment;
     }
 
@@ -34,8 +32,7 @@ public class PriceNotification {
 
     @Override
     public String toString() {
-        return "PriceNotification{" + "id=" + id + ", ordernumber='" + ordernumber + '\'' + ", pricegroup='" + pricegroup
-                + '\'' + ", price=" + price + ", comment='" + this.getComment() + '\'' + '}';
+        return "PriceNotification{" + "id=" + id + ", ordernumber='" + ordernumber + '\'' + ", pricegroup='" + pricegroup + '\'' + ", price=" + price + ", comment='" + this.getComment() + '\'' + '}';
     }
 
     public int getId() {

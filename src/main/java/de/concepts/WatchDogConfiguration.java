@@ -1,3 +1,8 @@
+/* Copyright (C) Marc Müller - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Marc Müller <marc@mgm.technology>, 2020
+ */
 package de.concepts;
 
 import de.concepts.io.tools.Helper;
@@ -10,30 +15,31 @@ import java.nio.file.Paths;
 import java.util.Properties;
 
 public class WatchDogConfiguration {
-    public static String watchdogLogfilePath = ""; // will be overwritten later
-    public static String watchdogDirectoryEnabled = ""; // will be overwritten later
-    public static String watchdogDirectoryMonitored = ""; // will be overwritten later
-    public static String watchdogDirectoryProcessed = ""; // will be overwritten later
-    public static String watchdogTimestampFormat = ""; // will be overwritten later
-    public static String watchdogSleepMilliseconds = ""; // will be overwritten later
-    public static String watchdogFTPEnabled = ""; // will be overwritten later
-    public static String watchdogFTPProtocolCommandListenerEnabled = ""; // will be overwritten later
-    public static String watchdogFTPPw = ""; // will be overwritten later
-    public static String watchdogFTPServer = ""; // will be overwritten later
-    public static String watchdogFTPUser = ""; // will be overwritten later
-    public static String watchdogFTPMinutes = ""; // will be overwritten later
-    public static String watchdogFTPKadisPathArticles = ""; // will be overwritten later
-    public static String watchdogFTPKadisPathInventory = ""; // will be overwritten later
-    public static String watchdogFTPKadisPathPrices = ""; // will be overwritten later
-    public static String watchdogPiwikSite = ""; // will be overwritten later
-    public static String watchdogPiwikId = ""; // will be overwritten later
-    public static String watchdogPiwikScript = ""; // will be overwritten later
-    public static String watchdogPiwikEnabled = ""; // will be overwritten later
+    public static String watchdogLogfilePath = ""; 
+    public static String watchdogDirectoryEnabled = ""; 
+    public static String watchdogDirectoryMonitored = ""; 
+    public static String watchdogDirectoryProcessed = ""; 
+    public static String watchdogTimestampFormat = ""; 
+    public static String watchdogSleepMilliseconds = ""; 
+    public static String watchdogFTPEnabled = ""; 
+    public static String watchdogFTPProtocolCommandListenerEnabled = ""; 
+    public static String watchdogFTPPw = ""; 
+    public static String watchdogFTPServer = ""; 
+    public static String watchdogFTPUser = ""; 
+    public static String watchdogFTPMinutes = ""; 
+    public static String watchdogFTPKadisPathArticles = ""; 
+    public static String watchdogFTPKadisPathInventory = ""; 
+    public static String watchdogFTPKadisPathPrices = ""; 
+    public static String watchdogPiwikSite = ""; 
+    public static String watchdogPiwikId = ""; 
+    public static String watchdogPiwikScript = ""; 
+    public static String watchdogPiwikEnabled = ""; 
+    public static String watchdogXMLOrdersSchemaFile = ""; 
 
     /**
      * configures watchdog using WATCHDOG_LOGGING_PROPERTIES
      */
-    static void configureWatchDog() {
+    static void configure() {
         Properties properties = new Properties();
         FileInputStream in;
         try {
@@ -63,6 +69,7 @@ public class WatchDogConfiguration {
         watchdogPiwikId = properties.getProperty("watchdog.piwik.id");
         watchdogPiwikScript = properties.getProperty("watchdog.piwik.script");
         watchdogPiwikEnabled = properties.getProperty("watchdog.piwik.enabled");
+        watchdogXMLOrdersSchemaFile = properties.getProperty("watchdog.xml.schema.uri.orders");
         // ensure the main directories exist
         File file = new File(watchdogLogfilePath); // create log dir
         file.getParentFile().mkdirs(); // create parent dirs

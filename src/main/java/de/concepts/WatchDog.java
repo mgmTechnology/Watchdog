@@ -35,7 +35,7 @@ public class WatchDog {
 
         // System.out.println(Helper.incrementAndMultiplyExample.apply(0,3));
 
-        WatchDogConfiguration.configureWatchDog();
+        WatchDogConfiguration.configure();
         configureLogging(currentDirectory);
         logger.info(String.format("Selftest Unirest : %s", Helper.checkUnirest()));
         logger.info(String.format("Selftest XML     : %s", Helper.checkXmlHandling()));
