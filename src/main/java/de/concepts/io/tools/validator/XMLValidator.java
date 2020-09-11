@@ -25,7 +25,7 @@ public class XMLValidator {
      * @throws IOException if an error occurred while reading {@code stream}
      * @throws NullPointerException if {@code stream} is {@code null}
      */
-    public static boolean validateOrders(String pathXml, String schemaFileUrl) throws IOException {
+    public static boolean validate(String pathXml, String schemaFileUrl) throws IOException {
         InputStream fisArticles = null;
 
         try {
@@ -48,10 +48,10 @@ public class XMLValidator {
             Schema schema = schemaFactory.newSchema(schemaFile);
             Validator validator = schema.newValidator();
             validator.validate(xmlFile);
-            System.out.println(xmlFile.getSystemId() + " is valid order ");
+            // System.out.println(xmlFile.getSystemId() + " is valid ");
             return true;
         } catch (SAXException e) {
-            System.out.println(xmlFile.getSystemId() + " is NOT valid order reason:" + e);
+            //System.out.println(xmlFile.getSystemId() + " is NOT valid :" + e);
             return false;
         } catch (IOException e) {
             System.out.println("IO Exception: " + e.getMessage());

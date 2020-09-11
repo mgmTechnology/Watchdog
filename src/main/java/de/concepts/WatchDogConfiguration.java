@@ -16,7 +16,8 @@ import java.util.Properties;
 
 public class WatchDogConfiguration {
     public static String watchdogLogfilePath = ""; 
-    public static String watchdogDirectoryEnabled = ""; 
+    public static String watchdogConfigurationPrintDetails = "";
+    public static String watchdogDirectoryEnabled = "";
     public static String watchdogDirectoryMonitored = ""; 
     public static String watchdogDirectoryProcessed = ""; 
     public static String watchdogTimestampFormat = ""; 
@@ -27,8 +28,9 @@ public class WatchDogConfiguration {
     public static String watchdogFTPServer = ""; 
     public static String watchdogFTPUser = ""; 
     public static String watchdogFTPMinutes = ""; 
-    public static String watchdogFTPKadisPathArticles = ""; 
-    public static String watchdogFTPKadisPathInventory = ""; 
+    public static String watchdogFTPKadisPathRoot = "";
+    public static String watchdogFTPKadisPathArticles = "";
+    public static String watchdogFTPKadisPathInventory = "";
     public static String watchdogFTPKadisPathPrices = ""; 
     public static String watchdogPiwikSite = ""; 
     public static String watchdogPiwikId = ""; 
@@ -39,7 +41,7 @@ public class WatchDogConfiguration {
     /**
      * configures watchdog using WATCHDOG_LOGGING_PROPERTIES
      */
-    static void configure() {
+    public static void configure() {
         Properties properties = new Properties();
         FileInputStream in;
         try {
@@ -51,6 +53,7 @@ public class WatchDogConfiguration {
         }
 
         watchdogLogfilePath = properties.getProperty("watchdog.logfile.path");
+        watchdogConfigurationPrintDetails = properties.getProperty("watchdog.configuration.printDetails");
         watchdogDirectoryEnabled = properties.getProperty("watchdog.directory.enabled");
         watchdogDirectoryMonitored = properties.getProperty("watchdog.directory.monitored");
         watchdogDirectoryProcessed = properties.getProperty("watchdog.directory.processed");
@@ -62,6 +65,7 @@ public class WatchDogConfiguration {
         watchdogFTPUser = properties.getProperty("watchdog.ftp.user");
         watchdogFTPPw = properties.getProperty("watchdog.ftp.pw");
         watchdogFTPMinutes = properties.getProperty("watchdog.ftp.minutes");
+        watchdogFTPKadisPathRoot = properties.getProperty("watchdog.ftp.kadis.path.root");
         watchdogFTPKadisPathArticles = properties.getProperty("watchdog.ftp.kadis.path.articles");
         watchdogFTPKadisPathInventory = properties.getProperty("watchdog.ftp.kadis.path.inventory");
         watchdogFTPKadisPathPrices = properties.getProperty("watchdog.ftp.kadis.path.prices");
@@ -79,7 +83,9 @@ public class WatchDogConfiguration {
         try {Files.createDirectory(Paths.get(watchdogDirectoryProcessed)); } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-        System.out.printf("Java      :  %s%n", Helper.getServerEnvironmentVariables());
+        if (WatchDogConfiguration.watchdogConfigurationPrintDetails.equalsIgnoreCase("true")) {
+            System.out.printf("Java      :  %s%n", Helper.getServerEnvironmentVariables());
+        }
         System.out.printf("Monitoring:  %s%n", watchdogDirectoryMonitored);
         System.out.printf("Processed:   %s%n", watchdogDirectoryProcessed);
         System.out.printf("Logfile:     %s%n", watchdogLogfilePath);

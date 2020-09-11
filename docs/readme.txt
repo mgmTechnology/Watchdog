@@ -37,4 +37,7 @@ Choosen:
 - start on command line
     java -jar D:\projects\Corazon\WatchDog\out\artifacts\WatchDog_jar\WatchDog.jar
 
+- XML to JSON
+    com.fasterxml.jackson.core:jackson-annotations:2.10.1
+
 Removed:

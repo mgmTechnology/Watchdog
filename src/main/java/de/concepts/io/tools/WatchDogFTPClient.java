@@ -10,13 +10,19 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import de.concepts.WatchDogConfiguration;
 import org.apache.commons.net.PrintCommandListener;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 
 /** implements a ftp client with apache commons
@@ -31,7 +37,7 @@ public class WatchDogFTPClient
         if (WatchDogConfiguration.watchdogFTPProtocolCommandListenerEnabled.equalsIgnoreCase("true")) {
             ftp.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
         } else {
-            System.out.println("No protocolCommandListener added.");
+            // System.out.println("No FTP protocolCommandListener added.");
         }
         int reply;
         ftp.connect(host);
@@ -50,6 +56,36 @@ public class WatchDogFTPClient
          return workDirPath.toString();
      }
 
+    public List<String> listFiles(String subdirectory, String filetypeFilter) throws IOException {
+        FTPClient ftpClient = new FTPClient();
+        ftpClient.connect(WatchDogConfiguration.watchdogFTPServer, 21);
+        ftpClient.login(WatchDogConfiguration.watchdogFTPUser, WatchDogConfiguration.watchdogFTPPw);
+        boolean success = ftpClient.changeWorkingDirectory("/testdata");
+        // lists files and directories in the current working directory
+        FTPFile[] files = ftpClient.listFiles();
+
+        Stream<FTPFile> ftpFileStream = Arrays.stream(files);
+        List<String> listOfFiles = ftpFileStream.map(f -> f.getName())
+                .filter(name -> name.contains(filetypeFilter))
+                .collect(Collectors.toList());
+//        iterates over the files and prints details for each
+//        DateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        for (FTPFile file : files) {
+//            String details = file.getName();
+//            if (file.isDirectory()) {
+//                details = "[" + details + "]";
+//            }
+//            details += "\t\t" + file.getSize();
+//            details += "\t\t" + dateFormater.format(file.getTimestamp().getTime());
+//            System.out.println(details);
+//        }
+
+        ftpClient.logout();
+        ftpClient.disconnect();
+
+        return listOfFiles;
+    }
+
     public String downloadFile(String remoteFilePath, String localFilePath) {
         String parentDirPath =Paths.get(remoteFilePath).getParent().toString();
         String fileName = Paths.get(remoteFilePath).getFileName().toString();
@@ -59,6 +95,7 @@ public class WatchDogFTPClient
         try (FileOutputStream fos = new FileOutputStream(localFilePath)) {
             this.ftp.retrieveFile(remoteFilePath, fos);
             this.ftp.rename( remoteFilePath, processedPath);
+
             return "OK: " + localFilePath;
         } catch (IOException e) {
             e.printStackTrace();
