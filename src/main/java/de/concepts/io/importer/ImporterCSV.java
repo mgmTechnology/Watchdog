@@ -9,6 +9,14 @@ package de.concepts.io.importer;
  * inherited class for importing CSV files
  */
 public class ImporterCSV extends Importer {
+    public static void getPricesFromCSV(String ts, String csvFileName) {
+        System.out.println("Handling prices");
+    }
+
+    public static void getInventoryFromCSV(String ts, String csvFileName) {
+        System.out.println("Handling inventory");
+    }
+
     @Override
     public String toString() {
         return "ImporterCSV{}";
