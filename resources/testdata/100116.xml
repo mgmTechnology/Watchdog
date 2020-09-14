@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--Export Version: 1.0.6564.21493-->
+<Artikel>
+  <KaDIS-Artikelsteuerung>aktiv</KaDIS-Artikelsteuerung>
+  <Verkaufsplattform>KADIS</Verkaufsplattform>
+  <supplier_name>Zentrale</supplier_name>
+  <active>1</active>
+  <tax>19</tax>
+  <mainDetail>
+    <number>100116</number>
+    <prices>
+      <customerGroupKey>AMAZO</customerGroupKey>
+      <price>0</price>
+      <pseudoPrice>0</pseudoPrice>
+      <basePrice>0</basePrice>
+      <from>1</from>
+      <to>beliebig</to>
+    </prices>
+    <prices>
+      <customerGroupKey>EK</customerGroupKey>
+      <price>0.25</price>
+      <pseudoPrice>0</pseudoPrice>
+      <basePrice>0</basePrice>
+      <from>1</from>
+      <to>beliebig</to>
+    </prices>
+    <prices>
+      <customerGroupKey>H05</customerGroupKey>
+      <price>0.2</price>
+      <pseudoPrice>0</pseudoPrice>
+      <basePrice>0</basePrice>
+      <from>1</from>
+      <to>beliebig</to>
+    </prices>
+    <prices>
+      <customerGroupKey>H08</customerGroupKey>
+      <price>0.19</price>
+      <pseudoPrice>0</pseudoPrice>
+      <basePrice>0</basePrice>
+      <from>1</from>
+      <to>beliebig</to>
+    </prices>
+    <prices>
+      <customerGroupKey>H15</customerGroupKey>
+      <price>0.18</price>
+      <pseudoPrice>0</pseudoPrice>
+      <basePrice>0</basePrice>
+      <from>1</from>
+      <to>beliebig</to>
+    </prices>
+    <prices>
+      <customerGroupKey>H20</customerGroupKey>
+      <price>0.17</price>
+      <pseudoPrice>0</pseudoPrice>
+      <basePrice>0</basePrice>
+      <from>1</from>
+      <to>beliebig</to>
+    </prices>
+    <prices>
+      <customerGroupKey>H33</customerGroupKey>
+      <price>0.14</price>
+      <pseudoPrice>0</pseudoPrice>
+      <basePrice>0</basePrice>
+      <from>1</from>
+      <to>beliebig</to>
+    </prices>
+    <prices />
+    <supplierNumber>7000014</supplierNumber>
+    <kind>1</kind>
+    <active>1</active>
+    <inStock>42</inStock>
+    <stockMin>20</stockMin>
+    <weight>0.002</weight>
+    <width>2.714</width>
+    <len>2.714</len>
+    <height>2.714</height>
+    <position>0</position>
+    <minPurchase>1</minPurchase>
+    <maxPurchase>0</maxPurchase>
+    <purchaseUnit>1.0000</purchaseUnit>
+    <referenceUnit>1.000</referenceUnit>
+    <unit>
+      <unit>Stück</unit>
+      <name>Stück</name>
+    </unit>
+    <packUnit>Stück</packUnit>
+    <shippingFree>false</shippingFree>
+    <shippingTime>5</shippingTime>
+    <attribute>
+      <lighthouseAltOrdernumber>506</lighthouseAltOrdernumber>
+      <lighthouseCoolDeliveryArticle>false</lighthouseCoolDeliveryArticle>
+      <lighthouseArticleDeposit>0</lighthouseArticleDeposit>
+    </attribute>
+    <ImageAttribute>
+      <Image>
+        <KadisImageName>100116_01.jpg</KadisImageName>
+        <ShopImageName>100116_01.jpg</ShopImageName>
+       
+      </Image>
+      <Image>
+        <KadisImageName>100116_02.jpg</KadisImageName>
+        <ShopImageName>100116_02.jpg</ShopImageName>
+        
+      </Image>
+    </ImageAttribute>
+  </mainDetail>
+  <name>Schieber für 20mm breites Gurtband - 1 Stück</name>
+  <description>Schieber für 20mm breites Gurtband - 1 Stück</description>
+  <descriptionLong>&lt;p&gt;&lt;b&gt;Schieber/ Regulator f&amp;uuml;r 20mm breites Gurtband aus Acetal &lt;/b&gt;&lt;/p&gt; &lt;p&gt;&lt;b&gt; Farbe: schwarz &lt;/b&gt;&lt;/p&gt;</descriptionLong>
+  <keywords>Schieber, Nexus, 20mm</keywords>
+  <lastStock>1</lastStock>
+  <notification>1</notification>
+  <categories>
+    <id>81</id>
+  </categories>
+  <categories>
+    <id>1295</id>
+  </categories>
+  <translations>
+    <Englisch>
+      <name>Strap adjuster for 20mm wide webbing - 1 piece</name>
+      <description>Strap adjuster for 20mm wide webbing - 1 piece</description>
+      <descriptionLong>&lt;p&gt;&lt;b&gt;Strap adjuster for 20mm wide webbing, made of acetal&lt;/b&gt;&lt;/p&gt; &lt;p&gt;&lt;b&gt;Color: black&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;1 piece&lt;/b&gt;&lt;/p&gt;</descriptionLong>
+      <keywords>Strap adjuster, 20mm, different amounts</keywords>
+    </Englisch>
+  </translations>
+</Artikel>

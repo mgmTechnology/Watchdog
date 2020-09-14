@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
+<!-- 
+Generell können mehrere Auftrage pro Datei mit mehreren bestellten Artikeln angegeben werden.
+Die Schlüsselbegriffe und Abschnitt-Bezeichner sind frei wählbar. 
+Es dürfen keine Verschachtelungen in den Abschnitten auftreten, außer die Artikel in "OrderList".
+Schlüsselbegriffe, die nie einen Wert haben, können weggelassen werden.
+Keine Leer- oder Sonderzeichen in den Schlüsselbegriffen.
+Jeder Schlüsselbegriff darf nur einmal pro Abschnitt auftreten.
+-->
+<Auftraege xmlns="http://www.kadis.de/auftrag/V1.1">
+    <Auftrag>
+        <Bestellung>
+            <BestellNr>56610</BestellNr> <!-- Referenznummer aus dem WebERP-Proghramm -->
+            <Mandant>1</Mandant> <!-- Kann ignoriert werden -->
+            <Mediaplan>Internet
+            </Mediaplan><!-- Hier wird ein eindeutiges Kuerzel fuer die Dependance mit uebergeben (wie diese lauten wird noch definiert)-->
+            <Bestellzeitpunkt>2010-06-27 12:32:15</Bestellzeitpunkt>
+            <Werbekontakt></Werbekontakt><!-- Kann ignoriert werden -->
+            <Kommentarzeile></Kommentarzeile><!-- Kommentare fuer das Warenlager aus dem Web-ERP -->
+            <Preisgruppe></Preisgruppe> <!-- wird noch geklärt, ob nötig oder nicht -->
+            <WKZ>EUR</WKZ><!-- Währungskennzeichen optional standard EUR -->
+            <MwStEinstellung>I
+            </MwStEinstellung><!-- SteuerEinstellung des Auftrags ( + = zzgl.Mwst. I = inkl.Mwst.  O=ohne Mwst ) -->
+        </Bestellung>
+
+        <Kunde>
+
+            <!-- Diese Adresse ist aus MyCorazon-Sicht die Adresse des Endkunden -->
+            <!-- Also aus MyCorazon Sicht die Lieferadresse für den Lieranten KaDIS -->
+            <Shopware-Kundennummer>12345654321</Shopware-Kundennummer><!-- Kundennummer aus dem Web-ERP -->
+            <KundenNr>0815</KundenNr><!-- KaDIS Kundennummer (wenn vorhanden) -->
+            <Anrede>Herr</Anrede>
+            <Vorname>Max</Vorname>
+            <Nachname>Muster</Nachname>
+            <Firma></Firma>
+            <Strasse>Testweg</Strasse>
+            <Hausnummer>1</Hausnummer>
+            <PLZ>12345</PLZ>
+            <Stadt>Weitweg</Stadt>
+            <Land>DE</Land>
+            <Telefon>
+                <Vorwahl>0391</Vorwahl>
+                <Rufnummer>123456</Rufnummer>
+            </Telefon>
+            <Email>e@mail.de</Email>
+        </Kunde>
+
+        <!-- abweichende Lieferadresse in der regel leer bzw. Abschnitt weglassen -->
+        <Lieferadresse>
+            <Anrede>Frau</Anrede>
+            <Vorname>Miriam</Vorname>
+            <Nachname>Musterfrau</Nachname>
+            <Firma></Firma>
+            <Strasse>Der Weg</Strasse>
+            <Hausnummer>2</Hausnummer>
+            <PLZ>12346</PLZ>
+            <Stadt>Teststadt</Stadt>
+            <Land>DE</Land>
+            <Telefon>
+                <Vorwahl>0392</Vorwahl>
+                <Rufnummer>323456</Rufnummer>
+            </Telefon>
+            <Email>f@mail.de</Email>
+        </Lieferadresse>
+
+        <Zahlung>  <!-- Zahlung kann ignoriert werden, da dies von KaDIS für jede Dependance vorgegeben ist --><!-- Im Web-ERP Unter Einkauf-Bestellungen-Zahlungskonditionen -->
+            <Zahlungsart>KK</Zahlungsart>
+        </Zahlung>
+
+        <OrderList>
+            <Artikel>
+                <ArtikelNr>107291</ArtikelNr> <!--Artikelnummer aus dem Web-ERP-->
+                <Menge>1</Menge><!-- Vom Endkunden bestellte Menge -->
+                <Groesse>XXL</Groesse><!-- Entfällt-->
+                <Name>T-Hemd, rot/weiß</Name><!-- optional, in der Landessprache der Dependance-->
+                <Preis>16.90</Preis><!-- Endkundenpreis -->
+                <Steuer>19</Steuer><!-- Zum Artikel zugehöriger Steuersatz in %-->
+                <SteuerEinstellung>I
+                </SteuerEinstellung><!-- SteuerEinstellung des Artikels ( + = zzgl.Mwst. I = inkl.Mwst.  O=ohne Mwst ) -->
+            </Artikel>
+
+            <Artikel>
+                <ArtikelNr>100001</ArtikelNr>
+                <Menge>1</Menge>
+                <Groesse>St</Groesse>
+                <Name>Versandkosten</Name>
+                <Preis>9.99</Preis>
+                <Steuer>19</Steuer>
+                <SteuerEinstellung>I</SteuerEinstellung>
+            </Artikel>
+
+            <Artikel>
+                <ArtikelNr>114965</ArtikelNr>
+                <Menge>1</Menge>
+                <Groesse>St</Groesse>
+                <Name>Handytasche aus Schafsfell</Name>
+                <Preis>9.99</Preis>
+                <Steuer>19</Steuer>
+                <SteuerEinstellung>I</SteuerEinstellung>
+            </Artikel>
+
+            <Artikel>
+                <ArtikelNr>115855</ArtikelNr>
+                <Menge>1</Menge>
+                <Groesse>St</Groesse>
+                <Name>großer Apfel</Name>
+                <Preis>4.99</Preis>
+                <Steuer>7</Steuer>
+                <SteuerEinstellung>I</SteuerEinstellung>
+            </Artikel>
+        </OrderList>
+    </Auftrag>
+</Auftraege>
