@@ -37,6 +37,8 @@ public class WatchDogConfiguration {
     public static String watchdogPiwikScript = ""; 
     public static String watchdogPiwikEnabled = ""; 
     public static String watchdogXMLOrdersSchemaFile = ""; 
+    public static String watchdogXMLArticleSchemaFile = "";
+    public static String watchdogCSVPricegroup ="";
 
     /**
      * configures watchdog using WATCHDOG_LOGGING_PROPERTIES
@@ -74,6 +76,9 @@ public class WatchDogConfiguration {
         watchdogPiwikScript = properties.getProperty("watchdog.piwik.script");
         watchdogPiwikEnabled = properties.getProperty("watchdog.piwik.enabled");
         watchdogXMLOrdersSchemaFile = properties.getProperty("watchdog.xml.schema.uri.orders");
+        watchdogXMLArticleSchemaFile = properties.getProperty("watchdog.xml.schema.uri.article");
+        watchdogCSVPricegroup = properties.getProperty("watchdog.csv.pricegroup");
+
         // ensure the main directories exist
         File file = new File(watchdogLogfilePath); // create log dir
         file.getParentFile().mkdirs(); // create parent dirs
