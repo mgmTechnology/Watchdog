@@ -95,12 +95,12 @@
       <Image>
         <KadisImageName>100116_01.jpg</KadisImageName>
         <ShopImageName>100116_01.jpg</ShopImageName>
-       
+        <ShopImageTitle></ShopImageTitle>
       </Image>
       <Image>
         <KadisImageName>100116_02.jpg</KadisImageName>
         <ShopImageName>100116_02.jpg</ShopImageName>
-        
+        <ShopImageTitle></ShopImageTitle>
       </Image>
     </ImageAttribute>
   </mainDetail>
