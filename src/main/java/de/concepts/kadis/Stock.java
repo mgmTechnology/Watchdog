@@ -5,6 +5,12 @@
  */
 package de.concepts.kadis;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "Stock")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Stock {
     String articleNumber;
     Integer stock;

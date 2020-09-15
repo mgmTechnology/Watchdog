@@ -5,6 +5,7 @@
  */
 package de.concepts.io.tools;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.*;
 import de.concepts.kadis.PriceNotification;
 import kong.unirest.HttpResponse;
@@ -14,8 +15,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -232,6 +233,29 @@ public class Helper {
         }
     }
 
+    /**
+     * check if string is JSON or XML
+     * @param message input string
+     * @return XML or JSON
+     */
+    public static String testXMLorJSON(String message) {
+
+
+        try {
+            DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(new StringReader(message)));
+
+            return "XML";
+        } catch (Exception e) {
+            System.out.println("no xml: " + message.substring(0,20));
+        }
+        try {
+            new ObjectMapper().readTree(message);
+            return "JSON";
+        } catch (IOException e) {
+            System.out.println("no json: " + message.substring(0,20));
+        }
+        return null;
+    }
 
     public static BiFunction<Integer, Integer, Integer> incrementAndMultiplyExample = ( incrementNumber, multiplyNumber)
             -> (incrementNumber + 1) * multiplyNumber;

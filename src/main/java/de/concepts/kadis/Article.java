@@ -10,8 +10,6 @@ import com.google.gson.Gson;
 import java.util.List;
 
 public class Article {
-
-
     String active;
     String tax;
     String number;
@@ -119,5 +117,8 @@ public class Article {
 
     public void setTranslations(List<Translation> translations) {
         this.translations = translations;
+    }
+
+    public Article() {
     }
 }

@@ -5,11 +5,15 @@
  */
 package de.concepts.kadis;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
-
+@XmlRootElement(name = "Price")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Price {
     String currentId;
     String kadisArticleNumber;

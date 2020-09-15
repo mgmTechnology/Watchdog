@@ -5,11 +5,16 @@
  */
 package de.concepts.kadis;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 
 /**
  * this class is deprecated. use Price instead
  */
+@XmlRootElement(name = "PriceNotification")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class PriceNotification {
 
     int id;
