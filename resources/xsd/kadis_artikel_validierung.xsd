@@ -1,0 +1,1261 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Artikel">
+    <xs:complexType>
+      <xs:sequence>
+		<xs:element name="KaDIS-Artikelsteuerung">
+			<xs:annotation>
+				<xs:documentation xml:lang="de">Artikelsteuerung, Kopf. Bei "aktiv" bekommt der Artikel informationen. Bei entfernen wird der Artikel komplett aus dem Shop "entfernen" (Minimale Informationen in der XML).</xs:documentation>
+            </xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					 <xs:pattern value="aktiv|entfernen"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:element>
+        <xs:element type="xs:string" name="Verkaufsplattform">
+			<xs:annotation>
+				<xs:documentation xml:lang="de">Gesetzte Verkaufsplattform, für Multi-Shop Steuerung, diese XML Datei wird dann nur von einem Shop benutzt, der dieses Feld abfragt.</xs:documentation>
+            </xs:annotation>
+		</xs:element>
+        <xs:element type="xs:string" name="supplier_name">
+			<xs:annotation>
+				<xs:documentation xml:lang="de">Herstellername des Artikels (nicht Lieferant!)</xs:documentation>
+            </xs:annotation>
+		</xs:element>
+        <xs:element name="active">
+			<xs:annotation>
+				<xs:documentation xml:lang="de">Shop interne Artikelsteuerung, Artikel ist im Shop, bekommt weiterhin Updates durch die XML 0 = deaktiviert, 1 = aktiviert.</xs:documentation>
+            </xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:int">
+					<xs:pattern value="[0-1]"/>
+				 </xs:restriction>
+			</xs:simpleType>
+		</xs:element>
+        <xs:element name="tax">
+			<xs:annotation>
+				<xs:documentation xml:lang="de">Steuersatz des Artikels z.b. 7% oder 19%, ohne %</xs:documentation>
+            </xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:int">
+					<xs:pattern value="[0-9]{1,2}"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:element>
+		<xs:element name="propertyGroup" minOccurs="0">
+			<xs:annotation>
+				<xs:documentation xml:lang="de">Erweiterte Eigenschaften Optionen</xs:documentation>
+            </xs:annotation>
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element type="xs:string" name="name" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Name des Eigenschaftsets</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element type="xs:int" name="position" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Position des Eigenschaftsets (Sortierung des Eigenschaftsets zu anderen Eigenschaftsets)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="comparable" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Ist das Set Vergleichbar mit anderen Eigenschaftsets (true:false)</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:pattern value="true|false|True|False|TRUE|FALSE"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element type="xs:int" name="sortMode" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Sortierungsmodus Eigenschaft Sets 0 - 3 (0=Alphabetisch, 1=Numerisch, 2=Postion)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="propertyValues" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Auflistung der Eigenschaften</xs:documentation>
+						</xs:annotation>
+						<xs:complexType mixed="true">
+							<xs:sequence>
+								<xs:element name="entry" minOccurs="1" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation xml:lang="de">Eigenschaft</xs:documentation>
+									</xs:annotation>
+									<xs:complexType mixed="true">
+										<xs:sequence>
+											<xs:element type="xs:string" name="value" minOccurs="1" maxOccurs="1">
+												<xs:annotation>
+													<xs:documentation xml:lang="de">Eigenschaftssame</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element type="xs:int" name="position" minOccurs="1" maxOccurs="1">
+												<xs:annotation>
+													<xs:documentation xml:lang="de">Eigenschaftsposition</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element type="xs:string" name="OptionName" minOccurs="1" maxOccurs="1">
+												<xs:annotation>
+													<xs:documentation xml:lang="de">Optionsname der Eigenschaft</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element type="xs:int" name="OptionPosition" minOccurs="1" maxOccurs="1">
+												<xs:annotation>
+													<xs:documentation xml:lang="de">Optionsposition der Eigenschaft</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element type="xs:string" name="valueNumeric" minOccurs="1" maxOccurs="1">
+												<xs:annotation>
+													<xs:documentation xml:lang="de">Numerischerwert der Eigenschaft</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>	
+				</xs:sequence>	
+			</xs:complexType>		
+		</xs:element>				
+		<xs:element name="SpezificationValues_DE" minOccurs="0">
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element type="xs:string" name="Spezification" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:element>
+		<xs:element name="NaehrwerteValues_DE" minOccurs="0">
+          <xs:annotation>
+				<xs:documentation xml:lang="de">Nährwerte Multi-Language für Deutsch</xs:documentation>
+            </xs:annotation>
+		  <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="Werte" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="propertyValues" minOccurs="0">
+          <xs:annotation>
+				<xs:documentation xml:lang="de">Produktfilter Informationen</xs:documentation>
+          </xs:annotation>
+		  <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="SEX" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Geschlechtsangabe für Produkt. Mögliche Werte per Semikolon getrennt hinzufügbar (H; D; U; K) entspricht (Herren; Damen; Unisex; Kinder)</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+              <xs:element type="xs:string" name="COLOR" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Vereinheitlichte Produktfarbe z.b. "blau", "rot" oder ...</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element type="xs:string" name="SIZE" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Vereinheitlichte Produktgröße z.b. "XXL", "L" oder ...</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element type="xs:string" name="MATERIAL" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Vereinheitlichtes Produktmaterial z.b. "Wolle", "Eisen" oder ...</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="mainDetail">
+		  <xs:annotation>
+			<xs:documentation xml:lang="de">Hauptartikel Informationen</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="number">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Kadis Artikelnummer</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+              <xs:element name="prices" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+					<xs:documentation xml:lang="de">Artikelpreise, mit Staffelpreise und Kundengruppenpreise</xs:documentation>
+				</xs:annotation>
+				<xs:complexType mixed="true">
+                  <xs:sequence>
+                    <xs:element name="customerGroupKey" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Kundengruppe, Standard ist Endkunde mit EK oder H für Händler oder H20 für Händler mit 20% oder ....</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							 <xs:restriction base="xs:string">
+								 <xs:pattern value="[a-zA-Z0-9_+-]{0,10}"/>
+							 </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+                    <xs:element type="xs:float" name="price" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Preis des Artikels. Wenn Endkunde dann in Brutto, sonst immer Netto</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+                    <xs:element type="xs:float" name="pseudoPrice" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Durchgestrichener Preis des Artikels. Wenn Endkunde dann in Brutto, sonst immer Netto</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+                    <xs:element type="xs:float" name="basePrice" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Grundpreis des Artikels, nicht sichtbar für den Kunden, für Statisik . Immer Netto</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+                    <xs:element type="xs:int" name="from" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Staffelung, Preis gilt von X (int) (min. 1)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+                    <xs:element type="xs:string" name="to" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Staffelung, Preis gilt bis Y (int) (bis unendlich = "beliebig")</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="supplierNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Herstellernummer aus Kadis</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+              <xs:element type="xs:int" name="kind" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Wenn Hauptartikel dann immer 1, wenn nicht 2 für Variante</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+              <xs:element name="active" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Shop interne Hauptartikelsteuerung, 0 = deaktiviert, 1 = aktiviert.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:pattern value="[0-1]"/>
+					</xs:restriction>
+				</xs:simpleType>
+			  </xs:element>
+              <xs:element type="xs:int" name="inStock" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Normaler Lagerbestand des Hauptartikels</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+              <xs:element type="xs:int" name="stockMin" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Mindestlagerbestand des Hauptartikels</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element name="lastStock" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Abverkaufartikel, wenn vorhanden und Wert "1" dann Abverkauf, gilt auch für alle Varianten</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:pattern value="[0-1]"/>
+					</xs:restriction>
+				</xs:simpleType>
+			  </xs:element>
+			  <xs:element name="notification" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">eMail Benachrichtigungsfunktion für Kunden beim Artikel bereitstellen.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:pattern value="[0-1]"/>
+					</xs:restriction>
+				</xs:simpleType>
+			  </xs:element> 
+              <xs:element type="xs:float" name="weight" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Gewicht des Artikels entsprechend der Einheit. z.b. 100g dann ist Wert = 100</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+              <xs:element type="xs:float" name="width" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Breite des Artikels</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+              <xs:element type="xs:float" name="len" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Länge des Artikels</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+              <xs:element type="xs:float" name="height" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Höhe des Artikels</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+              <xs:element name="ean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">EAN Nummer des Artikels</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:long">
+						<xs:pattern value="[0-9]{8,13}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			  </xs:element> 
+              <xs:element type="xs:int" name="position" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Sortierungsnummer, Standard = 0 unsortiert. Shopinterne zb. nach Alphabet</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:int" name="minPurchase" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Mindestbestellmenge</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+			  <xs:element type="xs:int" name="purchaseSteps" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Mengenstaffelung / Verkaufsstaffelung (z.b. 2,4,6,8...)</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:int" name="maxPurchase" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Maximale Bestellmenge</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:float" name="purchaseUnit" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Grundpreis: Bestellmenge z.B. 0.75> Stammpreis-Errechnung</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:float" name="referenceUnit" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Grundpreis: Bezugs- / Referenzmenge z.B. 1.00> Stammpreis-Errechnung</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+              <xs:element name="unit" minOccurs="0"> 
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Verkaufseinheit</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="unit" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Kürzel z.b. Stück,  l, ml, kg, g, usw.</xs:documentation>
+						</xs:annotation>
+					</xs:element> 
+                    <xs:element type="xs:string" name="name" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Name z.b. Stück, Liter, Mililiter, Kilogramm, Gramm, usw.</xs:documentation>
+						</xs:annotation>
+					</xs:element> 
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+			  <xs:element type="xs:string" name="unitID" default="Stück" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Fallback unit "Stück"</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:string" name="packUnit" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Ausgabe Bestelleinheit  Stück</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element name="shippingFree" minOccurs="0"> 
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Versandkostenfreier Artikel, true/false</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="true|false"/>
+					</xs:restriction>
+				</xs:simpleType>
+			  </xs:element>
+			  <xs:element type="xs:string" name="releaseDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Erscheinungsdatum  0000-00-00</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:int" name="shippingTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Lieferzeit in Tagen</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+				<xs:element name="attribute" minOccurs="0"> 
+                <xs:annotation>
+					<xs:documentation xml:lang="de">Hauptartikel Attribute</xs:documentation>
+				</xs:annotation>
+					<xs:complexType>
+						<xs:sequence minOccurs="0" maxOccurs="unbounded">
+							<xs:any processContents="lax"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="ImageAttribute" minOccurs="0"> 
+                <xs:annotation>
+					<xs:documentation xml:lang="de">Artikel Bilder Attribute</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Image" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation xml:lang="de">Bild Informationen zum Artikel</xs:documentation>
+							</xs:annotation>
+							<xs:complexType mixed="true">
+								<xs:sequence>
+									<xs:element type="xs:string" name="KadisImageName" minOccurs="1">
+										<xs:annotation>
+											<xs:documentation xml:lang="de">Kadis Bildname und Erkennungsname des Bildes</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element type="xs:string" name="ShopImageName" minOccurs="1">
+										<xs:annotation>
+											<xs:documentation xml:lang="de">Alternativer Bildname</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element type="xs:string" name="ShopImageTitle" minOccurs="1">
+										<xs:annotation>
+											<xs:documentation xml:lang="de">Titel für Bild</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:any  processContents="skip"  minOccurs="0" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="additionaltext" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Zusatzinformationen, bei Varianten sind es die Ausprägungen z.b. XXL / Grün</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element name="configuratorOptions" minOccurs="0"> 
+                <xs:annotation>
+					<xs:documentation xml:lang="de">Varianten Informationen, Ausprägungen</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Option" maxOccurs="unbounded" minOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="groupIdName">
+							<xs:annotation>
+								<xs:documentation xml:lang="de">Variantenausprägungsgruppe des Hauptartikels</xs:documentation>
+							</xs:annotation>
+						  </xs:element> 
+                          <xs:element type="xs:string" name="name">
+							<xs:annotation>
+								<xs:documentation xml:lang="de">Variantenausprägungsname des Hauptartikels</xs:documentation>
+							</xs:annotation>
+						  </xs:element>  
+                          <xs:element type="xs:int" name="position">
+							<xs:annotation>
+								<xs:documentation xml:lang="de">Variantenausprägungssortierung</xs:documentation>
+							</xs:annotation>
+						  </xs:element> 
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element type="xs:string" name="name" minOccurs="0">
+			<xs:annotation>
+				<xs:documentation xml:lang="de">Artikelname</xs:documentation>
+			</xs:annotation>
+		</xs:element> 
+		<xs:element type="xs:string" name="metaTitle" minOccurs="0">
+			<xs:annotation>
+				<xs:documentation xml:lang="de">Meta Titel des Produktes. Wenn nicht gegeben, wird der Artikelnname genommen. 55 Zeichen sind optimal.</xs:documentation>
+			</xs:annotation>
+		</xs:element>
+        <xs:element type="xs:string" name="description" minOccurs="0">
+			<xs:annotation>
+				<xs:documentation xml:lang="de">Artikelkurzbeschreibung</xs:documentation>
+			</xs:annotation>
+		</xs:element> 
+        <xs:element type="xs:string" name="descriptionLong" minOccurs="0">
+			<xs:annotation>
+				<xs:documentation xml:lang="de">Artikellangbeschreibung</xs:documentation>
+			</xs:annotation>
+		</xs:element> 
+		<xs:element type="xs:string" name="keywords" minOccurs="0">
+			<xs:annotation>
+				<xs:documentation xml:lang="de">Stichwörter des Artikels</xs:documentation>
+			</xs:annotation>
+		</xs:element>
+		<xs:element name="similar" maxOccurs="unbounded" minOccurs="0">
+			<xs:annotation>
+				<xs:documentation xml:lang="de">Ausweichartikel Artikel</xs:documentation>
+			</xs:annotation>
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element type="xs:string" name="ausweich" maxOccurs="unbounded"/> 
+				</xs:sequence>
+			</xs:complexType>
+		</xs:element>
+		<xs:element name="related" maxOccurs="unbounded" minOccurs="0"> 
+			<xs:annotation>
+				<xs:documentation xml:lang="de">Zubehör Artikel</xs:documentation>
+			</xs:annotation>
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element type="xs:string" name="zubehoer" maxOccurs="unbounded"/> 
+				</xs:sequence>
+			</xs:complexType>
+		</xs:element> 
+		<xs:element name="lastStock" minOccurs="0">
+			<xs:annotation>
+				<xs:documentation xml:lang="de">Abverkaufartikel, wenn vorhanden und Wert "1" dann Abverkauf</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:int">
+					<xs:pattern value="[0-1]"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:element>
+		<xs:element name="notification" minOccurs="0">
+		<xs:annotation>
+			<xs:documentation xml:lang="de">eMail Benachrichtigungsfunktion für Kunden beim Artikel bereitstellen.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="[0-1]"/>
+			</xs:restriction>
+		</xs:simpleType>
+	  </xs:element> 
+		<xs:element name="categories" maxOccurs="unbounded" minOccurs="0"> 
+          <xs:annotation>
+			<xs:documentation xml:lang="de">Kategorie ID Angabe, nur Nutzen wenn ID aus KaLinkaV2 und Shop gleich sind.</xs:documentation>
+		  </xs:annotation>
+		  <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:int" name="id"/> 
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element> 
+        <xs:element name="translations" minOccurs="0"> 
+          <xs:annotation>
+			<xs:documentation xml:lang="de">Artikelübersetzungen Multilanguage, Aktuell nur Englisch eingestellt, Erweiterung möglich</xs:documentation>
+		  </xs:annotation>
+		  <xs:complexType>
+            <xs:sequence minOccurs="0" maxOccurs="unbounded">
+              <xs:element name="Englisch" minOccurs="0">
+                <xs:annotation>
+					<xs:documentation xml:lang="de">Englische Übersetzungen</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:any processContents="lax"/>
+					</xs:sequence>
+                </xs:complexType>
+              </xs:element>          
+			 <xs:element name="Franzoesisch" minOccurs="0">
+                <xs:annotation>
+					<xs:documentation xml:lang="de">Französisch Übersetzungen</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:any processContents="lax"/>
+					</xs:sequence>
+                </xs:complexType>
+              </xs:element>
+			  <xs:element name="Italienisch" minOccurs="0">
+                <xs:annotation>
+					<xs:documentation xml:lang="de">Italienisch Übersetzungen</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:any processContents="lax"/>
+					</xs:sequence>
+                </xs:complexType>
+              </xs:element>
+			  <xs:element name="Spanisch" minOccurs="0">
+                <xs:annotation>
+					<xs:documentation xml:lang="de">Spanisch Übersetzungen</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:any processContents="lax"/>
+					</xs:sequence>
+                </xs:complexType>
+              </xs:element>
+			  <xs:element name="Niederlaendisch" minOccurs="0">
+                <xs:annotation>
+					<xs:documentation xml:lang="de">Niederlaendisch Übersetzungen</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:any processContents="lax"/>
+					</xs:sequence>
+                </xs:complexType>
+              </xs:element>
+			  <xs:element name="Belgisch" minOccurs="0">
+                <xs:annotation>
+					<xs:documentation xml:lang="de">Belgisch Übersetzungen</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:any processContents="lax"/>
+					</xs:sequence>
+                </xs:complexType>
+              </xs:element>
+			  <xs:element name="Griechisch" minOccurs="0">
+                <xs:annotation>
+					<xs:documentation xml:lang="de">Griechisch Übersetzungen</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:any processContents="lax"/>
+					</xs:sequence>
+                </xs:complexType>
+              </xs:element>
+			  <xs:element name="Ungarisch" minOccurs="0">
+                <xs:annotation>
+					<xs:documentation xml:lang="de">Ungarisch Übersetzungen</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:any processContents="lax"/>
+					</xs:sequence>
+                </xs:complexType>
+              </xs:element>
+			  <xs:element name="Polnisch" minOccurs="0">
+                <xs:annotation>
+					<xs:documentation xml:lang="de">Polnisch Übersetzungen</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:any processContents="lax"/>
+					</xs:sequence>
+                </xs:complexType>
+              </xs:element>
+			  <xs:element name="Daenisch" minOccurs="0">
+                <xs:annotation>
+					<xs:documentation xml:lang="de">Daenisch Übersetzungen</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:any processContents="lax"/>
+					</xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+		<xs:element name="Lebensmittelverordnung" minOccurs="0"> 
+          <xs:annotation>
+				<xs:documentation xml:lang="de">Deutsche Lebensmittelverordnung, Übertragung der "muss" Werte</xs:documentation>
+		  </xs:annotation>
+		  <xs:complexType>
+            <xs:all>
+			  <xs:element name="active"> 
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Darstellung, Aktivierung der Nährwerttabelle</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="true|True|false|False"/>
+					</xs:restriction>
+				</xs:simpleType>
+			  </xs:element> 
+              <xs:element type="xs:string" name="Naehrwert_Zucker" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Nährwerte Zucker  convert to float</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+              <xs:element type="xs:string" name="Verkehrsbezeichnung" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Verkehrsbezeichnung</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:string" name="Naehrwert_Einheit" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Nährwert Einheit</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:string" name="Naehrwert_Natrium" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Nährwert Natrium convert to float</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:string" name="Naehrwert_Fett_gesaettigt" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Nährwert gesättigte Fette convert to float</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:string" name="Naehrwert_Grundwertmenge" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Nährwert Grundwertmenge convert to float</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:string" name="Naehrwert_Ballaststoffe" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Nährwert Ballaststoffe convert to float</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:string" name="Zutatenliste" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Nährwerte Zutatenliste</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:string" name="Naehrwert_Eiweiss" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Nährwert Eiweiß convert to float</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:string" name="Naehrwert_Fett" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Nährwert Fette convert to float</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:string" name="Naehrwert_Brennwert_kcal" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Nährwert Brennwert kcal convert to float</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:string" name="Naehrwert_Portionsmenge" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Nährwert Portionsmenge convert to float</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:string" name="Naehrwert_Kohlenhydrate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Nährwert Kohlenhydrate convert to float</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:string" name="Naehrwert_Brennwert_kJ" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Nährwert Brennwert kJ convert to float</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:string" name="Aufbewahrungsinfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Nährwert Aufbewahrungsinformationen</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+			  <xs:element type="xs:string" name="Alkoholgehalt" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Nährwert Alkoholgehalt convert to float</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+			  <xs:element type="xs:string" name="Naehrwert_Salz" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Nährwert Salz convert to float</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+			  <xs:element type="xs:string" name="Naehrwert_Staerke" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Nährwert Stärke convert to float</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+			  <xs:element type="xs:string" name="Naehrwert_Alkohole" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Nährwert Alkohole</xs:documentation>
+				</xs:annotation>
+			  </xs:element>    
+			  <xs:element type="xs:string" name="Naehrwert_Cholesterin" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Nährwert Cholesterin convert to float</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+			  <xs:element type="xs:string" name="Naehrwert_Vitamine_Mineralstoffe" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Nährwert Vitamine Mineralstoffe convert to float</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element type="xs:string" name="Gebrauchsanleitung" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Gebrauchsanleitung</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element type="xs:string" name="Kreuzkontamination" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Kreuzkontamination</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element type="xs:string" name="Warnhinweise" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Warnhinweise</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element type="xs:string" name="Produkteigenschaften" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Produkteigenschaften</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element type="xs:string" name="Kennzeichnung" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Kennzeichnung</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element type="xs:string" name="Anzahl_der_Positionen" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Anzahl_der_Positionen</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element type="xs:string" name="Abtropfgewicht" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Abtropfgewicht</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element type="xs:string" name="Vorzeichen_Naehrwert_Eiweiss" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Vorzeichen_Naehrwert_Eiweiss</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element type="xs:string" name="Vorzeichen_Naehrwert_Kohlenhydrate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Vorzeichen_Naehrwert_Kohlenhydrate</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element type="xs:string" name="Vorzeichen_Naehrwert_Zucker" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Vorzeichen_Naehrwert_Zucker</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element type="xs:string" name="Vorzeichen_Naehrwert_Fett" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Vorzeichen_Naehrwert_Fett</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element type="xs:string" name="Vorzeichen_Naehrwert_Fett_gesaettigt" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Vorzeichen_Naehrwert_Fett_gesaettigt</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element type="xs:string" name="Vorzeichen_Naehrwert_Natrium" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Vorzeichen_Naehrwert_Natrium</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element type="xs:string" name="Vorzeichen_Naehrwert_Salz" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Vorzeichen_Naehrwert_Salz</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element type="xs:string" name="Vorzeichen_Naehrwert_Staerke" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Vorzeichen_Naehrwert_Staerke</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element type="xs:string" name="Vorzeichen_Naehrwert_Alkohole" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Vorzeichen_Naehrwert_Alkohole</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element type="xs:string" name="Vorzeichen_Naehrwert_Ballaststoffe" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Vorzeichen_Naehrwert_Ballaststoffe</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element type="xs:string" name="Vorzeichen_Naehrwert_Cholesterin" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Vorzeichen_Naehrwert_Cholesterin</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element type="xs:string" name="Vorzeichen_Naehrwert_Vitamine_Mineralstoffe" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Vorzeichen_Naehrwert_Vitamine_Mineralstoffe</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="configuratorSet" minOccurs="0">
+		  <xs:annotation>
+			<xs:documentation xml:lang="de">Variantenausprägungsgruppen Informationen, welche Gruppen gibt insgesamt bei diesem Artikel</xs:documentation>
+		  </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="name">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Setname. Beginnt mit "Set-" + Hauptartikelnummer</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element name="type">    
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Type: 0 = Standard , 1 = Auswahl, 2 = Tabelle</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:pattern value="[0-2]"/>
+					</xs:restriction>
+				</xs:simpleType>
+			  </xs:element> 
+              <xs:element name="groups" maxOccurs="unbounded" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Ausprägungsgruppen</xs:documentation>
+				</xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="name">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Name der Ausprägung</xs:documentation>
+						</xs:annotation>
+					</xs:element> 
+                    <xs:element type="xs:string" name="description">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Beschreibung der Ausprägung</xs:documentation>
+						</xs:annotation>
+					</xs:element> 
+                    <xs:element type="xs:int" name="position">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Sortierungsposition der Ausprägung</xs:documentation>
+						</xs:annotation>
+					</xs:element> 
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="variants" maxOccurs="unbounded" minOccurs="0"> 
+		  <xs:annotation>
+			<xs:documentation xml:lang="de">Alle Varianten des Artikels</xs:documentation>
+		  </xs:annotation>
+		  <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:int" name="number">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Artikelnummer der Variante</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element type="xs:string" name="name" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Alternativer Variantenname, wird nicht von jedem Shopsystem untersützt.</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+              <xs:element type="xs:string" name="supplierNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Herstellernummer der Variante</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element name="isMain"> 
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Soll Variante als Hauptartikel dargestellt werden. Hauptartikel muss dann false sein. Nur ein Artikel darf Hauptartikel sein.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="true|false"/>
+					</xs:restriction>
+				</xs:simpleType>
+			  </xs:element> 
+              <xs:element type="xs:string" name="additionaltext"  minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Zusatztext für Variantenausprägung z.b. XXL / Grün</xs:documentation>
+				</xs:annotation>
+			  </xs:element>
+			  <xs:element name="VarPropertyValues_DE" minOccurs="0">
+				<xs:complexType>
+				  <xs:sequence>
+					  <xs:element type="xs:string" name="Spezification" minOccurs="0" maxOccurs="unbounded"/>
+				  </xs:sequence>
+				</xs:complexType>
+			  </xs:element>
+			  <xs:element name="VarNaehrwerteValues_DE" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Nährwerte Multi-Language für Deutsch</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element type="xs:string" name="Werte" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+              </xs:element>
+              <xs:element name="VarPropertyValues" minOccurs="0">    
+                <xs:annotation>
+					<xs:documentation xml:lang="de">Produktfilter Informationen der Variante</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="SEX" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Geschlechtsangabe für Produkt. Mögliche Werte per Semikolon getrennt hinzufügbar (H; D; U; K) entspricht (Herren; Damen; Unisex; Kinder)</xs:documentation>
+						</xs:annotation>
+					</xs:element> 
+					<xs:element type="xs:string" name="COLOR" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Vereinheitlichte Produktfarbe z.b. "blau", "rot" oder ...</xs:documentation>
+						</xs:annotation>
+					</xs:element> 
+					<xs:element type="xs:string" name="SIZE" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Vereinheitlichte Produktgröße z.b. "XXL", "L" oder ...</xs:documentation>
+						</xs:annotation>
+					</xs:element> 
+					<xs:element type="xs:string" name="MATERIAL" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Vereinheitlichtes Produktmaterial z.b. "Wolle", "Eisen" oder ...</xs:documentation>
+						</xs:annotation>
+					</xs:element>  
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="active">  
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Variante aktiv Status</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="0">
+							<xs:annotation>
+								<xs:documentation xml:lang="de">deaktiviert</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration> 
+						<xs:enumeration value="1">
+							<xs:annotation>
+								<xs:documentation xml:lang="de">aktivert</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration> 
+						<xs:enumeration value="entfernen">
+							<xs:annotation>
+								<xs:documentation xml:lang="de">Komplett aus dem Shop entfernen</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration> 
+					</xs:restriction>
+				</xs:simpleType>
+			  </xs:element>
+              <xs:element type="xs:int" name="inStock"  minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Lagerbestand der Variante</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:int" name="stockMin"  minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Mindestbestand der Variante</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:float" name="weight"  minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Gewicht der Variante</xs:documentation>
+				</xs:annotation>
+			  </xs:element>  
+              <xs:element type="xs:float" name="width"  minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Breite der Variante</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:float" name="len"  minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Länge der Variante</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:float" name="height"  minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Höhe der Variante</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element name="ean"  minOccurs="0"> 
+				<xs:annotation>
+					<xs:documentation xml:lang="de">EAN der Variante</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:long">
+						<xs:pattern value="[0-9]{8,13}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			  </xs:element> 
+              <xs:element type="xs:int" name="position">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Position der Variante</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:int" name="minPurchase">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">mindest Bestellmenge der Variante</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+			  <xs:element type="xs:int" name="purchaseSteps" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Pseudo-Verkäufe / Beeinflussung Topseller-Anzeige</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:int" name="maxPurchase">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">max. Bestellmenge der Variante</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:float" name="purchaseUnit">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Grundpreis: Bestellmenge z.B. 0.75> Stammpreis-Errechnung</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:float" name="referenceUnit">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Grundpreis: Bezugs- / Referenzmenge z.B. 1.00> Stammpreis-Errechnung</xs:documentation>
+				</xs:annotation>
+			  </xs:element>    
+              <xs:element name="unit" minOccurs="0"> 
+                <xs:annotation>
+					<xs:documentation xml:lang="de">Verkaufseinheit</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="unit">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Kürzel z.b. Stück,  l, ml, kg, g, usw.</xs:documentation>
+						</xs:annotation>
+					</xs:element> 
+                    <xs:element type="xs:string" name="name">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Name z.b. Stück, Liter, Mililiter, Kilogramm, Gramm, usw.</xs:documentation>
+						</xs:annotation>
+					</xs:element> 
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+			  <xs:element type="xs:string" name="unitID" default="Stück" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Fallback unit "Stück"</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:string" name="packUnit">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Ausgabe Bestelleinheit  Stück</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element name="shippingFree"> 
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Versandkostenfreier Artikel, true/false</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="true|false"/>
+					</xs:restriction>
+				</xs:simpleType>
+			  </xs:element>
+			  <xs:element type="xs:string" name="releaseDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Erscheinungsdatum  0000-00-00</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element type="xs:int" name="shippingTime" default="5">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">Lieferzeit in Tagen</xs:documentation>
+				</xs:annotation>
+			  </xs:element> 
+              <xs:element name="attribute">
+                <xs:complexType>
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:any processContents="lax"/>
+					</xs:sequence>
+                </xs:complexType>
+              </xs:element>
+			  <xs:element name="ImageAttribute" minOccurs="0"> 
+                <xs:annotation>
+					<xs:documentation xml:lang="de">Artikel Bilder Attribute</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Image" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation xml:lang="de">Bild Informationen zum Artikel</xs:documentation>
+							</xs:annotation>
+							<xs:complexType mixed="true">
+								<xs:sequence>
+									<xs:element type="xs:string" name="KadisImageName" minOccurs="1">
+										<xs:annotation>
+											<xs:documentation xml:lang="de">Kadis Bildname und Erkennungsname des Bildes</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element type="xs:string" name="ShopImageName" minOccurs="1">
+										<xs:annotation>
+											<xs:documentation xml:lang="de">Alternativer Bildname</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element type="xs:string" name="ShopImageTitle" minOccurs="1">
+										<xs:annotation>
+											<xs:documentation xml:lang="de">Titel für Bild</xs:documentation>
+										</xs:annotation>
+									</xs:element> 
+									<xs:any  processContents="skip"  minOccurs="0" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="prices" minOccurs="1" maxOccurs="unbounded"> 
+                <xs:annotation>
+					<xs:documentation xml:lang="de">Artikelpreise, mit Staffelpreise und Kundengruppenpreise</xs:documentation>
+				</xs:annotation>
+				<xs:complexType mixed="true">
+                  <xs:sequence>
+                    <xs:element name="customerGroupKey" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Kundengruppe, Standard ist Endkunde mit EK oder H für Händler oder H20 für Händler mit 20% oder</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							 <xs:restriction base="xs:string">
+								 <xs:pattern value="[a-zA-Z0-9_+-]{0,10}"/>
+							 </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+                    <xs:element type="xs:float" name="price" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Preis des Artikels. Wenn Endkunde dann in Brutto, sonst immer Netto</xs:documentation>
+						</xs:annotation>
+					</xs:element> 
+                    <xs:element type="xs:float" name="pseudoPrice" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Durchgestrichener Preis des Artikels. Wenn Endkunde dann in Brutto, sonst immer Netto</xs:documentation>
+						</xs:annotation>
+					</xs:element> 
+                    <xs:element type="xs:float" name="basePrice" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Grundpreis des Artikels, nicht sichtbar für den Kunden, für Statisik . Immer Netto</xs:documentation>
+						</xs:annotation>
+					</xs:element> 
+                    <xs:element type="xs:int" name="from" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Staffelung, Preis gilt von X (int) (min. 1)</xs:documentation>
+						</xs:annotation>
+					</xs:element> 
+                    <xs:element type="xs:string" name="to" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Staffelung, Preis gilt bis Y (int) (bis unendlich = "beliebig")</xs:documentation>
+						</xs:annotation>
+					</xs:element> 
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="configuratorOptions"> 
+                <xs:annotation>
+					<xs:documentation xml:lang="de">Varianten Informationen, Ausprägungen</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Option" maxOccurs="unbounded" minOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="groupIdName">
+							<xs:annotation>
+								<xs:documentation xml:lang="de">Variantenausprägungsgruppe der Variante</xs:documentation>
+							</xs:annotation>
+						  </xs:element> 
+                          <xs:element type="xs:string" name="name">
+							<xs:annotation>
+								<xs:documentation xml:lang="de">Variantenausprägungsname der Variante</xs:documentation>
+							</xs:annotation>
+						  </xs:element> 
+                          <xs:element type="xs:int" name="position">
+							<xs:annotation>
+								<xs:documentation xml:lang="de">Variantenausprägungssortierung</xs:documentation>
+							</xs:annotation>
+						  </xs:element> 
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

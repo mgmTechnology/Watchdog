@@ -10,6 +10,8 @@ import de.concepts.io.db.SQLiter;
 import de.concepts.io.importer.ImporterArticles;
 import de.concepts.io.importer.ImporterCSV;
 import de.concepts.kadis.Article;
+import de.concepts.kadis.Price;
+import de.concepts.kadis.Stock;
 import org.apache.http.HttpResponse;
 import org.piwik.java.tracking.PiwikRequest;
 import org.piwik.java.tracking.PiwikTracker;
@@ -76,9 +78,10 @@ public class FTPTimerTask extends TimerTask {
                     // process CSV
 
                     if (csvFileName.contains("bestand")) {
-                        ImporterCSV.getInventoryFromCSV(ts, csvFileName);
+                        List<Stock> stockList = ImporterCSV.getInventoryFromCSV(csvFileName);
                     } else if (csvFileName.contains("preise")) {
-                        ImporterCSV.getPricesFromCSV(ts,csvFileName);
+                        List<Price> priceList = ImporterCSV.getPricesFromCSV(csvFileName,
+                                WatchDogConfiguration.watchdogCSVPricegroup);
                     }
                 });
             }

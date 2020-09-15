@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class WatchDogFTPClientTest {
 
     @Test
-    void listFiles() {
+    void testListFiles() {
         boolean validXML = false;
         List<String> xmlFilesOnServer=null;
         List<String> csvFilesOnServer=null;

@@ -2,9 +2,12 @@ package de.concepts.io.importer;
 
 import de.concepts.WatchDogConfiguration;
 import de.concepts.io.tools.validator.XMLValidator;
+import de.concepts.kadis.Price;
+import de.concepts.kadis.Stock;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,23 +18,23 @@ class ImporterCSVTest {
 
     @Test
     void testGetPricesFromCSV() {
-            boolean validCSV = false;
+            List<Price> priceList = null;
             try {
-                validCSV= ImporterCSV.getPricesFromCSV(RESOURCES_TESTDATA_PRICES_CSV, WATCHDOG_CSV_PRICEGROUP);
+                priceList = ImporterCSV.getPricesFromCSV(RESOURCES_TESTDATA_PRICES_CSV, WATCHDOG_CSV_PRICEGROUP);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            assertEquals(validCSV, true);
+            assertEquals(priceList.size(), 6614);
     }
 
     @Test
     void testGetInventoryFromCSV() {
-        boolean validCSV = false;
+        List<Stock> stockList = null;
         try {
-            validCSV =ImporterCSV.getInventoryFromCSV(RESOURCES_TESTDATA_PRICES_CSV);
+            stockList =ImporterCSV.getInventoryFromCSV(RESOURCES_TESTDATA_INVENTORY_CSV);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals(validCSV, true);
+        assertEquals(stockList.size(), 5614);
     }
 }

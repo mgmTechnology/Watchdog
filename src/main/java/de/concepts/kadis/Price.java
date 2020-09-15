@@ -1,6 +1,14 @@
+/* Copyright (C) Marc Müller - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Marc Müller <marc@mgm.technology>, 2020
+ */
 package de.concepts.kadis;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 
 public class Price {
     String currentId;
@@ -79,5 +87,29 @@ public class Price {
     @Override
     public String toString() {
         return "Price{" + "kadisArticleNumber='" + kadisArticleNumber + '\'' + ", priceGroup='" + priceGroup + '\'' + ", price=" + price + '}';
+    }
+
+    public Price() {
+    }
+
+    public Price(String kadisArticleNumber, String priceGroup, String fromQuantity, String toQuantity,
+                 String price, String taxGroup, String taxValue) {
+        this.kadisArticleNumber = kadisArticleNumber;
+        this.priceGroup = priceGroup;
+        this.fromQuantity = fromQuantity;
+        this.toQuantity = toQuantity;
+        try {
+            Number aNumber = NumberFormat.getNumberInstance(Locale.GERMANY).parse(price);
+            this.price=  new BigDecimal(aNumber.toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        this.taxGroup = taxGroup;
+        try {
+            Number aNumber = NumberFormat.getNumberInstance(Locale.GERMANY).parse(taxValue);
+            this.taxValue=  new BigDecimal(aNumber.toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -10,10 +10,8 @@ import com.google.gson.Gson;
 import java.util.List;
 
 public class Article {
-    @Override
-    public String toString() {
-        return "Article {" + " = " + number + ": " + description + "}";
-    }
+
+
     String active;
     String tax;
     String number;
@@ -26,6 +24,11 @@ public class Article {
     String description;
     List<Translation> translations;
 
+    @Override
+    public String toString() {
+        return "Article{" + "number='" + number + '\'' + ", prices=" + prices + ", name='" + name + '\'' + ", " +
+                "description='" + description + '\'' + '}';
+    }
 
     public String getJSON () {
          return new Gson().toJson(this);

@@ -7,6 +7,9 @@ package de.concepts.kadis;
 
 import java.math.BigDecimal;
 
+/**
+ * this class is deprecated. use Price instead
+ */
 public class PriceNotification {
 
     int id;
