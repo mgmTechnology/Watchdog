@@ -5,25 +5,26 @@
  */
 package de.concepts.kadis;
 
-import java.util.ArrayList;
+import de.concepts.io.exporter.ExporterXML;
 
-class OrderList {
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
+@XmlRootElement(name = "OrderList")
+public class OrderList {
+    @XmlElement(name="Artikel")
     ArrayList<OrderArticle> listArtikel = new ArrayList<>();
 
     public OrderList(ArrayList<OrderArticle> listArtikel) {
         this.listArtikel = listArtikel;
     }
 
-    public ArrayList<OrderArticle> getListArtikel() {
-        return listArtikel;
-    }
-
-    public void setListArtikel(ArrayList<OrderArticle> listArtikel) {
-        this.listArtikel = listArtikel;
-    }
 
     public OrderList() {
     }
 
+    public String getXML() {
+        return ExporterXML.jaxbObjectToXML(this);
+    }
 
 }

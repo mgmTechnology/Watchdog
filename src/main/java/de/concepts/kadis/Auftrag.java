@@ -7,15 +7,21 @@ package de.concepts.kadis;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "Auftrag")
 @XmlAccessorType(XmlAccessType.FIELD)
 class Auftrag {
+    @XmlElement(name="Bestellung")
     Bestellung bestellungObject;
+    @XmlElement(name="Kunde")
     Kunde kundeObject;
+    @XmlElement(name="Lieferadresse")
     Lieferadresse lieferadresseObject;
+    @XmlElement(name="Zahlung")
     Zahlung zahlungObject;
+    @XmlElement(name="OrderList")
     OrderList orderListObject;
 
     public Bestellung getBestellungObject() {

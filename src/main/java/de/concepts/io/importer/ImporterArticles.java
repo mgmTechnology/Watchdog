@@ -37,7 +37,7 @@ public class ImporterArticles extends ImporterXML {
     public static ImportArticle getArticleIfValidXml(String ts, String articleFileName) {
         boolean validXML = false;
         try {
-            validXML = XMLValidator.validate("./downloads/" + ts + articleFileName, SCHEMA_ARTICLE_URI);
+            validXML = XMLValidator.validateFile("./downloads/" + ts + articleFileName, SCHEMA_ARTICLE_URI);
 
             if (validXML == true) {
                 System.out.println("Valid article: " + "./downloads/" + ts + articleFileName);

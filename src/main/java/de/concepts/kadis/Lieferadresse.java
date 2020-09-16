@@ -33,6 +33,7 @@ public class Lieferadresse {
     private String stadt;
     @XmlElement(name="Land")
     private String land;
+    @XmlElement(name = "Telefon")
     Telefon telefonObject;
     @XmlElement(name="Email")
     private String email;

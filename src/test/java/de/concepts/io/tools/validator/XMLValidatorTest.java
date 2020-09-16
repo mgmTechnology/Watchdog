@@ -20,7 +20,7 @@ class XMLValidatorTest {
     void testValidateOrders() {
         boolean validXML = false;
         try {
-            validXML = XMLValidator.validate(RESOURCES_TESTDATA_ORDER_XML, SCHEMA_ORDER_URI);
+            validXML = XMLValidator.validateFile(RESOURCES_TESTDATA_ORDER_XML, SCHEMA_ORDER_URI);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -30,7 +30,7 @@ class XMLValidatorTest {
     void testValidateArticle() {
         boolean validXML = false;
         try {
-            validXML = XMLValidator.validate(RESOURCES_TESTDATA_ARTICLES_XML, SCHEMA_ARTICLE_URI);
+            validXML = XMLValidator.validateFile(RESOURCES_TESTDATA_ARTICLES_XML, SCHEMA_ARTICLE_URI);
         } catch (IOException e) {
             e.printStackTrace();
         }

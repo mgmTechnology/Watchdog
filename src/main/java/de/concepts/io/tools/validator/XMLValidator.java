@@ -25,9 +25,8 @@ public class XMLValidator {
      * @throws IOException if an error occurred while reading {@code stream}
      * @throws NullPointerException if {@code stream} is {@code null}
      */
-    public static boolean validate(String pathXml, String schemaFileUrl) throws IOException {
+    public static boolean validateFile(String pathXml, String schemaFileUrl) throws IOException {
         InputStream fisArticles = null;
-
         try {
             fisArticles =
                     new DataInputStream(new FileInputStream(pathXml));
@@ -35,12 +34,10 @@ public class XMLValidator {
             e.printStackTrace();
         }
         if (fisArticles == null) {throw new NullPointerException("stream");}
-
 //        final URL schemaUrl = ArticleValidator.class.getResource(pathXsd);
         URL schemaFile = new URL(schemaFileUrl);
         // local file example:
         // File schemaFile = new File("/location/to/localfile.xsd"); // etc.
-
         Source xmlFile = new StreamSource(new File(pathXml));
         SchemaFactory schemaFactory = SchemaFactory
                 .newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
@@ -48,10 +45,35 @@ public class XMLValidator {
             Schema schema = schemaFactory.newSchema(schemaFile);
             Validator validator = schema.newValidator();
             validator.validate(xmlFile);
-             System.out.println(xmlFile.getSystemId() + " is valid ");
+            System.out.println(xmlFile.getSystemId() + " is valid ");
             return true;
         } catch (SAXException e) {
             System.out.println(xmlFile.getSystemId() + " is NOT valid :" + e);
+            return false;
+        } catch (IOException e) {
+            System.out.println("IO Exception: " + e.getMessage());
+            return false;}
+    }
+
+    /**
+     *
+     * @param xml
+     * @param schemaFileUrl
+     * @return
+     * @throws IOException
+     */
+    public static boolean validateString(String xml, String schemaFileUrl) throws IOException {
+        URL schemaFile = new URL(schemaFileUrl);
+        Source xmlFile = new StreamSource(new StringReader(xml));
+        SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        try {
+            Schema schema = schemaFactory.newSchema(schemaFile);
+            Validator validator = schema.newValidator();
+            validator.validate(xmlFile);
+            System.out.println("String is valid ");
+            return true;
+        } catch (SAXException e) {
+            System.out.println("String is NOT valid :" + e);
             return false;
         } catch (IOException e) {
             System.out.println("IO Exception: " + e.getMessage());

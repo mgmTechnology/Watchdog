@@ -23,10 +23,7 @@ public class Bestellung {
     private String mediaplan;
     @XmlElement(name="Bestellzeitpunkt")
     private String bestellzeitpunkt;
-    @XmlElement(name="Werbekontakt")
-    private String werbekontakt;
-    @XmlElement(name="Kommentarzeile")
-    private String kommentarzeile;
+
     @XmlElement(name="Preisgruppe")
     private String preisgruppe;
     @XmlElement(name="WKZ")
@@ -78,22 +75,6 @@ public class Bestellung {
 
     public void setBestellzeitpunkt(String bestellzeitpunkt) {
         this.bestellzeitpunkt = bestellzeitpunkt;
-    }
-
-    public String getWerbekontakt() {
-        return werbekontakt;
-    }
-
-    public void setWerbekontakt(String werbekontakt) {
-        this.werbekontakt = werbekontakt;
-    }
-
-    public String getKommentarzeile() {
-        return kommentarzeile;
-    }
-
-    public void setKommentarzeile(String kommentarzeile) {
-        this.kommentarzeile = kommentarzeile;
     }
 
     public String getPreisgruppe() {

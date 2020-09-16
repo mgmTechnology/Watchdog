@@ -21,7 +21,7 @@ public class Kunde {
     private String shopwareKundennummer;
     @XmlElement(name="KundenNr")
     private String kundenNr;
-    @XmlElement(name="employee")
+    @XmlElement(name="Anrede")
     private String anrede;
     @XmlElement(name="Vorname")
     private String vorname;
@@ -39,6 +39,7 @@ public class Kunde {
     private String stadt;
     @XmlElement(name="Land")
     private String land;
+    @XmlElement(name = "Telefon")
     Telefon telefonObject;
     @XmlElement(name="Email")
 
