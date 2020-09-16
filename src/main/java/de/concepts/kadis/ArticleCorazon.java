@@ -15,11 +15,14 @@ import java.math.BigDecimal;
 
 @XmlRootElement(name = "Artikel")
 @XmlAccessorType(XmlAccessType.FIELD)
+/**
+ * this class is a article to be exported to kadis
+ */
 public class ArticleCorazon {
     @XmlElement(name="ArtikelNr")
     String artikelNr;
     @XmlElement(name="Menge")
-    Integer menge;
+    Double menge;
     @XmlElement(name="Groesse")
     String groesse;
     @XmlElement(name="Name")
@@ -27,7 +30,7 @@ public class ArticleCorazon {
     @XmlElement(name="Preis")
     BigDecimal preis;
     @XmlElement(name="Steuer")
-    Integer steuer;
+    Double steuer;
     @XmlElement(name="SteuerEinstellung")
     String steuerEinstellung;
 
@@ -39,11 +42,11 @@ public class ArticleCorazon {
         this.artikelNr = artikelNr;
     }
 
-    public Integer getMenge() {
+    public Double getMenge() {
         return menge;
     }
 
-    public void setMenge(Integer menge) {
+    public void setMenge(Double menge) {
         this.menge = menge;
     }
 
@@ -71,11 +74,11 @@ public class ArticleCorazon {
         this.preis = preis;
     }
 
-    public Integer getSteuer() {
+    public Double getSteuer() {
         return steuer;
     }
 
-    public void setSteuer(Integer steuer) {
+    public void setSteuer(Double steuer) {
         this.steuer = steuer;
     }
 
@@ -87,8 +90,8 @@ public class ArticleCorazon {
         this.steuerEinstellung = steuerEinstellung;
     }
 
-    public ArticleCorazon(String artikelNr, Integer menge, String groesse, String name, BigDecimal preis,
-                          Integer steuer, String steuerEinstellung) {
+    public ArticleCorazon(String artikelNr, Double menge, String groesse, String name, BigDecimal preis,
+                          Double steuer, String steuerEinstellung) {
         this.artikelNr = artikelNr;
         this.menge = menge;
         this.groesse = groesse;

@@ -11,25 +11,18 @@ import de.concepts.kadis.Article;
 import de.concepts.kadis.Price;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
 import javax.xml.xpath.*;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ImporterArticles extends ImporterXML {
     public static final String SCHEMA_ORDER_URI = WatchDogConfiguration.watchdogXMLOrdersSchemaFile;
@@ -81,7 +74,7 @@ public class ImporterArticles extends ImporterXML {
         final XPathFactory factory = XPathFactory.newInstance();
         final XPath xpath = factory.newXPath();
         XPathExpression expr = xpath.compile("/Artikel/mainDetail/number");
-        final String elementData = (String) expr.evaluate(doc, XPathConstants.STRING);
+        Integer elementData = Integer.parseInt((String) expr.evaluate(doc, XPathConstants.STRING));
         article.setNumber(elementData);
         price.setKadisArticleNumber(elementData);
         expr = xpath.compile("/Artikel/name");
@@ -92,15 +85,15 @@ public class ImporterArticles extends ImporterXML {
         expr = xpath.compile("/Artikel/active");
         article.setActive((String) expr.evaluate(doc, XPathConstants.STRING));
         expr = xpath.compile("/Artikel/tax");
-        article.setTax((String) expr.evaluate(doc, XPathConstants.STRING));
+        article.setTax(Double.parseDouble((String) expr.evaluate(doc, XPathConstants.STRING)));
         expr = xpath.compile("/Artikel/mainDetail/height");
-        article.setHeight((String) expr.evaluate(doc, XPathConstants.STRING));
+        article.setHeight(Double.parseDouble((String) expr.evaluate(doc, XPathConstants.STRING)));
         expr = xpath.compile("/Artikel/mainDetail/weight");
-        article.setWeight((String) expr.evaluate(doc, XPathConstants.STRING));
+        article.setWeight(Double.parseDouble((String) expr.evaluate(doc, XPathConstants.STRING)));
         expr = xpath.compile("/Artikel/mainDetail/len");
-        article.setLen((String) expr.evaluate(doc, XPathConstants.STRING));
+        article.setLen(Double.parseDouble((String) expr.evaluate(doc, XPathConstants.STRING)));
         expr = xpath.compile("/Artikel/mainDetail/width");
-        article.setWidth((String) expr.evaluate(doc, XPathConstants.STRING));
+        article.setWidth(Double.parseDouble((String) expr.evaluate(doc, XPathConstants.STRING)));
         // check prices
         expr = xpath.compile("//prices");
         Object result = expr.evaluate(doc, XPathConstants.NODESET);

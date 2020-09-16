@@ -6,18 +6,22 @@
 package de.concepts.kadis;
 
 import com.google.gson.Gson;
+import de.concepts.io.exporter.ExporterXML;
 
 import java.util.List;
 
+/**
+ * this article is an article to be imported into myCorazon
+ */
 public class Article {
     String active;
-    String tax;
-    String number;
+    Double tax;
+    Integer number;
     List<Price> prices;
-    String weight;
-    String width;
-    String len;
-    String height;
+    Double weight;
+    Double width;
+    Double len;
+    Double height;
     String name;
     String description;
     List<Translation> translations;
@@ -39,19 +43,19 @@ public class Article {
         this.active = active;
     }
 
-    public String getTax() {
+    public Double getTax() {
         return tax;
     }
 
-    public void setTax(String tax) {
+    public void setTax(Double tax) {
         this.tax = tax;
     }
 
-    public String getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 
@@ -63,35 +67,35 @@ public class Article {
         this.prices = prices;
     }
 
-    public String getWeight() {
+    public Double getWeight() {
         return weight;
     }
 
-    public void setWeight(String weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
     }
 
-    public String getWidth() {
+    public Double getWidth() {
         return width;
     }
 
-    public void setWidth(String width) {
+    public void setWidth(Double width) {
         this.width = width;
     }
 
-    public String getLen() {
+    public Double getLen() {
         return len;
     }
 
-    public void setLen(String len) {
+    public void setLen(Double len) {
         this.len = len;
     }
 
-    public String getHeight() {
+    public Double getHeight() {
         return height;
     }
 
-    public void setHeight(String height) {
+    public void setHeight(Double height) {
         this.height = height;
     }
 
@@ -120,5 +124,22 @@ public class Article {
     }
 
     public Article() {
+    }
+
+    public Article(String active, double tax, Integer number, Double weight, Double width, Double len, Double height,
+                   String name, String description) {
+        this.active = active;
+        this.tax = tax;
+        this.number = number;
+        this.weight = weight;
+        this.width = width;
+        this.len = len;
+        this.height = height;
+        this.name = name;
+        this.description = description;
+    }
+
+    public String getXML() {
+        return ExporterXML.jaxbObjectToXML(this);
     }
 }
