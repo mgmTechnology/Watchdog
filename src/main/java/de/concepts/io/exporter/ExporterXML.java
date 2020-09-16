@@ -1,6 +1,6 @@
 package de.concepts.io.exporter;
 
-import de.concepts.kadis.ArticleCorazon;
+import de.concepts.kadis.OrderArticle;
 import de.concepts.kadis.Bestellung;
 import de.concepts.kadis.Kunde;
 import de.concepts.kadis.Lieferadresse;
@@ -22,7 +22,7 @@ public class ExporterXML {
                     jaxbContext = JAXBContext.newInstance(Lieferadresse.class);
                     break;
                 case "ArticleCorazon":
-                    jaxbContext = JAXBContext.newInstance(ArticleCorazon.class);
+                    jaxbContext = JAXBContext.newInstance(OrderArticle.class);
                     break;
                 case "Bestellung":
                     jaxbContext = JAXBContext.newInstance(Bestellung.class);

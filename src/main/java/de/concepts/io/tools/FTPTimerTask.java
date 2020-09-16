@@ -9,7 +9,7 @@ import de.concepts.WatchDogConfiguration;
 import de.concepts.io.db.SQLiter;
 import de.concepts.io.importer.ImporterArticles;
 import de.concepts.io.importer.ImporterCSV;
-import de.concepts.kadis.Article;
+import de.concepts.kadis.ImportArticle;
 import de.concepts.kadis.Price;
 import de.concepts.kadis.Stock;
 import org.apache.http.HttpResponse;
@@ -22,7 +22,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimerTask;
 import java.util.concurrent.Future;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class FTPTimerTask extends TimerTask {
@@ -62,7 +61,7 @@ public class FTPTimerTask extends TimerTask {
                     SQLiter.logFtpAccess(articleFileName);
                     //                    System.out.println("./downloads/" + ts + articleFileName);
                     // process CSV
-                    Article currentArticle = ImporterArticles.getArticleIfValidXml(ts, articleFileName);
+                    ImportArticle currentArticle = ImporterArticles.getArticleIfValidXml(ts, articleFileName);
                 });
             }
             // get all CSV

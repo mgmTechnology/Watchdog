@@ -16,9 +16,9 @@ import java.math.BigDecimal;
 @XmlRootElement(name = "Artikel")
 @XmlAccessorType(XmlAccessType.FIELD)
 /**
- * this class is a article to be exported to kadis
+ * this class is a article element within an orderList to be send to KaDIS
  */
-public class ArticleCorazon {
+public class OrderArticle {
     @XmlElement(name="ArtikelNr")
     String artikelNr;
     @XmlElement(name="Menge")
@@ -90,8 +90,8 @@ public class ArticleCorazon {
         this.steuerEinstellung = steuerEinstellung;
     }
 
-    public ArticleCorazon(String artikelNr, Double menge, String groesse, String name, BigDecimal preis,
-                          Double steuer, String steuerEinstellung) {
+    public OrderArticle(String artikelNr, Double menge, String groesse, String name, BigDecimal preis,
+                        Double steuer, String steuerEinstellung) {
         this.artikelNr = artikelNr;
         this.menge = menge;
         this.groesse = groesse;
@@ -101,7 +101,7 @@ public class ArticleCorazon {
         this.steuerEinstellung = steuerEinstellung;
     }
 
-    public ArticleCorazon() {
+    public OrderArticle() {
     }
 
     public String getXML() {

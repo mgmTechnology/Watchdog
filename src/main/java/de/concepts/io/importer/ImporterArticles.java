@@ -7,7 +7,7 @@ package de.concepts.io.importer;
 
 import de.concepts.WatchDogConfiguration;
 import de.concepts.io.tools.validator.XMLValidator;
-import de.concepts.kadis.Article;
+import de.concepts.kadis.ImportArticle;
 import de.concepts.kadis.Price;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -34,14 +34,14 @@ public class ImporterArticles extends ImporterXML {
      * @param articleFileName
      * @return
      */
-    public static Article getArticleIfValidXml(String ts, String articleFileName) {
+    public static ImportArticle getArticleIfValidXml(String ts, String articleFileName) {
         boolean validXML = false;
         try {
             validXML = XMLValidator.validate("./downloads/" + ts + articleFileName, SCHEMA_ARTICLE_URI);
 
             if (validXML == true) {
                 System.out.println("Valid article: " + "./downloads/" + ts + articleFileName);
-                Article currentArticle = createArticleWithXpath("./downloads/" + ts + articleFileName);
+                ImportArticle currentArticle = createArticleWithXpath("./downloads/" + ts + articleFileName);
                 return currentArticle;
             } else {
                 System.out.println("Invalid article: " + "./downloads/" + ts + articleFileName);
@@ -63,9 +63,9 @@ public class ImporterArticles extends ImporterXML {
      * @throws SAXException
      * @throws XPathExpressionException
      */
-    public static Article createArticleWithXpath(String resourcePath) throws ParserConfigurationException, IOException
+    public static ImportArticle createArticleWithXpath(String resourcePath) throws ParserConfigurationException, IOException
             , SAXException, XPathExpressionException {
-        Article article = new Article();
+        ImportArticle article = new ImportArticle();
         Price price = new Price();
         List<Price> priceList = new ArrayList<>();
         final DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();

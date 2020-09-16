@@ -37,13 +37,13 @@ class OrdersTest {
         );
         auftrag.setLieferadresseObject(lieferAdresse);
         System.out.println(auftrag.getLieferadresseObject());
-        ArrayList<ArticleCorazon> listOrderItems = new ArrayList<>();
+        ArrayList<OrderArticle> listOrderItems = new ArrayList<>();
 
-        ArticleCorazon art1 = new ArticleCorazon("107291", 1.0, "XXL", "T-Hemd, rot/weiss",
+        OrderArticle art1 = new OrderArticle("107291", 1.0, "XXL", "T-Hemd, rot/weiss",
                 new BigDecimal("16.90"), 19.0, "I");
-        ArticleCorazon art2 = new ArticleCorazon("107292", 2.0, "XXL", "T-Hemd, blau/grün",
+        OrderArticle art2 = new OrderArticle("107292", 2.0, "XXL", "T-Hemd, blau/grün",
                 new BigDecimal("14.90"), 19.0, "I");
-        ArticleCorazon art3 = new ArticleCorazon("107293", 3.0, "XXL", "T-Hemd, schwarz/braun",
+        OrderArticle art3 = new OrderArticle("107293", 3.0, "XXL", "T-Hemd, schwarz/braun",
                 new BigDecimal("17.90"), 19.0, "I");
         Collections.addAll(listOrderItems,art1,art2,art3);
         auftrag.setOrderListObject(new OrderList(listOrderItems));

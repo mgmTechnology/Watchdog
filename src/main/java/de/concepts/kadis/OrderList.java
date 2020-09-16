@@ -8,17 +8,17 @@ package de.concepts.kadis;
 import java.util.ArrayList;
 
 class OrderList {
-    ArrayList<ArticleCorazon> listArtikel = new ArrayList<>();
+    ArrayList<OrderArticle> listArtikel = new ArrayList<>();
 
-    public OrderList(ArrayList<ArticleCorazon> listArtikel) {
+    public OrderList(ArrayList<OrderArticle> listArtikel) {
         this.listArtikel = listArtikel;
     }
 
-    public ArrayList<ArticleCorazon> getListArtikel() {
+    public ArrayList<OrderArticle> getListArtikel() {
         return listArtikel;
     }
 
-    public void setListArtikel(ArrayList<ArticleCorazon> listArtikel) {
+    public void setListArtikel(ArrayList<OrderArticle> listArtikel) {
         this.listArtikel = listArtikel;
     }
 

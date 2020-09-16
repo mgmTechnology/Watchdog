@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * this article is an article to be imported into myCorazon
  */
-public class Article {
+public class ImportArticle {
     String active;
     Double tax;
     String number;
@@ -123,11 +123,11 @@ public class Article {
         this.translations = translations;
     }
 
-    public Article() {
+    public ImportArticle() {
     }
 
-    public Article(String active, double tax, String number, Double weight, Double width, Double len, Double height,
-                   String name, String description) {
+    public ImportArticle(String active, double tax, String number, Double weight, Double width, Double len, Double height,
+                         String name, String description) {
         this.active = active;
         this.tax = tax;
         this.number = number;
