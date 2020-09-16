@@ -13,11 +13,13 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 @XmlRootElement(name="Auftraege")
+
 @XmlAccessorType(XmlAccessType.FIELD)
 
 public class Orders {
     @XmlElement(name="Auftrag")
     private ArrayList<Auftrag> auftragObjects;
+    @XmlAttribute
     private String xmlns;
     public String getXmlns() {
         return xmlns;
@@ -34,6 +36,9 @@ public class Orders {
     public String getXML() {
         return ExporterXML.jaxbObjectToXML(this);
     }
+
+
+
 }
 
 

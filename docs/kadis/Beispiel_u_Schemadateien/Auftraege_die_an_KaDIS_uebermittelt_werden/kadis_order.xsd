@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- Created with Liquid Technologies Online Tools 1.0 (https://www.liquid-technologies.com) -->
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.kadis.de/auftrag/V1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xs:element name="Auftraege">
@@ -9,74 +9,73 @@
                         <xs:sequence>
                             <xs:element name="Bestellung">
                                 <xs:complexType>
-                                    <xs:sequence>
-                                        <xs:element name="BestellNr" type="xs:unsignedShort" />
-                                        <xs:element name="Mandant" type="xs:unsignedByte" />
+                                    <xs:all>
+                                        <xs:element name="BestellNr" type="xs:string" />
+                                        <xs:element name="Mandant" type="xs:string" />
                                         <xs:element name="Mediaplan" type="xs:string" />
                                         <xs:element name="Bestellzeitpunkt" type="xs:string" />
-                                        <xs:element name="Werbekontakt" />
-                                        <xs:element name="Kommentarzeile" />
-                                        <xs:element name="Preisgruppe" />
+                               
+                                        <xs:element name="Preisgruppe" type="xs:string" />
                                         <xs:element name="WKZ" type="xs:string" />
                                         <xs:element name="MwStEinstellung" type="xs:string" />
-                                    </xs:sequence>
+                                    </xs:all>
                                 </xs:complexType>
                             </xs:element>
                             <xs:element name="Kunde">
                                 <xs:complexType>
-                                    <xs:sequence>
+                                    <xs:all>
                                         <xs:element name="Shopware-Kundennummer" type="xs:unsignedLong" />
-                                        <xs:element name="KundenNr" type="xs:unsignedShort" />
+                                        <xs:element name="KundenNr" type="xs:string" />
                                         <xs:element name="Anrede" type="xs:string" />
                                         <xs:element name="Vorname" type="xs:string" />
                                         <xs:element name="Nachname" type="xs:string" />
-                                        <xs:element name="Firma" />
+                                        <xs:element name="Firma" type="xs:string"/>
                                         <xs:element name="Strasse" type="xs:string" />
-                                        <xs:element name="Hausnummer" type="xs:unsignedByte" />
-                                        <xs:element name="PLZ" type="xs:unsignedShort" />
+                                        <xs:element name="Hausnummer" type="xs:string" />
+                                        <xs:element name="PLZ" type="xs:string" />
                                         <xs:element name="Stadt" type="xs:string" />
                                         <xs:element name="Land" type="xs:string" />
                                         <xs:element name="Telefon">
                                             <xs:complexType>
                                                 <xs:sequence>
-                                                    <xs:element name="Vorwahl" type="xs:unsignedShort" />
-                                                    <xs:element name="Rufnummer" type="xs:unsignedInt" />
+                                                    <xs:element name="Vorwahl" type="xs:string" />
+                                                    <xs:element name="Rufnummer" type="xs:string" />
                                                 </xs:sequence>
                                             </xs:complexType>
                                         </xs:element>
                                         <xs:element name="Email" type="xs:string" />
-                                    </xs:sequence>
+                                    </xs:all>
                                 </xs:complexType>
                             </xs:element>
                             <xs:element name="Lieferadresse">
                                 <xs:complexType>
-                                    <xs:sequence>
+                                    <xs:all>
                                         <xs:element name="Anrede" type="xs:string" />
                                         <xs:element name="Vorname" type="xs:string" />
                                         <xs:element name="Nachname" type="xs:string" />
-                                        <xs:element name="Firma" />
+                                        <xs:element name="Firma" type="xs:string" />
                                         <xs:element name="Strasse" type="xs:string" />
-                                        <xs:element name="Hausnummer" type="xs:unsignedByte" />
-                                        <xs:element name="PLZ" type="xs:unsignedShort" />
+                                        <xs:element name="Hausnummer" type="xs:string" />
+                                        <xs:element name="PLZ" type="xs:string" />
                                         <xs:element name="Stadt" type="xs:string" />
                                         <xs:element name="Land" type="xs:string" />
                                         <xs:element name="Telefon">
                                             <xs:complexType>
                                                 <xs:sequence>
-                                                    <xs:element name="Vorwahl" type="xs:unsignedShort" />
-                                                    <xs:element name="Rufnummer" type="xs:unsignedInt" />
+                                                    <xs:element name="Vorwahl" type="xs:string" />
+                                                    <xs:element name="Rufnummer" type="xs:string" />
                                                 </xs:sequence>
                                             </xs:complexType>
                                         </xs:element>
                                         <xs:element name="Email" type="xs:string" />
-                                    </xs:sequence>
+                                    </xs:all>
                                 </xs:complexType>
                             </xs:element>
                             <xs:element name="Zahlung">
                                 <xs:complexType>
-                                    <xs:sequence>
+                                    <xs:all>
                                         <xs:element name="Zahlungsart" type="xs:string" />
-                                    </xs:sequence>
+                                    </xs:all>
                                 </xs:complexType>
                             </xs:element>
                             <xs:element name="OrderList">
@@ -84,15 +83,15 @@
                                     <xs:sequence>
                                         <xs:element maxOccurs="unbounded" name="Artikel">
                                             <xs:complexType>
-                                                <xs:sequence>
-                                                    <xs:element name="ArtikelNr" type="xs:unsignedInt" />
-                                                    <xs:element name="Menge" type="xs:unsignedByte" />
+                                                <xs:all>
+                                                    <xs:element name="ArtikelNr" type="xs:string" />
+                                                    <xs:element name="Menge" type="xs:string" />
                                                     <xs:element name="Groesse" type="xs:string" />
                                                     <xs:element name="Name" type="xs:string" />
                                                     <xs:element name="Preis" type="xs:decimal" />
-                                                    <xs:element name="Steuer" type="xs:unsignedByte" />
+                                                    <xs:element name="Steuer" type="xs:string" />
                                                     <xs:element name="SteuerEinstellung" type="xs:string" />
-                                                </xs:sequence>
+                                                </xs:all>
                                             </xs:complexType>
                                         </xs:element>
                                     </xs:sequence>

@@ -18,12 +18,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class OrdersTest {
 
-    private static final String SCHEMA_ARTICLE_URI = "http://mgm.technology:80/kadis/kadis_artikel.xsd";
+    private static final String SCHEMA_ARTICLE_URI = "http://mgm.technology:80/kadis/kadis_order.xsd";
 
 
     @Test
     void testCreateOrdersObject() {
         Orders auftraegeFuerKaDIS = new Orders();
+        auftraegeFuerKaDIS.setXmlns("http://www.kadis.de/auftrag/V1.1");
         ArrayList<Auftrag> listAuftraege = new ArrayList<>();
 
         Auftrag auftrag = new Auftrag();

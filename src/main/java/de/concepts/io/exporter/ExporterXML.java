@@ -12,9 +12,7 @@ public class ExporterXML {
         JAXBContext jaxbContext = null;
 
         try {
-
             String simpleName = currentObject.getClass().getSimpleName();
-
             switch (simpleName) {
                 case "Lieferadresse":
                     jaxbContext = JAXBContext.newInstance(Lieferadresse.class);
@@ -38,6 +36,7 @@ public class ExporterXML {
                     System.out.println("could not create xml for " + simpleName);
             }
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller(); //Create Marshaller
+
             jaxbMarshaller.setProperty("com.sun.xml.bind.xmlDeclaration", false); // remove <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); //Required formatting??
 
