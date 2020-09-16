@@ -16,7 +16,7 @@ import java.util.Locale;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Price {
     String currentId;
-    Integer kadisArticleNumber;
+    String kadisArticleNumber;
     String priceGroup;
     String fromQuantity;
     String toQuantity; // can be beliebig
@@ -32,11 +32,11 @@ public class Price {
         this.currentId = currentId;
     }
 
-    public Integer getKadisArticleNumber() {
+    public String getKadisArticleNumber() {
         return kadisArticleNumber;
     }
 
-    public void setKadisArticleNumber(Integer kadisArticleNumber) {
+    public void setKadisArticleNumber(String kadisArticleNumber) {
         this.kadisArticleNumber = kadisArticleNumber;
     }
 
@@ -96,7 +96,7 @@ public class Price {
     public Price() {
     }
 
-    public Price(Integer kadisArticleNumber, String priceGroup, String fromQuantity, String toQuantity,
+    public Price(String kadisArticleNumber, String priceGroup, String fromQuantity, String toQuantity,
                  String price, String taxGroup, String taxValue) {
         this.kadisArticleNumber = kadisArticleNumber;
         this.priceGroup = priceGroup;

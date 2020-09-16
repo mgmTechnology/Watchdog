@@ -1,0 +1,30 @@
+Diese Preisgruppen sollen ja auch dazu dienen, um zu erkennen, ob es sich um ein "Fremdartikel" handelt oder um ein Artikel der von der Zentrale in Deutschland verschickt wird. 
+Wie Sie diese in Ihrem System am Ende als Fremdartikel markieren, ist Ihnen überlassen. 
+
+Alle Artikel die von der KaDIS-Zentrale verschickt werden haben unter anderem die Preisgruppe VK_DP  (Verkaufspreis an die Dependance) dies muss in MyCorazon der 
+Einkaufspreis für den betroffenen Artikel sein. 
+
+Ein Fremdartikel, der von der Dependance im eigenen Land bezogen und verkauft wird, 
+bekommt aus KaDIS die Preisgruppe VK_<Landeskenner der Dependance). 
+Das heißt, wenn am Artikel die Preisgruppe VK_DK mitgeliefert wird, muss MyCorazon erkennen, dass dies ein Fremdartikel ist, der 
+ausschließlich in Dänemark verkauft wird. Der hier dranhängende Preis muss ignoriert werden (außer es ist die Dependance in Deutschland). 
+Zudem darf dieser Artikel bei anderen Dependancen nicht sichtbar/verkaufbar sein. 
+
+Eine Dependance kann immer nur Artikel verkaufen die aus KaDIS mit der Preisgruppe VK_DP oder VK_<Landeskenner der Dependance> kommen. 
+
+Da unser jetziger Kunde so begeistert von MyCorazon ist, möchte er es auch gerne in Deutschland einsetzen. 
+Die deutsche Dependance stellt allerdings einen Sonderfall in MyCorazon dar. 
+Denn für Deutschland wird die Rechnung in KaDIS erzeugt und verschickt, das heißt der Schritt 6. 3. Auf Seite 1 der Prozessbeschreibung fällt dort weg. 
+Für die Deutsche Dependance soll der VK_D auch verarbeitet werden und als Verkaufspreis in MyCorazon gesetzt werden. 
+(optimal wäre, wenn man hier verschiedene Preisgruppen für den Verkaufspreis übergeben könnte VK_D1, VK_D2 und VK_D3) 
+Soweit ich von Herrn Hammergren verstanden habe ist derzeit nur ein Verkaufspreis pro Artikel möglich. 
+
+Kurz zusammengefasst: 
+Alle Artikel haben die Preisgruppe VK_DP oder VK_<Landeskenner der Dependance> sowie zusätzlich die Preisgruppen 
+VK_D1, VK_D2, VK_D3. 
+
+Artikel die einen VK_<Landeskenner der Dependance> enthalten sind Fremdartikel die nur in dem jeweiligen Landverkauft werden dürfen
+Der Wert von den VK_<Landeskenner> Preisen kann in MyCorazon ignoriert werden. Da wir in KaDIS den Einkaufspreis der Fremdartikel nicht kennen. 
+Artikel mit der Preisgruppe VK_DP sind Artikel die von der KaDIS-Zentrale verschickt werden, hier ist der VK_DP der Einkaufspreis in MyCorazon. 
+
+Die Endkunden-Verkaufspreise in MyCorazon dürfen nur für die Deutsche Dependance  importiert werden (Preisgruppe VK_D1) (Falls irgendwann in MyCorazon möglich auch VK_D2 und VK_D3)

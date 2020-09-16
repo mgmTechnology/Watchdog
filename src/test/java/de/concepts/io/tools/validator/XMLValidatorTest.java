@@ -13,9 +13,8 @@ class XMLValidatorTest {
 
     private static final String RESOURCES_TESTDATA_ARTICLES_XML = "D:/projects/Corazon/WatchDog/src/main/resources/testdata/100116.xml";
     private static final String RESOURCES_TESTDATA_ORDER_XML = "D:/projects/Corazon/WatchDog/src/main/resources/testdata/orders.xml";
-    private static final String RESOURCES_XSD_ARTICLES_XSD = "D:/projects/Corazon/WatchDog/src/main/resources/xsd/inferred_article.xsd";
-    private static final String SCHEMA_ORDER_URI = "http://mgm.technology:80/kadis/orders.xsd";
-    private static final String SCHEMA_ARTICLE_URI = "http://mgm.technology:80/kadis/inferred_article.xsd";
+    private static final String SCHEMA_ORDER_URI = "http://mgm.technology:80/kadis/kadis_order.xsd";
+    private static final String SCHEMA_ARTICLE_URI = "http://mgm.technology:80/kadis/kadis_artikel.xsd";
 
     @Test
     void testValidateOrders() {

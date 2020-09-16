@@ -74,7 +74,7 @@ public class ImporterArticles extends ImporterXML {
         final XPathFactory factory = XPathFactory.newInstance();
         final XPath xpath = factory.newXPath();
         XPathExpression expr = xpath.compile("/Artikel/mainDetail/number");
-        Integer elementData = Integer.parseInt((String) expr.evaluate(doc, XPathConstants.STRING));
+        String elementData = (String) expr.evaluate(doc, XPathConstants.STRING);
         article.setNumber(elementData);
         price.setKadisArticleNumber(elementData);
         expr = xpath.compile("/Artikel/name");

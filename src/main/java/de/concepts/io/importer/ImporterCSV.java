@@ -27,7 +27,7 @@ public class ImporterCSV extends Importer {
                     .skip(1)
                     .map(row -> row.split(";"))
                     .filter(row -> row[2].equals(priceGroup))
-                    .map(row -> new Price(Integer.parseInt(row[1]),row[2],row[3], row[4], row[5], row[9], row[10]))
+                    .map(row -> new Price(row[1],row[2],row[3], row[4], row[5], row[9], row[10]))
                     .collect(Collectors.toList());
             return priceList;
         } catch (Exception e) {

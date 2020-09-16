@@ -246,13 +246,13 @@ public class Helper {
 
             return "XML";
         } catch (Exception e) {
-            System.out.println("no xml: " + message.substring(0,20));
+            System.out.println("no xml: " + message.substring(0,40));
         }
         try {
             new ObjectMapper().readTree(message);
             return "JSON";
         } catch (IOException e) {
-            System.out.println("no json: " + message.substring(0,20));
+            System.out.println("no json: " + message.substring(0,40));
         }
         return null;
     }

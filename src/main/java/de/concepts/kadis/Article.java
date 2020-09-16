@@ -16,7 +16,7 @@ import java.util.List;
 public class Article {
     String active;
     Double tax;
-    Integer number;
+    String number;
     List<Price> prices;
     Double weight;
     Double width;
@@ -51,11 +51,11 @@ public class Article {
         this.tax = tax;
     }
 
-    public Integer getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 
@@ -126,7 +126,7 @@ public class Article {
     public Article() {
     }
 
-    public Article(String active, double tax, Integer number, Double weight, Double width, Double len, Double height,
+    public Article(String active, double tax, String number, Double weight, Double width, Double len, Double height,
                    String name, String description) {
         this.active = active;
         this.tax = tax;
