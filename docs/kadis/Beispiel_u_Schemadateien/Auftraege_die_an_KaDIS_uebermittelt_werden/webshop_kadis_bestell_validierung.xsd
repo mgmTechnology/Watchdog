@@ -1,0 +1,862 @@
+<xs:schema  attributeFormDefault="unqualified" 
+			elementFormDefault="qualified"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			targetNamespace="http://www.kadis.de/import/v1.3">
+	<xs:element name="Auftraege">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Auftrag" minOccurs="1" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Bestellung">
+								<!-- Bestellungskopf Anfang -->
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element type="xs:string" name="BestellNr">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Shop-Bestellnummer des Auftrags</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="KadisKundennummer" minOccurs="0" maxOccurs="1">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">KadisKundennummer wenn diese dem Shop bekannt ist. Zuordnung zum Kunden möglich, wenn dieser seine Rechnungsadresse ändert.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:int" name="ShopwareShopID" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Shopware-Shop Nummer/ID</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:int" name="ShopwareKundenID" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Shopware-KundenID</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:int" name="ShopwareKundenNummer" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Shopware-Kundennummer</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:int" name="PrestaKundenID" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">PrestaShop-Kunden Nummer/ID</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Mandant">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Kadis Mandant, wenn nicht vorhanden, leer lassen.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="PartnerID">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Shop Ref-PartnerID, wenn nicht vorhanden, leer lassen.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Mediaplan">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Kadis-Mediaplan für Shops mit Endkunden, INTERNETB2C, für Shops die NUR Händler haben INTERNETB2B (Standard: INTERNETB2C|INTERNETB2B|EBAY|RAKUTEN)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="Bestellzeitpunkt">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Zeitpunkt der Bestellung z.b. 2015-06-25 21:21:51</xs:documentation>
+												<xs:appinfo>
+													<xs:resourceBundeFormatted base="xs:dateTime" type="date" pattern="yyyy-MM-dd HH:mm:ss"/>
+												</xs:appinfo>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Kommentarzeile">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Kommentar des Kunden an den Shopbetreiber für die Bestellung</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Grusstextzeile" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Extra Grusskommentar eines Kunden an den zu belieferden Kunden</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Preisgruppe">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Preisgruppe des Kunden (Standard: ENDKUNDE) (ENDKUNDE|HAENDLER|H01|H02| ....) Preisgruppe muss im Kadis vorhanden sein.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="WKZ">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Währung der Bestellung Standard: EUR</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="MwStEinstellung">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Mehrwertsteuer Einstellung der Bestellung I = inkl. | + exkl. | O ohne Steuern (Standard : I)</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="I">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">inkl. Steuern</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="+">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">exkl. Steuern</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="O">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">ohne Steuern</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element type="xs:string" name="Lieferbedingungen">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Kadis Lieferbedingungen Standard: INET (darf nicht leer sein.)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Versender">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Versender mit dem das Paket, Brief versendet wird. Standard: DHL;Express;UPS;Briefversand;DHLCool;DHLCool_18002000;DHLCool_19002100 ... (darf nicht leer sein.)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="DHLWunsch_Adresstyp" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">DHL Wunschzeitzustellung Adresstypus (address;filiale;packstation)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="DHLWunsch_Referenzzeit" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">DHL Wunschzeitzustellung Zeitraumangabe (zb 19002100 ist 19:00-21:00)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="DHLWunsch_Abstellort" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">DHL Wunschzeitzustellung Abstellort (z.b. Garage oder Balkon, Freitext)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="DHLWunsch_Nachbarname" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">DHL Wunschzeitzustellung Nachbarname (z.b. Frau Müller, Freitext)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="DHLWunsch_Nachbaradresse" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">DHL Wunschzeitzustellung Nachbaradresse (z.b.  Panzerstraße 11, Freitext)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="DHLWunsch_Zustelltag" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">DHL Wunschzeitzustellung Zustelltag (z.b. 2017-09-25 Datumsfeld)</xs:documentation>
+												<xs:appinfo>
+													<xs:resourceBundeFormatted base="xs:dateTime" type="date" pattern="yyyy-MM-dd"/>
+												</xs:appinfo>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="DHLWunsch_AufschlagVersandkosten" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">DHL Wunschzeitzustellung Extrakosten (Sind in den Versandkosten bereits mit eingerechnet und könnten durch die Übergabe extra ausgewiesen werden)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Shopbestellnummer" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Gibt die eigentliche Shopbestellnummer an, wenn diese von der Bestellnummer abweicht.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="Versanddatum" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Datum ab wann die Bestellung ausgeliefert werden darf, in der Zukunft z.b 2019-06-25</xs:documentation>
+												<xs:appinfo>
+													<xs:resourceBundeFormatted base="xs:dateTime" type="date" pattern="yyyy-MM-dd"/>
+												</xs:appinfo>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+								<!-- Bestellungskopf Ende -->
+							</xs:element>
+							<xs:element name="Kunde">
+								<!-- Kundeninfokopf Anfang -->
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element type="xs:string" name="KundeNr">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Kundennummer des Shop</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Anrede">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Rechnungs Anrede des Kunden (STANDARD: Herr, Frau) oder Mr., Ms., Mrs., Dr., Prof. Dr., ... </xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Vorname">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Rechnungs Vorname des Kunden</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Nachname">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Rechnungs Nachname des Kunden</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Firma">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Rechnungs Firma des Kunden</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Abteilung">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Rechnungs "zu Händen", "Abteilung" des Kunden</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Strasse">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Rechnungs Straße mit Hausnummer getrennt durch Leerzeichen des Kunden z.b. Röntgenweg 11, Straße, Strasse gekürzt in "Röntgen Str." oder z.b. "Röntgenstr."</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Hausnummer">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Rechnungs Hausnummer, dient der Absicherung, bei z.b Ausländischen Kundenadressen.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="PLZ">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Rechnungs Postleitzahl des Kunden</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Stadt">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Rechnungs Stadt des Kunden</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="Land">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Rechnungs Lieferland des Kunden (STANDARD: DE)</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:pattern value="[A-Z]{2}"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element type="xs:string" name="Telefon">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Rechnungs Telefonnummer des Kunden</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Fax">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Rechnungs Faxnummer des Kunden</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Email">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Rechnungs Email des Kunden</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="USTID">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Umsatzsteuer ID des Kunden</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="KENNER" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Zuordnung für Kunden-Kenner</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="SUCHWORT" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Suchwort, über die man den Kunden finden kann.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+								<!-- Kundeninfokopf Ende -->	
+							</xs:element>
+							<xs:element name="Lieferadresse" minOccurs="0" maxOccurs="1">
+								<!-- Lieferadresseinfokopf Anfang -->
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element type="xs:string" name="KundeNr">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Kundennummer des Shop</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Anrede">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Lieferadresse Anrede des Kunden (STANDARD: Herr, Frau) oder Mr., Ms., Mrs., Dr., Prof. Dr., ... </xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Vorname">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Lieferadresse Vorname des Kunden</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Nachname">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Lieferadresse Nachname des Kunden</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Firma">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Lieferadresse Firma des Kunden</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Abteilung">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Lieferadresse "zu Händen", "Abteilung" des Kunden</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Strasse">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Lieferadresse Straße mit Hausnummer getrennt durch Leerzeichen des Kunden z.b. Röntgenweg 11, Straße, Strasse gekürzt in "Röntgen Str." oder z.b. "Röntgenstr."</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Hausnummer">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Lieferadresse Hausnummer, dient der Absicherung, bei z.b Ausländischen Kundenadressen.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="PLZ">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Lieferadresse Postleitzahl des Kunden</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Stadt">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Lieferadresse Stadt des Kunden</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="Land">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Lieferadresse Lieferland des Kunden (STANDARD: DE)</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:pattern value="[A-Z]{2}"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element type="xs:string" name="USTID" minOccurs="0" maxOccurs="1">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Umsatzsteuer ID des Kunden (Lieferadresse)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+								<!-- Lieferadresseinfokopf Ende -->	
+							</xs:element>
+							<xs:element name="Zahlung">
+								<!-- Zahlungsdaten Anfang -->
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Zahlungsart">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Zahlart der Bestellung STANDARD: Vorkasse</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="Vorkasse">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">Vorkasse Zahlung</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="Barzahlung">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">Barzahlung Zahlung</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="Nachnahme">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">Nachnahme Zahlung</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="Rechnung">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">Rechnungs Zahlung</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="PayPal">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">PayPal Zahlung</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="PayPal_PZ">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">Offene PayPal Zahlung , nicht validierte.</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="ebayCreditCard">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">ebayCreditCard Zahlung</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="ebayCreditCard_PZ">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">Offene ebayCreditCard Zahlung , nicht validierte.</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="Magnalister">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">Magnalister Zahlung</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>													
+													<xs:enumeration value="Saferpay">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">Saferpay Zahlung</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="Saferpay_RE">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">Direktverbuchte Saferpay Zahlung(Bereits bezahlt)</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="Kreditkarte">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">Kreditkarten Zahlung</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="Lastschrift">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">Lastschrift Zahlung (veraltet)</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="SEPA">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">SEPA Zahlung</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="Amazon">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">AmazonPayments Zahlung</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="Shopgate_Konto">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">Shopgatekonto Zahlung</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="SOFORT">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">Sofortüberweisungs Zahlung</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="SOFORT_offen">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">Offene Sofortüberweisungs Zahlung, nicht validierte.</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="Heidelpay">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">Heidelpay Zahlung</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="Heidelpay_PZ">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">Offene Heidelpay Zahlung, nicht validierte.</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="Heidelpay_VK">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">Offene Vorkasse Heidelpay Zahlung, nicht validiert.</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="Heidelpay_LA">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">Lastschrift (SEPA) Heidelpay Zahlung.</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="Rakuten">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">Bezahlte Bestellung die von Rakuten freigegeben wurde.</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="Rakuten_RE">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">Rakutenzahlung die per Rechnung bezahlt wird (GGf. wegen gesonderten Rechnungsformular).</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+													<xs:enumeration value="Rakuten_offen">
+														<xs:annotation>
+															<xs:documentation xml:lang="de">Offene Bestellung die von Rakuten nicht bestätigt wurde (z.b. Vorkasse, manuelle Prüfung nötig).</xs:documentation>
+														</xs:annotation>
+													</xs:enumeration>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Check">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Zahlungsstatus der Bestellung, wird meist durch den Zahlungsdienstleister im Shop gesetzt.</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="Offen"/>
+													<xs:enumeration value="Komplett bezahlt"/>
+													<xs:enumeration value="abgebrochen"/>
+													<xs:enumeration value="Teilweise in Rechnung gestellt"/>
+													<xs:enumeration value="Komplett in Rechnung gestellt"/>
+													<xs:enumeration value="Teilweise bezahlt"/>
+													<xs:enumeration value="1 Mahnung"/>
+													<xs:enumeration value="2 Mahnung"/>
+													<xs:enumeration value="3 Mahnung"/>
+													<xs:enumeration value="Inkasso"/>
+													<xs:enumeration value="Reserviert"/>
+													<xs:enumeration value="Verzoegert"/>
+													<xs:enumeration value="Wiedergutschrift"/>
+													<xs:enumeration value="Überprüfung notwendig"/>
+													<xs:enumeration value="Es wurde kein Kredit genehmigt"/>
+													<xs:enumeration value="Der Kredit wurde vorlaeufig akzeptiert"/>
+													<xs:enumeration value="Der Kredit wurde genehmigt"/>
+													<xs:enumeration value="Die Zahlung wurde von der Hanseatic Bank angewiesen"/>
+													<xs:enumeration value="Es wurde eine Zeitverlaengerung eingetragen"/>
+													<xs:enumeration value="Vorgang wurde abgebrochen"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Status">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Bestellstatus der Bestellung.</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="Offen"/>
+													<xs:enumeration value="In Bearbeitung (Wartet)"/>
+													<xs:enumeration value="Komplett abgeschlossen"/>
+													<xs:enumeration value="Teilweise abgeschlossen"/>
+													<xs:enumeration value="Storniert / Abgelehnt"/>
+													<xs:enumeration value="Zur Lieferung bereit"/>
+													<xs:enumeration value="Teilweise ausgeliefert"/>
+													<xs:enumeration value="Komplett ausgeliefert"/>
+													<xs:enumeration value="Klärung notwendig"/>
+													<xs:enumeration value="Mahnwesen"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Reserviert">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Gesamtbestellsumme des Auftrages. mit Komma (z.b. 59,99)</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:pattern value="\d+(,|.\d+)?"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+
+										<!-- Neue Felder aufgrund neuer eBay Zahlungsart-->
+										<xs:element type="xs:string" name="eBaySalesRecordNumber" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">eBaySalesRecordNumber</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="ebay_ID" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">ebay_ID Kommentar</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+
+										<!-- MUSS FELDER bei SEPA Zahlung -->
+										<xs:element type="xs:string" name="Kontoinhaber" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Konto Inhaber bei der Bank</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="IBAN" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">IBAN des Kunden</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="BIC" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">BIC des Kunden</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Bankname" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Bankname des Kunden</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<!-- MUSS FELD <xs:element type="xs:string" name="Bankname" minOccurs="0"></xs:element> -->
+										<xs:element type="xs:string" name="Erstellt" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Wann wurde die Bestellung erstellt, bzw. der Auftrag erteilt. (Nach SEPA Richtlinie)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<!-- -->
+										<!-- MUSS FELDER bei Shopgatezahlungen mit PayPal -->
+										<xs:element type="xs:string" name="Shopgate_comment" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Shopgate Kommentar</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<!-- MUSS FELD <xs:element type="xs:string" name="PayPal_transaction_id" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Paypal TransaktionsID die von Shopgate übertragen wurde.</xs:documentation>
+											</xs:annotation>
+										</xs:element> -->
+										<!-- -->
+										<!-- MUSS FELDER bei Shopgatezahlungen per Vorkasse -->
+										<xs:element type="xs:string" name="Shopgate_transaction_id" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Shopgate TransaktionsID bei Vorkassebestellungen</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<!-- -->
+										<!-- MUSS FELDER bei PayPal Zahlung -->
+										<xs:element type="xs:string" name="PayPal_transaction_id" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">PayPal TransaktionsID</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="PayPal_Order_ID" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">PayPal OrderID (In der Regel entspricht dies der Bestellnummer)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="PayPal_Comment" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">PayPal Kommentar</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+
+										<xs:element type="xs:string" name="ebayCreditCard_transaction_id" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">ebayCreditCard TransaktionsID</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="ebayCreditCard_Order_ID" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">ebayCreditCard OrderID (In der Regel entspricht dies der Bestellnummer)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="ebayCreditCard_Comment" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">ebayCreditCard Kommentar</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										
+										<!-- -->
+										<!-- MUSS FELDER bei Saferpay Kreditkartenzahlung -->
+										<xs:element type="xs:string" name="Saferpay_Order_ID" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Saferpay OrderID</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="TransaktionsID" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Transaktions ID</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Saferpay_TransakionsID" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Saferpay Transaktions ID</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Saferpay_Cardname" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Kreditkartenname</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Saferpay_AccountID" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Saferpay Account ID</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Saferpay_Waehrung" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Währung der Saferpay Zahlung</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Saferpay_Summe_Reserviert" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Summe die für diese Zahlung reserviert wurde.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Saferpay_CardRef_ID" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Saferpay CardRef ID</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Saferpay_Zahlstatus" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Saferpay Zahlungstatus</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Saferpay_Datum_Erstellung" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Datum wann die Reservierung durchgeführt wurde bzw. wann die Daten an Saferpay übertragen wurden</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Saferpay_Authorisation" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Saferpay AuthorisationsCode</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<!-- -->
+										<!-- MUSS FELDER bei Sofortüberweisungszahlungen -->
+										<xs:element type="xs:string" name="Sofort_transaktions_id" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Sofortüberweisung TransaktionsID</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<!-- -->
+										<!-- MUSS FELDER bei AmazonPaymentszahlungen -->
+										<xs:element type="xs:string" name="Amazon_transaktions_id" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">AmazonPayments TransaktionsID</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<!-- -->
+										<!-- MUSS FELDER bei Magnalisterzahlungen mit PayPal -->
+										<!-- MUSS FELD <xs:element type="xs:string" name="PayPal_transaction_id" minOccurs="0"></xs:element> -->
+										<!-- MUSS FELD <xs:element type="xs:string" name="PayPal_Order_ID" minOccurs="0"></xs:element> -->
+										<!-- MUSS FELD <xs:element type="xs:string" name="PayPal_Comment" minOccurs="0"></xs:element> -->
+										<xs:element type="xs:string" name="Shopbestellnummer" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Bestellnummer aus dem Shop mit der der Auftrag angelegt wurde.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Magnalister_eBay_transaktions_id" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Ebay Bestell-, TransaktionsID</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<!-- -->
+										
+										<!-- MUSS FELDER bei Heidelpayzahlungen --> 
+										<xs:element type="xs:string" name="Heidelpay_Order_ID" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Heidelpay Bestell-, ShortID</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Heidelpay_TransaktionsID" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Heidelpay Bestell-, TransaktionsID</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Heidelpay_Datum_Erstellung" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Heidelpay Erstellungsdatum der Zahlung</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element type="xs:string" name="Heidelpay_Authorisation" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Heidelpay Authorisationsstatus</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<!-- -->
+										
+										<!-- MUSS FELDER bei Magnalisterzahlung per Vorkasse -->
+										<!-- MUSS FELD <xs:element type="xs:string" name="Shopbestellnummer" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Bestellnummer aus dem Shop mit der der Auftrag angelegt wurde.</xs:documentation>
+											</xs:annotation>
+										</xs:element> -->
+										<!-- MUSS FELD <xs:element type="xs:string" name="Magnalister_eBay_transaktions_id" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="de">Ebay Bestell-, TransaktionsID</xs:documentation>
+											</xs:annotation>
+										</xs:element> -->
+										<!-- -->
+									</xs:sequence>
+								</xs:complexType>
+								<!-- Zahlungsdaten Ende -->
+							</xs:element>
+							<xs:element name="OrderList">
+								<!-- Positionsliste Anfang -->
+								<xs:complexType>
+									<xs:sequence>
+									<xs:element name="Artikel" minOccurs="1" maxOccurs="unbounded">
+										<!-- Artikel Position Anfang -->
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element type="xs:string" name="ArtikelNr">
+													<xs:annotation>
+														<xs:documentation xml:lang="de">Kadis Artikelnummer des Produkts</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element type="xs:integer" name="Menge">
+													<xs:annotation>
+														<xs:documentation xml:lang="de">Bestellte Menge des Produkts</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element type="xs:string" name="Groesse">
+													<xs:annotation>
+														<xs:documentation xml:lang="de">Großenangabe des Artikels. STANDARD: St </xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element type="xs:float" name="Gewicht" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation xml:lang="de">Einzelgewicht des Produktes</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element type="xs:string" name="Einheit">
+													<xs:annotation>
+														<xs:documentation xml:lang="de">Verkaufseinheit des Artikels STANDARD: Stück, Bei Versandkosten : 0</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element type="xs:string" name="Name">
+													<xs:annotation>
+														<xs:documentation xml:lang="de">Name des Artikels</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element type="xs:string" name="Code" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation xml:lang="de">Gutschein-Codes für den Druck</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="Preis">
+													<xs:annotation>
+														<xs:documentation xml:lang="de">Einzelpreis des Artikels mit Komma.</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:pattern value="(|-)\d+(,|.\d+)?"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="Steuer">
+													<xs:annotation>
+														<xs:documentation xml:lang="de">Steuersatz des Artikels STANDARD: 19 oder 7 </xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:pattern value="(|-)\d+(,|.\d+)?"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="SteuerEinstellung">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="I">
+																<xs:annotation>
+																	<xs:documentation xml:lang="de">Preis ist inkl. Steuern</xs:documentation>
+																</xs:annotation>
+															</xs:enumeration>
+															<xs:enumeration value="+">
+																<xs:annotation>
+																	<xs:documentation xml:lang="de">Preis ist exkl. Steuern</xs:documentation>
+																</xs:annotation>
+															</xs:enumeration>
+															<xs:enumeration value="O">
+																<xs:annotation>
+																	<xs:documentation xml:lang="de">Preis ist ohne Steuern</xs:documentation>
+																</xs:annotation>
+															</xs:enumeration>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+										<!-- Artikel Position Ende -->
+									</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+								<!-- Positionsliste Ende -->
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
