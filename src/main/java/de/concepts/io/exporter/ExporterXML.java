@@ -1,6 +1,6 @@
 package de.concepts.io.exporter;
 
-import de.concepts.kadis.*;
+import de.concepts.kadis.out.*;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;

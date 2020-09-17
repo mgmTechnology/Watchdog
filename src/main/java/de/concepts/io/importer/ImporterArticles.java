@@ -7,8 +7,8 @@ package de.concepts.io.importer;
 
 import de.concepts.WatchDogConfiguration;
 import de.concepts.io.tools.validator.XMLValidator;
-import de.concepts.kadis.ImportArticle;
-import de.concepts.kadis.Price;
+import de.concepts.kadis.in.ImportArticle;
+import de.concepts.kadis.out.Price;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -24,7 +24,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImporterArticles extends ImporterXML {
+public class ImporterArticles {
     public static final String SCHEMA_ORDER_URI = WatchDogConfiguration.watchdogXMLOrdersSchemaFile;
     public static final String SCHEMA_ARTICLE_URI = WatchDogConfiguration.watchdogXMLArticleSchemaFile;
 

@@ -3,7 +3,7 @@
  * Proprietary and confidential
  * Written by Marc Müller <marc@mgm.technology>, 2020
  */
-package de.concepts.kadis;
+package de.concepts.kadis.out;
 
 import de.concepts.io.exporter.ExporterXML;
 
@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "Telefon")
 @XmlAccessorType(XmlAccessType.FIELD)
-class Telefon {
+public class Telefon {
     @XmlElement(name="Vorwahl")
     private String vorwahl;
     @XmlElement(name="Rufnummer")

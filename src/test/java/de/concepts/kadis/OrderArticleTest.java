@@ -1,5 +1,6 @@
 package de.concepts.kadis;
 
+import de.concepts.kadis.out.OrderArticle;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

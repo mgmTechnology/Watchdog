@@ -3,7 +3,11 @@
  * Proprietary and confidential
  * Written by Marc Müller <marc@mgm.technology>, 2020
  */
-package de.concepts.kadis;
+package de.concepts.kadis.out;
+
+
+
+
 
 import de.concepts.io.exporter.ExporterXML;
 
@@ -12,9 +16,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "Lieferadresse")
+@XmlRootElement(name = "Kunde")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Lieferadresse {
+public class Kunde {
+    @XmlElement(name="Shopware-Kundennummer")
+    private String shopwareKundennummer;
+    @XmlElement(name="KundenNr")
+    private String kundenNr;
     @XmlElement(name="Anrede")
     private String anrede;
     @XmlElement(name="Vorname")
@@ -36,7 +44,23 @@ public class Lieferadresse {
     @XmlElement(name = "Telefon")
     Telefon telefonObject;
     @XmlElement(name="Email")
+
     private String email;
+    public String getShopwareKundennummer() {
+        return shopwareKundennummer;
+    }
+
+    public void setShopwareKundennummer(String shopwareKundennummer) {
+        this.shopwareKundennummer = shopwareKundennummer;
+    }
+
+    public String getKundenNr() {
+        return kundenNr;
+    }
+
+    public void setKundenNr(String kundenNr) {
+        this.kundenNr = kundenNr;
+    }
 
     public String getAnrede() {
         return anrede;
@@ -126,8 +150,11 @@ public class Lieferadresse {
         this.email = email;
     }
 
-    public Lieferadresse(String vorname, String nachname, String firma, String strasse, String hausnummer, String plz
-            , String stadt, String land, String email) {
+
+    public Kunde(String shopwareKundennummer, String kundenNr, String vorname, String nachname, String firma,
+                 String strasse, String hausnummer, String plz, String stadt, String land, String email) {
+        this.shopwareKundennummer = shopwareKundennummer;
+        this.kundenNr = kundenNr;
         this.vorname = vorname;
         this.nachname = nachname;
         this.firma = firma;
@@ -139,7 +166,7 @@ public class Lieferadresse {
         this.email = email;
     }
 
-    public Lieferadresse() {
+    public Kunde() {
     }
 
     public String getXML() {

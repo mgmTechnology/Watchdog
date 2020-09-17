@@ -1,12 +1,9 @@
 package de.concepts.io.importer;
 
-import de.concepts.WatchDogConfiguration;
-import de.concepts.io.tools.validator.XMLValidator;
-import de.concepts.kadis.Price;
-import de.concepts.kadis.Stock;
+import de.concepts.kadis.out.Price;
+import de.concepts.kadis.in.Stock;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -5,8 +5,8 @@
  */
 package de.concepts.io.importer;
 
-import de.concepts.kadis.Price;
-import de.concepts.kadis.Stock;
+import de.concepts.kadis.out.Price;
+import de.concepts.kadis.in.Stock;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -18,6 +18,12 @@ import java.util.stream.Stream;
  * inherited class for importing CSV files
  */
 public class ImporterCSV extends Importer {
+    /**
+     *  get list of Prices to be imported
+     * @param csvFileName
+     * @param priceGroup
+     * @return
+     */
     public static List<Price> getPricesFromCSV(String csvFileName, String priceGroup) {
         System.out.println("Handling prices with pricegroup " + priceGroup);
         try {
@@ -36,6 +42,11 @@ public class ImporterCSV extends Importer {
         }
     }
 
+    /**
+     * get stock numbers to be imported
+     * @param csvFileName
+     * @return
+     */
     public static List<Stock> getInventoryFromCSV(String csvFileName) {
         System.out.println("Handling inventory");
         List<Stock> stockList ;

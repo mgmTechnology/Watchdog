@@ -5,7 +5,7 @@
  */
 package de.concepts.io.importer;
 
-import de.concepts.kadis.ImportArticle;
+import de.concepts.kadis.in.ImportArticle;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 

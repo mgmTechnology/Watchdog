@@ -3,7 +3,7 @@
  * Proprietary and confidential
  * Written by Marc Müller <marc@mgm.technology>, 2020
  */
-package de.concepts.kadis;
+package de.concepts.kadis.out;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

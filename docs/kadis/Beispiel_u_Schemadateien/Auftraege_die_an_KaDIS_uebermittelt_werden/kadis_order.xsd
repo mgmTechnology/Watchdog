@@ -6,7 +6,7 @@
             <xs:sequence>
                 <xs:element name="Auftrag">
                     <xs:complexType>
-                        <xs:sequence>
+                        <xs:all>
                             <xs:element name="Bestellung">
                                 <xs:complexType>
                                     <xs:all>
@@ -14,9 +14,10 @@
                                         <xs:element name="Mandant" type="xs:string" />
                                         <xs:element name="Mediaplan" type="xs:string" />
                                         <xs:element name="Bestellzeitpunkt" type="xs:string" />
-                               
                                         <xs:element name="Preisgruppe" type="xs:string" />
                                         <xs:element name="WKZ" type="xs:string" />
+                                        <xs:element name="Werbekontakt" type="xs:string" />
+                                        <xs:element name="Kommentarzeile" type="xs:string" />
                                         <xs:element name="MwStEinstellung" type="xs:string" />
                                     </xs:all>
                                 </xs:complexType>
@@ -97,7 +98,7 @@
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
-                        </xs:sequence>
+                        </xs:all>
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>

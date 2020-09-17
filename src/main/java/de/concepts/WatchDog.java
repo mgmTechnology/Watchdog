@@ -5,9 +5,8 @@
  */
 package de.concepts;
 
+import de.concepts.io.importer.ImporterArticles;
 import de.concepts.io.importer.ImporterCSV;
-import de.concepts.io.importer.ImporterJSON;
-import de.concepts.io.importer.ImporterXML;
 import de.concepts.io.tools.FTPTimerTask;
 import de.concepts.io.tools.Helper;
 
@@ -178,10 +177,7 @@ public class WatchDog {
                         switch (fileTypeExtension) {
                             case "xml":
                                 // new ImporterXML();
-                                ImporterXML xmlImporter = new ImporterXML();
-                                break;
-                            case "json":
-                                ImporterJSON jsonImporter = new ImporterJSON();
+                                ImporterArticles xmlImporter = new ImporterArticles();
                                 break;
                             case "csv":
                                 ImporterCSV csvImporter = new ImporterCSV();

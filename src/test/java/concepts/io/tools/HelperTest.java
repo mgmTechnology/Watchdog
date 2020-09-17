@@ -6,12 +6,11 @@
 package concepts.io.tools;
 
 import de.concepts.io.tools.Helper;
-import de.concepts.kadis.PriceNotification;
+import de.concepts.kadis.in.PriceNotification;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.util.List;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 

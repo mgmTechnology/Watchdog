@@ -3,13 +3,12 @@
  * Proprietary and confidential
  * Written by Marc Müller <marc@mgm.technology>, 2020
  */
-package de.concepts.kadis;
+package de.concepts.kadis.out;
 
 
 import de.concepts.io.exporter.ExporterXML;
 
 import javax.xml.bind.annotation.*;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 @XmlRootElement(name="Auftraege")
