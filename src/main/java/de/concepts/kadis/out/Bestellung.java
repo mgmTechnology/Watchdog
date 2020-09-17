@@ -23,22 +23,44 @@ public class Bestellung {
     private String mediaplan;
     @XmlElement(name="Bestellzeitpunkt")
     private String bestellzeitpunkt;
-
     @XmlElement(name="Preisgruppe")
     private String preisgruppe;
     @XmlElement(name="WKZ")
     private String wkz;
     @XmlElement(name="MwStEinstellung")
     private String mwstEinstellung;
+    @XmlElement(name="Kommentarzeile")
+    private String kommentarzeile;
+    @XmlElement(name="Werbekontakt")
+    private String werbekontakt;
+
 
     public Bestellung(String bestellNr, String mediaplan, String bestellzeitpunkt, String mwstEinstellung) {
         this.bestellNr = bestellNr;
         this.mediaplan = mediaplan;
         this.bestellzeitpunkt = bestellzeitpunkt;
         this.mwstEinstellung = mwstEinstellung;
+        this.werbekontakt = "";
+        this.kommentarzeile = "";
     }
 
     public Bestellung() {
+    }
+
+    public String getKommentarzeile() {
+        return kommentarzeile;
+    }
+
+    public void setKommentarzeile(String kommentarzeile) {
+        this.kommentarzeile = kommentarzeile;
+    }
+
+    public String getWerbekontakt() {
+        return werbekontakt;
+    }
+
+    public void setWerbekontakt(String werbekontakt) {
+        this.werbekontakt = werbekontakt;
     }
 
     public String getXML() {
