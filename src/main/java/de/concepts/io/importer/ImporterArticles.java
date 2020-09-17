@@ -75,7 +75,7 @@ public class ImporterArticles {
         final XPath xpath = factory.newXPath();
         XPathExpression expr = xpath.compile("/Artikel/mainDetail/number");
         String elementData = (String) expr.evaluate(doc, XPathConstants.STRING);
-        article.setNumber(elementData);
+        article.setKadisNumber(elementData);
         price.setKadisArticleNumber(elementData);
         expr = xpath.compile("/Artikel/name");
         article.setName((String) expr.evaluate(doc, XPathConstants.STRING));
@@ -102,7 +102,7 @@ public class ImporterArticles {
         expr = xpath.compile("//prices");
         result = expr.evaluate(doc, XPathConstants.NODESET);
         nodes = (NodeList) result;
-        System.out.println("Article " + article.getNumber() + " --> " + nodes.getLength() + " prices");
+        System.out.println("Article " + article.getKadisNumber() + " --> " + nodes.getLength() + " prices");
         for (int i = 0; i < nodes.getLength(); i++) {
             price = new Price();
             Element el = (Element) nodes.item(i);
@@ -112,7 +112,7 @@ public class ImporterArticles {
             String currentPrice = el.getElementsByTagName("price").item(0).getTextContent();
             String to = el.getElementsByTagName("to").item(0).getTextContent();
             String from = el.getElementsByTagName("from").item(0).getTextContent();
-            price.setKadisArticleNumber(article.getNumber());
+            price.setKadisArticleNumber(article.getKadisNumber());
             price.setPriceGroup(customerGroupKey);
             price.setFromQuantity(from);
             price.setToQuantity(to);

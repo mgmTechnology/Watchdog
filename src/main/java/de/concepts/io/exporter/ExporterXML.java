@@ -32,6 +32,9 @@ public class ExporterXML {
                 case "OrderList":
                     jaxbContext = JAXBContext.newInstance(OrderList.class);
                     break;
+                case "Price":
+                    jaxbContext = JAXBContext.newInstance(Price.class);
+                    break;
                 default:
                     System.out.println("could not create xml for " + simpleName);
             }

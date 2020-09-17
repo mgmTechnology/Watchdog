@@ -10,6 +10,7 @@ import de.concepts.io.exporter.ExporterXML;
 import de.concepts.kadis.out.Price;
 import de.concepts.kadis.out.Translation;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ import java.util.List;
 public class ImportArticle {
     String active;
     Double tax;
-    String number;
+    String kadisNumber;
     List<Price> prices;
     Double weight;
     Double width;
@@ -27,11 +28,15 @@ public class ImportArticle {
     String name;
     String description;
     List<Translation> translations;
+    Boolean isKadisArticle;
+    BigDecimal purchasePrice;
 
     @Override
     public String toString() {
-        return "Article{" + "number='" + number + '\'' + ", prices=" + prices + ", name='" + name + '\'' + ", " +
-                "description='" + description + '\'' + '}';
+        return "ImportArticle{" + "active='" + active + '\'' + ", kadisNumber='" + kadisNumber
+                + '\'' + ", name='" + name + '\'' + ", isKadisArticle="+ '\'' + isKadisArticle
+                + '\'' + ", prices='" + prices.size() + '\''
+                + ", purchasePrice="+ '\'' + purchasePrice + '\'' + '}';
     }
 
     public String getJSON () {
@@ -53,20 +58,25 @@ public class ImportArticle {
         this.tax = tax;
     }
 
-    public String getNumber() {
-        return number;
+    public String getKadisNumber() {
+        return kadisNumber;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setKadisNumber(String kadisNumber) {
+        this.kadisNumber = kadisNumber;
     }
 
     public List<Price> getPrices() {
         return prices;
     }
 
+    /**
+     * set prices and also kadisprice information
+     * @param prices
+     */
     public void setPrices(List<Price> prices) {
         this.prices = prices;
+        setKadisPriceInformation();
     }
 
     public Double getWeight() {
@@ -124,15 +134,40 @@ public class ImportArticle {
     public void setTranslations(List<Translation> translations) {
         this.translations = translations;
     }
+    public Boolean getKadisArticle() {
+        return isKadisArticle;
+    }
+
+    public void setKadisArticle(Boolean kadisArticle) {
+        isKadisArticle = kadisArticle;
+    }
+
+    public BigDecimal getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public void setPurchasePrice(BigDecimal purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
 
     public ImportArticle() {
     }
 
-    public ImportArticle(String active, double tax, String number, Double weight, Double width, Double len, Double height,
+    public void setKadisPriceInformation() {
+//        Price priceVKDP = this.prices.stream().filter(p -> "VK_DP".equals(p.getPriceGroup())).findFirst().orElse(null);
+        Price priceVKDP = prices.stream().filter(p -> "VK_DE".equals(p.getPriceGroup())).findFirst().orElse(null);
+        boolean isKadisArticle = (priceVKDP!=null) ? true: false;
+        this.setKadisArticle(isKadisArticle);
+        if (isKadisArticle) { setPurchasePrice(new BigDecimal( priceVKDP.getPrice().toString()));
+        } else { setPurchasePrice(new BigDecimal( "0"));
+        }
+    }
+
+    public ImportArticle(String active, double tax, String kadisNumber, Double weight, Double width, Double len, Double height,
                          String name, String description) {
         this.active = active;
         this.tax = tax;
-        this.number = number;
+        this.kadisNumber = kadisNumber;
         this.weight = weight;
         this.width = width;
         this.len = len;

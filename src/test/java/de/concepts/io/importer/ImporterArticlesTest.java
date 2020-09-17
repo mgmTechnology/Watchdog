@@ -22,7 +22,7 @@ class ImporterArticlesTest {
     void testCreateArticleFromXML() throws ParserConfigurationException, XMLStreamException, SAXException, XPathExpressionException, IOException {
         ImportArticle currentArticle = ImporterArticles.createArticleWithXpath( RESOURCES_TESTDATA_ARTICLE_XML);
         System.out.println(currentArticle.getName() + " has " + currentArticle.getPrices().size() + " prices.");
-        assertEquals(currentArticle.getNumber(), "100116");
+        assertEquals(currentArticle.getKadisNumber(), "100116");
         assertEquals(currentArticle.getPrices().size(), 7); // 1 empty node
         System.out.println(currentArticle);
     }

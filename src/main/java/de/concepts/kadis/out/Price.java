@@ -5,6 +5,8 @@
  */
 package de.concepts.kadis.out;
 
+import de.concepts.io.exporter.ExporterXML;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -115,5 +117,9 @@ public class Price {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getXML() {
+        return ExporterXML.jaxbObjectToXML(this);
     }
 }
