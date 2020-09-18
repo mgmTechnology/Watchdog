@@ -5,7 +5,7 @@
  */
 package de.concepts.kadis.out;
 
-import de.concepts.io.exporter.ExporterXML;
+import de.concepts.io.converter.ObjectConverter;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -17,21 +17,20 @@ import java.math.BigDecimal;
 @XmlAccessorType(XmlAccessType.FIELD)
 /**
  * this class is a article element within an orderList to be send to KaDIS
- */
-public class OrderArticle {
-    @XmlElement(name="ArtikelNr")
+ */ public class OrderArticle {
+    @XmlElement(name = "ArtikelNr")
     String artikelNr;
-    @XmlElement(name="Menge")
+    @XmlElement(name = "Menge")
     Double menge;
-    @XmlElement(name="Groesse")
+    @XmlElement(name = "Groesse")
     String groesse;
-    @XmlElement(name="Name")
+    @XmlElement(name = "Name")
     String name;
-    @XmlElement(name="Preis")
+    @XmlElement(name = "Preis")
     BigDecimal preis;
-    @XmlElement(name="Steuer")
+    @XmlElement(name = "Steuer")
     Double steuer;
-    @XmlElement(name="SteuerEinstellung")
+    @XmlElement(name = "SteuerEinstellung")
     String steuerEinstellung;
 
     public String getArtikelNr() {
@@ -90,8 +89,8 @@ public class OrderArticle {
         this.steuerEinstellung = steuerEinstellung;
     }
 
-    public OrderArticle(String artikelNr, Double menge, String groesse, String name, BigDecimal preis,
-                        Double steuer, String steuerEinstellung) {
+    public OrderArticle(String artikelNr, Double menge, String groesse, String name, BigDecimal preis, Double steuer,
+                        String steuerEinstellung) {
         this.artikelNr = artikelNr;
         this.menge = menge;
         this.groesse = groesse;
@@ -105,6 +104,10 @@ public class OrderArticle {
     }
 
     public String getXML() {
-        return ExporterXML.jaxbObjectToXML(this);
+        return ObjectConverter.getXMLFromObject(this);
+    }
+
+    public String getJSON() {
+        return ObjectConverter.getJSONFromObject(this);
     }
 }

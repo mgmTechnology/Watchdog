@@ -5,7 +5,7 @@
  */
 package de.concepts.kadis.out;
 
-import de.concepts.io.exporter.ExporterXML;
+import de.concepts.io.converter.ObjectConverter;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
+
 @XmlRootElement(name = "Price")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Price {
@@ -98,28 +99,32 @@ public class Price {
     public Price() {
     }
 
-    public Price(String kadisArticleNumber, String priceGroup, String fromQuantity, String toQuantity,
-                 String price, String taxGroup, String taxValue) {
+    public Price(String kadisArticleNumber, String priceGroup, String fromQuantity, String toQuantity, String price,
+                 String taxGroup, String taxValue) {
         this.kadisArticleNumber = kadisArticleNumber;
         this.priceGroup = priceGroup;
         this.fromQuantity = fromQuantity;
         this.toQuantity = toQuantity;
         try {
             Number aNumber = NumberFormat.getNumberInstance(Locale.GERMANY).parse(price);
-            this.price=  new BigDecimal(aNumber.toString());
+            this.price = new BigDecimal(aNumber.toString());
         } catch (ParseException e) {
             e.printStackTrace();
         }
         this.taxGroup = taxGroup;
         try {
             Number aNumber = NumberFormat.getNumberInstance(Locale.GERMANY).parse(taxValue);
-            this.taxValue=  new BigDecimal(aNumber.toString());
+            this.taxValue = new BigDecimal(aNumber.toString());
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
 
     public String getXML() {
-        return ExporterXML.jaxbObjectToXML(this);
+        return ObjectConverter.getXMLFromObject(this);
+    }
+
+    public String getJSON() {
+        return ObjectConverter.getJSONFromObject(this);
     }
 }

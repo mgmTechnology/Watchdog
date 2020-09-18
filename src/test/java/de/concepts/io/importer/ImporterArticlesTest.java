@@ -24,7 +24,8 @@ class ImporterArticlesTest {
         System.out.println(currentArticle.getName() + " has " + currentArticle.getPrices().size() + " prices.");
         assertEquals(currentArticle.getKadisNumber(), "100116");
         assertEquals(currentArticle.getPrices().size(), 7); // 1 empty node
-        System.out.println(currentArticle);
+        System.out.println(currentArticle.getXML());
+        System.out.println(currentArticle.getJSON());
     }
 
 

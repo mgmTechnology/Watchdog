@@ -5,14 +5,15 @@
  */
 package de.concepts.kadis.out;
 
-import de.concepts.io.exporter.ExporterXML;
+import de.concepts.io.converter.ObjectConverter;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
+
 @XmlRootElement(name = "OrderList")
 public class OrderList {
-    @XmlElement(name="Artikel")
+    @XmlElement(name = "Artikel")
     ArrayList<OrderArticle> listArtikel = new ArrayList<>();
 
     public OrderList(ArrayList<OrderArticle> listArtikel) {
@@ -24,7 +25,11 @@ public class OrderList {
     }
 
     public String getXML() {
-        return ExporterXML.jaxbObjectToXML(this);
+        return ObjectConverter.getXMLFromObject(this);
+    }
+
+    public String getJSON() {
+        return ObjectConverter.getJSONFromObject(this);
     }
 
 }

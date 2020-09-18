@@ -5,6 +5,8 @@
  */
 package de.concepts.kadis.out;
 
+import de.concepts.io.converter.ObjectConverter;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -20,7 +22,8 @@ public class Zahlung {
     public void setZahlungsart(String zahlungsart) {
         this.zahlungsart = zahlungsart;
     }
-    @XmlElement(name="Zahlungsart")
+
+    @XmlElement(name = "Zahlungsart")
     private String zahlungsart;
 
     public Zahlung(String zahlungsart) {
@@ -28,5 +31,13 @@ public class Zahlung {
     }
 
     public Zahlung() {
+    }
+
+    public String getXML() {
+        return ObjectConverter.getXMLFromObject(this);
+    }
+
+    public String getJSON() {
+        return ObjectConverter.getJSONFromObject(this);
     }
 }

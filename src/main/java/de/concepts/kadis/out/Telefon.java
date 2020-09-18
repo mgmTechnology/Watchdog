@@ -5,7 +5,7 @@
  */
 package de.concepts.kadis.out;
 
-import de.concepts.io.exporter.ExporterXML;
+import de.concepts.io.converter.ObjectConverter;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "Telefon")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Telefon {
-    @XmlElement(name="Vorwahl")
+    @XmlElement(name = "Vorwahl")
     private String vorwahl;
-    @XmlElement(name="Rufnummer")
+    @XmlElement(name = "Rufnummer")
     private String rufnummer;
 
     public String getVorwahl() {
@@ -35,6 +35,7 @@ public class Telefon {
     public void setRufnummer(String rufnummer) {
         this.rufnummer = rufnummer;
     }
+
     public Telefon() {
     }
 
@@ -44,6 +45,10 @@ public class Telefon {
     }
 
     public String getXML() {
-        return ExporterXML.jaxbObjectToXML(this);
+        return ObjectConverter.getXMLFromObject(this);
+    }
+
+    public String getJSON() {
+        return ObjectConverter.getJSONFromObject(this);
     }
 }

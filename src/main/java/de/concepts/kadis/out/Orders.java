@@ -6,36 +6,44 @@
 package de.concepts.kadis.out;
 
 
-import de.concepts.io.exporter.ExporterXML;
+import de.concepts.io.converter.ObjectConverter;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 
-@XmlRootElement(name="Auftraege")
+@XmlRootElement(name = "Auftraege")
 
 @XmlAccessorType(XmlAccessType.FIELD)
 
 public class Orders {
-    @XmlElement(name="Auftrag")
+    @XmlElement(name = "Auftrag")
     private ArrayList<Auftrag> auftragObjects;
     @XmlAttribute
     private String xmlns;
+
     public String getXmlns() {
         return xmlns;
     }
+
     public ArrayList<Auftrag> getAuftragObjects() {
         return auftragObjects;
     }
+
     public void setAuftragObjects(ArrayList<Auftrag> auftragObjects) {
         this.auftragObjects = auftragObjects;
     }
+
     public void setXmlns(String xmlns) {
         this.xmlns = xmlns;
     }
+
     public String getXML() {
-        return ExporterXML.jaxbObjectToXML(this);
+        return ObjectConverter.getXMLFromObject(this);
     }
 
+    public String getJSON() {
+        return ObjectConverter.getJSONFromObject(this);
+    }
 
 
 }

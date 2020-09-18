@@ -5,7 +5,7 @@
  */
 package de.concepts.kadis.out;
 
-import de.concepts.io.exporter.ExporterXML;
+import de.concepts.io.converter.ObjectConverter;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -15,23 +15,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "Bestellung")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Bestellung {
-    @XmlElement(name="BestellNr")
+    @XmlElement(name = "BestellNr")
     private String bestellNr;
-    @XmlElement(name="Mandant")
+    @XmlElement(name = "Mandant")
     private String mandant;
-    @XmlElement(name="Mediaplan")
+    @XmlElement(name = "Mediaplan")
     private String mediaplan;
-    @XmlElement(name="Bestellzeitpunkt")
+    @XmlElement(name = "Bestellzeitpunkt")
     private String bestellzeitpunkt;
-    @XmlElement(name="Preisgruppe")
+    @XmlElement(name = "Preisgruppe")
     private String preisgruppe;
-    @XmlElement(name="WKZ")
+    @XmlElement(name = "WKZ")
     private String wkz;
-    @XmlElement(name="MwStEinstellung")
+    @XmlElement(name = "MwStEinstellung")
     private String mwstEinstellung;
-    @XmlElement(name="Kommentarzeile")
+    @XmlElement(name = "Kommentarzeile")
     private String kommentarzeile;
-    @XmlElement(name="Werbekontakt")
+    @XmlElement(name = "Werbekontakt")
     private String werbekontakt;
 
 
@@ -61,10 +61,6 @@ public class Bestellung {
 
     public void setWerbekontakt(String werbekontakt) {
         this.werbekontakt = werbekontakt;
-    }
-
-    public String getXML() {
-        return ExporterXML.jaxbObjectToXML(this);
     }
 
     public String getBestellNr() {
@@ -121,5 +117,13 @@ public class Bestellung {
 
     public void setMwstEinstellung(String mwstEinstellung) {
         this.mwstEinstellung = mwstEinstellung;
+    }
+
+    public String getXML() {
+        return ObjectConverter.getXMLFromObject(this);
+    }
+
+    public String getJSON() {
+        return ObjectConverter.getJSONFromObject(this);
     }
 }

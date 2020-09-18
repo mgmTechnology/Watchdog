@@ -1,13 +1,33 @@
-package de.concepts.io.exporter;
+package de.concepts.io.converter;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import de.concepts.kadis.in.ImportArticle;
 import de.concepts.kadis.out.*;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import java.io.StringWriter;
 
-public class ExporterXML {
-    public static String jaxbObjectToXML(Object currentObject) {
+public class ObjectConverter {
+
+    /**
+     * converts object into JSON
+     * @param currentObject
+     * @return
+     */
+    public static String getJSONFromObject(Object currentObject) {
+        String jsonContent = "{\"status\": \"unprocessed\"}";
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(currentObject);
+    }
+
+    /**
+     * converts an POJO to xml
+     * @param currentObject
+     * @return
+     */
+    public static String getXMLFromObject(Object currentObject) {
         String xmlContent = "<result>undefined</result>";
         JAXBContext jaxbContext = null;
 
@@ -19,6 +39,9 @@ public class ExporterXML {
                     break;
                 case "OrderArticle":
                     jaxbContext = JAXBContext.newInstance(OrderArticle.class);
+                    break;
+                case "ImportArticle":
+                    jaxbContext = JAXBContext.newInstance(ImportArticle.class);
                     break;
                 case "Bestellung":
                     jaxbContext = JAXBContext.newInstance(Bestellung.class);

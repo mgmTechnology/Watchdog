@@ -6,6 +6,10 @@
 package de.concepts.io.tools;
 
 import de.concepts.WatchDogConfiguration;
+import de.concepts.io.db.SQLiter;
+import de.concepts.io.importer.ImporterCSV;
+import de.concepts.kadis.in.Stock;
+import de.concepts.kadis.out.Price;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -36,5 +40,21 @@ class WatchDogFTPClientTest {
         csvFilesOnServer.stream().forEach(System.out::println);
         assertTrue(xmlFilesOnServer.size()  > 0, "no XML files found" );
         assertTrue(csvFilesOnServer.size()  > 0, "no CSV files found" );
+    }
+
+    @Test
+    void testDeleteOldFiles() {
+        List<String> filesOnServer=null;
+        try {
+            WatchDogConfiguration.configure();
+            WatchDogFTPClient ftpClient = null;
+            ftpClient = new WatchDogFTPClient(WatchDogConfiguration.watchdogFTPServer,
+                    WatchDogConfiguration.watchdogFTPUser, WatchDogConfiguration.watchdogFTPPw);
+
+            filesOnServer= ftpClient.deleteOldFiles("/data/processed", "*", 5);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

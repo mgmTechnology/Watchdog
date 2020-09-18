@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 /**
  * inherited class for importing CSV files
  */
-public class ImporterCSV extends Importer {
+public class ImporterCSV {
     /**
      *  get list of Prices to be imported
      * @param csvFileName

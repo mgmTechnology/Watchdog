@@ -6,10 +6,7 @@
 package de.concepts.kadis.out;
 
 
-
-
-
-import de.concepts.io.exporter.ExporterXML;
+import de.concepts.io.converter.ObjectConverter;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -19,33 +16,34 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "Kunde")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Kunde {
-    @XmlElement(name="Shopware-Kundennummer")
+    @XmlElement(name = "Shopware-Kundennummer")
     private String shopwareKundennummer;
-    @XmlElement(name="KundenNr")
+    @XmlElement(name = "KundenNr")
     private String kundenNr;
-    @XmlElement(name="Anrede")
+    @XmlElement(name = "Anrede")
     private String anrede;
-    @XmlElement(name="Vorname")
+    @XmlElement(name = "Vorname")
     private String vorname;
-    @XmlElement(name="Nachname")
+    @XmlElement(name = "Nachname")
     private String nachname;
-    @XmlElement(name="Firma")
+    @XmlElement(name = "Firma")
     private String firma;
-    @XmlElement(name="Strasse")
+    @XmlElement(name = "Strasse")
     private String strasse;
-    @XmlElement(name="Hausnummer")
+    @XmlElement(name = "Hausnummer")
     private String hausnummer;
-    @XmlElement(name="PLZ")
+    @XmlElement(name = "PLZ")
     private String plz;
-    @XmlElement(name="Stadt")
+    @XmlElement(name = "Stadt")
     private String stadt;
-    @XmlElement(name="Land")
+    @XmlElement(name = "Land")
     private String land;
     @XmlElement(name = "Telefon")
     Telefon telefonObject;
-    @XmlElement(name="Email")
+    @XmlElement(name = "Email")
 
     private String email;
+
     public String getShopwareKundennummer() {
         return shopwareKundennummer;
     }
@@ -170,7 +168,11 @@ public class Kunde {
     }
 
     public String getXML() {
-        return ExporterXML.jaxbObjectToXML(this);
+        return ObjectConverter.getXMLFromObject(this);
+    }
+
+    public String getJSON() {
+        return ObjectConverter.getJSONFromObject(this);
     }
 
 }

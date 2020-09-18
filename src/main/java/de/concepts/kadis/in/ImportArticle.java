@@ -5,30 +5,48 @@
  */
 package de.concepts.kadis.in;
 
-import com.google.gson.Gson;
-import de.concepts.io.exporter.ExporterXML;
+import de.concepts.io.converter.ObjectConverter;
 import de.concepts.kadis.out.Price;
 import de.concepts.kadis.out.Translation;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 import java.util.List;
 
 /**
  * this article is an article to be imported into myCorazon
  */
+@XmlRootElement(name = "Artikel")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ImportArticle {
+    @XmlElement
     String active;
+    @XmlElement
     Double tax;
+    @XmlElement(name="number")
     String kadisNumber;
+    @XmlElement
     List<Price> prices;
+    @XmlElement
     Double weight;
+    @XmlElement
     Double width;
+    @XmlElement
     Double len;
+    @XmlElement
     Double height;
+    @XmlElement
     String name;
+    @XmlElement
     String description;
+    @XmlElement
     List<Translation> translations;
+    @XmlElement
     Boolean isKadisArticle;
+    @XmlElement(name="kadisPurchasePrice")
     BigDecimal purchasePrice;
 
     @Override
@@ -39,9 +57,6 @@ public class ImportArticle {
                 + ", purchasePrice="+ '\'' + purchasePrice + '\'' + '}';
     }
 
-    public String getJSON () {
-         return new Gson().toJson(this);
-    }
     public String getActive() {
         return active;
     }
@@ -177,6 +192,10 @@ public class ImportArticle {
     }
 
     public String getXML() {
-        return ExporterXML.jaxbObjectToXML(this);
+        return ObjectConverter.getXMLFromObject(this);
     }
+    public String getJSON() {
+        return ObjectConverter.getJSONFromObject(this);
+    }
+
 }

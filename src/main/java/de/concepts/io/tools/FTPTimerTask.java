@@ -46,7 +46,7 @@ public class FTPTimerTask extends TimerTask {
             ftpDownloader = new WatchDogFTPClient(WatchDogConfiguration.watchdogFTPServer,
                     WatchDogConfiguration.watchdogFTPUser, WatchDogConfiguration.watchdogFTPPw);
             // get lists with all files on server
-            System.out.println("Checking files on FTP server...");
+            System.out.println("Checking files on FTP server " + WatchDogConfiguration.watchdogFTPServer);
             xmlFilesOnServer = ftpDownloader.listFiles(WatchDogConfiguration.watchdogFTPKadisPathRoot, "xml");
             csvFilesOnServer = ftpDownloader.listFiles(WatchDogConfiguration.watchdogFTPKadisPathRoot, "csv");
             // get all XML
@@ -57,6 +57,7 @@ public class FTPTimerTask extends TimerTask {
             } else {
 
                 listOfArticles.forEach(articleFileName -> {
+
                     finalFtpDownloader.downloadFile(WatchDogConfiguration.watchdogFTPKadisPathRoot + "/" + articleFileName, "./downloads/" + ts + articleFileName);
                     SQLiter.logFtpAccess(articleFileName);
                     //                    System.out.println("./downloads/" + ts + articleFileName);
